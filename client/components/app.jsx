@@ -3,8 +3,6 @@ import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
-import QuickLook from './quick-look';
-import ProductCarousel from './product-carousel';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 export default class App extends React.Component {
@@ -67,18 +65,6 @@ export default class App extends React.Component {
     this.getCartItems();
   }
   render() {
-    var element = null;
-    var quickLookElement = <div className="hidden"></div>;
-    if (this.state.view.name === 'catalog') {
-      element = <ProductList onClick={this.setView} />;
-      if (this.state.view.params.item) {
-        quickLookElement = <QuickLook item={this.state.view.params.item} onViewChange={this.setView}/>;
-      }
-    } else if (this.state.view.name === 'cart') {
-      element = <CartSummary cartItems={this.state.cart} onBackToCatalog={this.setView} />;
-    } else if (this.state.view.name === 'details') {
-      element = <ProductDetails onBackToCatalog={this.setView} onAddToCart={this.addToCart} productId={this.state.view.params.id}/>;
-    }
     return (
       <div className='app-container'>
         <Router>
@@ -89,15 +75,14 @@ export default class App extends React.Component {
             </Route>
             <Route
               path="/products"
-              render={props => {
-                return (
-                  <ProductList />
-                );
-              }} />
+              render={props => <ProductList /> } />
+            <Route
+              path="/product/:id"
+              render={props => <ProductDetails /> } />
+            <Route
+              path="/cart"
+              render={props => <CartSummary /> } />
           </Switch>
-          <ProductCarousel />
-          {element}
-          {quickLookElement}
         </Router>
       </div>
     );
