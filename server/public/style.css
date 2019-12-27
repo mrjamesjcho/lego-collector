@@ -1,0 +1,79 @@
+body {
+  font-family: 'Raleway', sans-serif;
+}
+.headerContainer {
+  background-color: rgb(255, 217, 0);
+}
+.shoppingCartImage {
+  height: 30px;
+}
+.featuredItems, .carouselImage {
+  height: 300px;
+}
+.itemPrice {
+  font-family: 'Open Sans', sans-serif;
+}
+.quick-look-thumbnail-container{
+  scroll-snap-type: x mandatory;
+}
+.quick-look-thumbnail-row{
+  width: 90%;
+  overflow-y: hidden;
+  display: inline-block;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.quick-look-thumbnail-row > div {
+  scroll-snap-align: start;
+}
+.item-image, .carouselImage{
+  object-fit: contain;
+}
+.item-thumbnail{
+  width: 80px;
+  display: inline-block;
+}
+.prev-thumbnail, .next-thumbnail{
+  cursor: pointer;
+  width: 5%;
+}
+.prev-thumbnail:hover, .next-thumbnail:hover{
+  background-color: lightgray;
+}
+.item-info-container{
+  overflow: hidden;
+  background-color: rgb(247, 247, 247);
+}
+.card-container{
+  height: 400px;
+}
+.product-details-image-info-container{
+  height: 400px;
+}
+.item-card,
+.back-to-catalog,
+.modal-close-button,
+.shopping-cart-container{
+  cursor: pointer;
+}
+.shopping-cart-container, .cart-summary-total{
+  font-size: 2rem;
+}
+.details-button-container{
+  display: none;
+  background-color: rgba(162, 161, 161, 0.2);
+  z-index: 1;
+}
+.quick-look-modal-container{
+  background-color: rgba(0, 0, 0, 0.331);
+  z-index: 2;
+}
+.quick-look-modal{
+  background-color: white;
+}
+.quick-look-image-option:hover .item-image{
+  filter: opacity(.5);
+}
+.item-card:hover .details-button-container{
+  display: flex;
+}
