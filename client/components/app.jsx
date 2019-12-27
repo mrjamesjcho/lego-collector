@@ -66,25 +66,23 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <div className='app-container'>
-        <Router>
-          <Header numberOfItemsInCart={this.numOfItemsInCart()} onViewCart={this.setView} />
-          <Switch>
-            <Route exact path="/">
-              <Redirect to={'/products'} />
-            </Route>
-            <Route
-              path="/products"
-              render={props => <ProductList /> } />
-            <Route
-              path="/product/:id"
-              render={props => <ProductDetails /> } />
-            <Route
-              path="/cart"
-              render={props => <CartSummary /> } />
-          </Switch>
-        </Router>
-      </div>
+      <Router className='app-container'>
+        <Header numberOfItemsInCart={this.numOfItemsInCart()} onViewCart={this.setView} />
+        <Switch>
+          <Route exact path="/">
+            <Redirect to={'/products'} />
+          </Route>
+          <Route
+            path="/products"
+            render={props => <ProductList {...props} /> } />
+          <Route
+            path="/product/:id"
+            render={props => <ProductDetails {...props} /> } />
+          <Route
+            path="/cart"
+            render={props => <CartSummary {...props} /> } />
+        </Switch>
+      </Router>
     );
   }
 }
