@@ -5,6 +5,7 @@ import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import QuickLook from './quick-look';
 import ProductCarousel from './product-carousel';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -80,10 +81,24 @@ export default class App extends React.Component {
     }
     return (
       <div className='app-container'>
-        <Header numberOfItemsInCart={this.numOfItemsInCart()} onViewCart={this.setView}/>
-        <ProductCarousel />
-        {element}
-        {quickLookElement}
+        <Router>
+          <Header numberOfItemsInCart={this.numOfItemsInCart()} onViewCart={this.setView} />
+          <Switch>
+            <Route exact path="/">
+              <Redirect to={'/products'} />
+            </Route>
+            <Route
+              path="/products"
+              render={props => {
+                return (
+                  <ProductList />
+                );
+              }} />
+          </Switch>
+          <ProductCarousel />
+          {element}
+          {quickLookElement}
+        </Router>
       </div>
     );
   }
