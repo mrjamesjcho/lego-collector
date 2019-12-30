@@ -80,7 +80,7 @@ export default class App extends React.Component {
             render={props => <ProductDetails {...props} onAddToCart={this.addToCart} /> } />
           <Route
             path="/cart"
-            render={props => <CartSummary {...props} /> } />
+            render={props => <CartSummary {...props} cartItems={this.state.cart} /> } />
         </Switch>
       </Router>
     );
