@@ -24,15 +24,12 @@ export default class ProductDetails extends React.Component {
     this.props.onAddToCart(this.state.product);
   }
   componentDidMount() {
-    this.getProducts(this.state.id);
+    this.getProducts(this.props.match.params.id);
   }
   render() {
     if (this.state.product) {
       return (
         <div className='product-details-container container'>
-          <div className="row px-4 py-2 back-to-catalog-container">
-            <a className='back-to-catalog' onClick={this.handleBackToCatalog} >&lt; <u>back to catalog</u></a>
-          </div>
           <div className="product-details-image-info-container row">
             <div className="product-details-image-container col-7 h-100 d-flex align-items-center">
               <img src={'/' + this.state.product.images[0]} className="item-image rounded h-100 w-100 m-auto p-2" />

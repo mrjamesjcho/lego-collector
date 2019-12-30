@@ -1,6 +1,9 @@
 body {
   font-family: 'Raleway', sans-serif;
 }
+link:hover {
+  text-decoration: none;
+}
 .headerContainer {
   background-color: rgb(255, 217, 0);
 }

@@ -19,7 +19,7 @@ export default class App extends React.Component {
     this.setState({ view: { name: name, params: params } });
   }
   getCartItems() {
-    fetch('api/cart.php')
+    fetch('/api/cart.php')
       .then(request => request.json())
       .then(data => this.setState({
         view: this.state.view,
@@ -31,7 +31,7 @@ export default class App extends React.Component {
       body: JSON.stringify({ 'id': product.id }),
       headers: { 'Content-Type': 'application/json' }
     };
-    fetch('api/cart.php', data)
+    fetch('/api/cart.php', data)
       .then(response => {})
       .then(data => {
         var sameItemIndex = null;
