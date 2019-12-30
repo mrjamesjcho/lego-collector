@@ -36,7 +36,7 @@ export default class ProductDetails extends React.Component {
             </div>
             <div className="product-info-container col-5 d-flex-column">
               <h1 className="product-name">{this.state.product.name}</h1>
-              <div className="product-price">{'$' + (this.state.product.price / 100)}</div>
+              <h3 className="product-price">{'$' + (this.state.product.price / 100)}</h3>
               <div className="product-short-description mt-2">{this.state.product.shortDescription}</div>
               <div className="button-container d-flex">
                 <a href='#' className='btn btn-primary mt-3' onClick={this.handleAddToCart}>Add to Cart</a>
