@@ -77,7 +77,7 @@ export default class App extends React.Component {
             render={props => <ProductList {...props} /> } />
           <Route
             path="/product/:id"
-            render={props => <ProductDetails {...props} /> } />
+            render={props => <ProductDetails {...props} onAddToCart={this.addToCart} /> } />
           <Route
             path="/cart"
             render={props => <CartSummary {...props} /> } />

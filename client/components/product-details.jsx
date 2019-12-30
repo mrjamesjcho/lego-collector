@@ -32,7 +32,7 @@ export default class ProductDetails extends React.Component {
         <div className='product-details-container container'>
           <div className="product-details-image-info-container row">
             <div className="product-details-image-container col-7 h-100 d-flex align-items-center">
-              <img src={'/' + this.state.product.images[0]} className="item-image rounded h-100 w-100 m-auto p-2" />
+              <img src={this.state.product.images[0]} className="item-image rounded h-100 w-100 m-auto p-2" />
             </div>
             <div className="product-info-container col-5 d-flex-column">
               <h1 className="product-name">{this.state.product.name}</h1>

@@ -17,7 +17,7 @@ export default class Header extends React.Component {
             <h1 className='header-name'>Lego Collector</h1>
           </Link>
           <h5 className='shopping-cart-container d-flex align-items-center' onClick={this.handleClick}>
-            <img className="shoppingCartImage mr-2" src='images/shopping.png'/>
+            <img className="shoppingCartImage mr-2" src='/images/shopping.png'/>
             {`  ${this.props.numberOfItemsInCart}`}
           </h5>
         </div>
