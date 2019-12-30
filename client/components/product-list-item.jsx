@@ -15,7 +15,7 @@ export default class ProductListItem extends React.Component {
   }
   render() {
     return (
-      <Link to="/product/1" className="col-lg-3 col-md-4 col-sm-6 col-xs p-1 card-container">
+      <Link to={`/product/${this.props.id}`} className="col-lg-3 col-md-4 col-sm-6 col-xs p-1 card-container">
         <div className="item-card card border-0 h-100" onClick={this.handleClick}>
           <div className="details-button-container display-none position-absolute justify-content-center align-items-center h-100 w-100">
             <button className="quick-look-button btn btn-secondary" id="quick-look-button" type="button" onClick={this.handleClickQuickLook}>Quick look</button>
