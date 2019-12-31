@@ -6,9 +6,7 @@ export default class Header extends React.Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick() {
-    this.props.onViewCart('cart', {});
-  }
+
   render() {
     return (
       <div className='headerContainer d-flex mb-3'>
@@ -17,7 +15,7 @@ export default class Header extends React.Component {
             <h1 className='header-name'>Lego Collector</h1>
           </Link>
           <Link to='/cart' >
-            <h5 className='shopping-cart-container d-flex align-items-center' onClick={this.handleClick}>
+            <h5 className='shopping-cart-container d-flex align-items-center' >
               <img className="shoppingCartImage mr-2" src='/images/shopping.png' />
               {`  ${this.props.numberOfItemsInCart}`}
             </h5>
