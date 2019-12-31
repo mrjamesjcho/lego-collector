@@ -84,7 +84,10 @@ a:hover {
 .item-card:hover .details-button-container{
   display: flex;
 }
+.cart-item-container {
+  height: 180px;
+}
 .cart-item-img {
   max-width: 100%;
-  max-height: 100%;
+  max-height: 150px;
 }
