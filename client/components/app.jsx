@@ -3,8 +3,7 @@ import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
-import QuickLook from './quick-look';
-import ProductCarousel from './product-carousel';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -20,7 +19,7 @@ export default class App extends React.Component {
     this.setState({ view: { name: name, params: params } });
   }
   getCartItems() {
-    fetch('api/cart.php')
+    fetch('/api/cart.php')
       .then(request => request.json())
       .then(data => this.setState({
         view: this.state.view,
@@ -32,7 +31,7 @@ export default class App extends React.Component {
       body: JSON.stringify({ 'id': product.id }),
       headers: { 'Content-Type': 'application/json' }
     };
-    fetch('api/cart.php', data)
+    fetch('/api/cart.php', data)
       .then(response => {})
       .then(data => {
         var sameItemIndex = null;
@@ -66,25 +65,24 @@ export default class App extends React.Component {
     this.getCartItems();
   }
   render() {
-    var element = null;
-    var quickLookElement = <div className="hidden"></div>;
-    if (this.state.view.name === 'catalog') {
-      element = <ProductList onClick={this.setView} />;
-      if (this.state.view.params.item) {
-        quickLookElement = <QuickLook item={this.state.view.params.item} onViewChange={this.setView}/>;
-      }
-    } else if (this.state.view.name === 'cart') {
-      element = <CartSummary cartItems={this.state.cart} onBackToCatalog={this.setView} />;
-    } else if (this.state.view.name === 'details') {
-      element = <ProductDetails onBackToCatalog={this.setView} onAddToCart={this.addToCart} productId={this.state.view.params.id}/>;
-    }
     return (
-      <div className='app-container'>
-        <Header numberOfItemsInCart={this.numOfItemsInCart()} onViewCart={this.setView}/>
-        <ProductCarousel />
-        {element}
-        {quickLookElement}
-      </div>
+      <Router className='app-container'>
+        <Header numberOfItemsInCart={this.numOfItemsInCart()} onViewCart={this.setView} />
+        <Switch>
+          <Route exact path="/">
+            <Redirect to={'/products'} />
+          </Route>
+          <Route
+            path="/products"
+            render={props => <ProductList {...props} /> } />
+          <Route
+            path="/product/:id"
+            render={props => <ProductDetails {...props} onAddToCart={this.addToCart} /> } />
+          <Route
+            path="/cart"
+            render={props => <CartSummary {...props} cartItems={this.state.cart} /> } />
+        </Switch>
+      </Router>
     );
   }
 }

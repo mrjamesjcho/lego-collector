@@ -5,7 +5,7 @@ export default function CartSummaryItem(props) {
     <div>
       <div className="container d-flex justify-content-center border rounded my-2 cart-summary-item-container">
         <div className="image-container d-flex col-5 p-2">
-          <img src={props.itemImage} className="cart-summary-item-image rounded m-auto h-100" />
+          <img src={props.itemImage} className="cart-item-img rounded m-auto" />
         </div>
         <div className="d-flex-column p-2 col-5">
           <h5 className="item-name">{props.itemName}</h5>
