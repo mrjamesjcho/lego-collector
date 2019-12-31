@@ -39,7 +39,6 @@ export default class App extends React.Component {
         });
         if (sameItemIndex === null) {
           product['count'] = 1;
-          product['images'] = product['images'][0];
           newCart.push(product);
         }
         this.setState({ cart: newCart });
