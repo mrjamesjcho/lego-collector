@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CartSummaryItem from './cart-summary-item';
 
 export default class CartSummary extends React.Component {
@@ -29,9 +30,9 @@ export default class CartSummary extends React.Component {
     return (
       <div className="cart-summary-container container col-8 align-self-center">
         <div className="row px-4 py-2 back-to-catalog-container">
-          <a className='back-to-catalog' onClick={this.handleBackToCatalog} >&lt; <u>back to catalog</u></a>
+          <Link to='/products' className='back-to-catalog' >&lt; <u>continue shopping</u></Link>
         </div>
-        <h1 className="cart-summary-header container">My Cart</h1>
+        <h1 className="cart-summary-header container">Shopping Cart</h1>
         <div className="cart-summary-items container d-flex-column">
           {cartItemElements}
         </div>
