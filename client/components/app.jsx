@@ -9,22 +9,17 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: { name: 'catalog', params: {} },
       cart: []
     };
-    this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
   }
-  setView(name, params) {
-    this.setState({ view: { name: name, params: params } });
-  }
+
   getCartItems() {
     fetch('/api/cart.php')
       .then(request => request.json())
-      .then(data => this.setState({
-        view: this.state.view,
-        cart: data }));
+      .then(data => this.setState({ cart: data }));
   }
+
   addToCart(product) {
     const data = {
       method: 'POST',
@@ -47,12 +42,10 @@ export default class App extends React.Component {
           product['images'] = product['images'][0];
           newCart.push(product);
         }
-        this.setState({
-          view: this.state.view,
-          cart: newCart
-        });
+        this.setState({ cart: newCart });
       });
   }
+
   numOfItemsInCart() {
     var numOfItems = 0;
     if (this.state.cart.length === 0) {
@@ -64,10 +57,11 @@ export default class App extends React.Component {
   componentDidMount() {
     this.getCartItems();
   }
+
   render() {
     return (
       <Router className='app-container'>
-        <Header numberOfItemsInCart={this.numOfItemsInCart()} onViewCart={this.setView} />
+        <Header numberOfItemsInCart={this.numOfItemsInCart()} />
         <Switch>
           <Route exact path="/">
             <Redirect to={'/products'} />
