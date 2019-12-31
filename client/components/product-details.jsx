@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class ProductDetails extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ export default class ProductDetails extends React.Component {
     if (this.state.product) {
       return (
         <div className='product-details-container container'>
+          <Link to='/products' className='back-to-catalog' >&lt; <u>continue shopping</u></Link>
           <div className="product-details-image-info-container row">
             <div className="product-details-image-container col-7 h-100 d-flex align-items-center">
               <img src={this.state.product.images[0]} className="item-image rounded h-100 w-100 m-auto p-2" />
