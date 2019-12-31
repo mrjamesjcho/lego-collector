@@ -6,13 +6,18 @@ export default function CartSummaryItem(props) {
       <div className="image-container d-flex col-5 p-2">
         <img src={props.itemImage} className="cart-item-img rounded m-auto" />
       </div>
-      <div className="d-flex-column p-2 col-5">
+      <div className="d-flex-column p-2 col-7 mt-2">
         <h4 className="item-name">{props.itemName}</h4>
-        <div className="item-price mb-2">{'$' + (props.itemPrice / 100)}</div>
-      </div>
-      <div className="d-flex flex-column col-2 justify-content-center align-items-center item-quantity-container">
-        <h5>Qty</h5>
-        <h5>{props.itemQuantity}</h5>
+        <div className="item-price-qty d-flex justify-content-around mt-3">
+          <div className="item-qty d-flex flex-column justify-content-center align-items-center">
+            <h5>Qty</h5>
+            <h5>{props.itemQuantity}</h5>
+          </div>
+          <div className="item-price d-flex flex-column justify-content-center align-items-center">
+            <h5>Price</h5>
+            <h5>{'$' + (props.itemPrice / 100)}</h5>
+          </div>
+        </div>
       </div>
     </div>
   );

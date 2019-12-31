@@ -28,7 +28,7 @@ export default class CartSummary extends React.Component {
       });
     }
     return (
-      <div className="cart-summary-container container col-8 align-self-center">
+      <div className="cart-summary-container container col-lg-8 align-self-center">
         <div className="row px-4 py-2 back-to-catalog-container">
           <Link to='/products' className='back-to-catalog' >&lt; <u>continue shopping</u></Link>
         </div>
