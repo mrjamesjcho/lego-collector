@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class ProductListItem extends React.Component {
   constructor(props) {
@@ -6,15 +7,15 @@ export default class ProductListItem extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick(event) {
-    if (event.target.id === 'quick-look-button') {
-      this.props.onClick('catalog', { item: this.props.item });
-    } else {
-      this.props.onClick('details', { id: this.props.id });
-    }
+    // if (event.target.id === 'quick-look-button') {
+    //   this.props.onClick('catalog', { item: this.props.item });
+    // } else {
+    //   this.props.onClick('details', { id: this.props.id });
+    // }
   }
   render() {
     return (
-      <div className="col-lg-3 col-md-4 col-sm-6 col-xs p-1 card-container">
+      <Link to={`/product/${this.props.id}`} className="col-lg-3 col-md-4 col-sm-6 col-xs p-1 card-container">
         <div className="item-card card border-0 h-100" onClick={this.handleClick}>
           <div className="details-button-container display-none position-absolute justify-content-center align-items-center h-100 w-100">
             <button className="quick-look-button btn btn-secondary" id="quick-look-button" type="button" onClick={this.handleClickQuickLook}>Quick look</button>
@@ -31,7 +32,7 @@ export default class ProductListItem extends React.Component {
             <div className="card-text item-description">{this.props.itemDescription}</div>
           </div>
         </div>
-      </div>
+      </Link>
     );
   }
 }
