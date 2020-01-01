@@ -4,15 +4,15 @@ if(!defined('INTERNAL')){
   exit('cannot allow direct access');
 }
 
-$id = getBodyData();
-$id = json_decode($id, true);
+$data = getBodyData();
+$data = json_decode($data, true);
 if(!$id){
-  $error = 'must have a product id to add to cart';
+  $error = 'must have a cart item id to delete from cart';
   throw new Exception($error);
 }
-$id = $id["id"];
+$id = $data['id'];
 if ($id <= 0){
-  $error = 'product id must be valid: '.$id;
+  $error = 'invlid cart item id: '.$id;
   throw new Exception($error);
 }
 
@@ -41,28 +41,15 @@ if(!$transactionResult){
   throw new Exception(mysqli_error($conn));
 }
 
-if(!$cartId){
-  $insertQuery = 'INSERT INTO `cart` SET `created`=NOW()';
-  $insertResult = mysqli_query($conn, $insertQuery);
-  if(!$insertResult){
-    throw new Exception(mysqli_error($conn));
-  }
-  if (mysqli_affected_rows($conn) !== 1){
-    throw new Exception('there was an error adding to cart');
-  }
-  $cartId = mysqli_insert_id($conn);
-  $_SESSION['cartId'] = $cartId;
-}
+$query = "DELETE FROM `cartItems` WHERE `cartItems`.`id` = $id";
 
-$insertQuery = "INSERT INTO `cartItems` SET `price`=".$productData['price'].", `count`=1, `productID`=$id, `cartID`=$cartId, `added`=NOW() ON DUPLICATE KEY UPDATE `count`=`count` + 1";
-
-$insertResult = mysqli_query($conn, $insertQuery);
-if(!$insertResult){
+$result = mysqli_query($conn, $query);
+if(!$result){
   throw new Exception(mysqli_error($conn));
 }
 if (mysqli_affected_rows($conn) < 1){
   mysqli_query($conn, 'ROLLBACK');
-  throw new Exception('there was an error adding to cart');
+  throw new Exception('there was an error deleting from cart');
 }
 mysqli_query($conn, 'COMMIT');
 
