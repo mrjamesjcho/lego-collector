@@ -17,8 +17,8 @@ a:hover {
 .featuredItems, .carouselImage {
   height: 300px;
 }
-.itemPrice {
-  font-family: 'Open Sans', sans-serif;
+.item-price {
+  font-family: 'Montserrat', sans-serif;
 }
 .quick-look-thumbnail-container{
   scroll-snap-type: x mandatory;

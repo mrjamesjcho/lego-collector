@@ -15,7 +15,7 @@ export default function CartSummaryItem(props) {
               <h5 className="qty-decrement btn btn-secondary d-flex justify-content-center align-items-center p-0">
                 &#8722;
               </h5>
-              <h5 className="mx-3">{props.itemQuantity}</h5>
+              <h5 className="item-qty text-center mx-2">{props.itemQuantity}</h5>
               <h5 className="qty-increment btn btn-secondary d-flex justify-content-center align-items-center p-0">
                 &#x0002B;
               </h5>
