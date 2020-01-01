@@ -11,12 +11,12 @@ export default function CartSummaryItem(props) {
         <div className="item-price-qty d-flex justify-content-around mt-3">
           <div className="item-qty d-flex flex-column justify-content-center align-items-center">
             <h5>Qty</h5>
-            <div className="qty-change d-flex">
-              <h5 className="qty-decrement">
+            <div className="qty-change d-flex justify-content-center align-items-center">
+              <h5 className="qty-decrement btn btn-secondary d-flex justify-content-center align-items-center p-0">
                 &#8722;
               </h5>
               <h5 className="mx-3">{props.itemQuantity}</h5>
-              <h5 className="qty-increment">
+              <h5 className="qty-increment btn btn-secondary d-flex justify-content-center align-items-center p-0">
                 &#x0002B;
               </h5>
             </div>

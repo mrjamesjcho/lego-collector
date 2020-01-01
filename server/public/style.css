@@ -91,3 +91,10 @@ a:hover {
   max-width: 100%;
   max-height: 150px;
 }
+.qty-decrement, .qty-increment {
+  height: 20px;
+  width: 20px;
+}
+.qty-decrement:hover, .qty-increment:hover {
+  cursor: pointer;
+}
