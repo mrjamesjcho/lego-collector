@@ -17,7 +17,7 @@ a:hover {
 .featuredItems, .carouselImage {
   height: 300px;
 }
-.item-price {
+.item-price, .cart-total {
   font-family: 'Montserrat', sans-serif;
 }
 .quick-look-thumbnail-container{
@@ -61,7 +61,7 @@ a:hover {
 .shopping-cart-container{
   cursor: pointer;
 }
-.shopping-cart-container, .cart-summary-total{
+.shopping-cart-container, .cart-total{
   font-size: 2rem;
 }
 .details-button-container{
@@ -82,17 +82,14 @@ a:hover {
 .item-card:hover .details-button-container{
   display: flex;
 }
-.cart-item-container {
-  height: 180px;
-}
+
 .item-name {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .cart-item-img {
-  max-width: 100%;
-  max-height: 150px;
+  height: 150px;
 }
 .qty-decrement, .qty-increment {
   height: 20px;

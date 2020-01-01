@@ -36,7 +36,7 @@ export default class CartSummary extends React.Component {
         <div className="cart-summary-items container d-flex-column">
           {cartItemElements}
         </div>
-        <h1 className="container mb-5 cart-summary-total">Item Total: {'$' + (itemTotal / 100)}</h1>
+        <h1 className="cart-total container mb-5">Item Total: {'$' + (itemTotal / 100)}</h1>
       </div>
     );
 
