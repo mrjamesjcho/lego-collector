@@ -12,6 +12,7 @@ export default class App extends React.Component {
       cart: []
     };
     this.addToCart = this.addToCart.bind(this);
+    this.deleteFromCart = this.deleteFromCart.bind(this);
   }
 
   getCartItems() {
@@ -29,7 +30,7 @@ export default class App extends React.Component {
       headers: { 'Content-Type': 'application/json' }
     };
     fetch('/api/cart.php', data)
-      .then(response => {})
+      .then(res => {})
       .then(data => {
         var sameItemIndex = null;
         const newCart = this.state.cart.map((item, index) => {
@@ -47,6 +48,25 @@ export default class App extends React.Component {
         }
         this.setState({ cart: newCart });
       });
+  }
+
+  deleteFromCart(cartItem) {
+    const data = {
+      method: 'DELETE',
+      body: JSON.stringify({ id: cartItem.cart_item_id }),
+      headers: { 'Contnet-Type': 'application/json' }
+    };
+    fetch('/api/cart.php', data)
+      .then(res => {})
+      .then(data => {
+        const newCart = this.state.cart.map((item, index) => {
+          if (item.cart_item_id !== cartItem.cart_item_id) {
+            return item;
+          }
+        });
+        this.setState({ cart: newCart });
+      });
+
   }
 
   numOfItemsInCart() {
