@@ -98,9 +98,9 @@ a:hover {
 .qty-decrement:hover, .qty-increment:hover {
   cursor: pointer;
 }
-.item-image-container:hover {
+.item-image-container:hover, .cart-item-img:hover {
   opacity: .7;
 }
-.item-name-container:hover {
+.item-name-container:hover, .cart-item-name:hover {
   color: gray;
 }

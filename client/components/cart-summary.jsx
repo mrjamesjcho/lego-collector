@@ -20,6 +20,7 @@ export default class CartSummary extends React.Component {
         itemTotal += item.price * item.count;
         return <CartSummaryItem
           key={item.id}
+          id={item.id}
           itemImage={item.images}
           itemName={item.name}
           itemPrice={item.price}
