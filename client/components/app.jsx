@@ -17,7 +17,9 @@ export default class App extends React.Component {
   getCartItems() {
     fetch('/api/cart.php')
       .then(request => request.json())
-      .then(data => this.setState({ cart: data }));
+      .then(data => {
+        this.setState({ cart: data });
+      });
   }
 
   addToCart(product) {
@@ -38,9 +40,10 @@ export default class App extends React.Component {
           return item;
         });
         if (sameItemIndex === null) {
-          product['count'] = 1;
-          product['images'] = product['images'][0];
-          newCart.push(product);
+          const newCartProduct = { ...product };
+          newCartProduct.count = 1;
+          newCartProduct.images = product.images[0];
+          newCart.push(newCartProduct);
         }
         this.setState({ cart: newCart });
       });
