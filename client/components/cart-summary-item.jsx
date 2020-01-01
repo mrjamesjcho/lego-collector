@@ -10,7 +10,7 @@ export default function CartSummaryItem(props) {
         <h4 className="item-name">{props.itemName}</h4>
         <div className="item-price-qty d-flex justify-content-around mt-3">
           <div className="item-qty d-flex flex-column justify-content-center align-items-center">
-            <h5>Qty</h5>
+            <h6>Qty</h6>
             <div className="qty-change d-flex justify-content-center align-items-center">
               <h5 className="qty-decrement btn btn-secondary d-flex justify-content-center align-items-center p-0">
                 &#8722;
@@ -22,7 +22,7 @@ export default function CartSummaryItem(props) {
             </div>
           </div>
           <div className="item-price d-flex flex-column justify-content-center align-items-center">
-            <h5>Price</h5>
+            <h6>Price</h6>
             <h5>{'$' + (props.itemPrice / 100)}</h5>
           </div>
         </div>
