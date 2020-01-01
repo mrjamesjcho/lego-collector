@@ -56,7 +56,6 @@ a:hover {
 .product-details-image-info-container{
   height: 400px;
 }
-.item-card,
 .back-to-catalog,
 .modal-close-button,
 .shopping-cart-container{
@@ -101,4 +100,10 @@ a:hover {
 }
 .qty-decrement:hover, .qty-increment:hover {
   cursor: pointer;
+}
+.item-image-container:hover {
+  opacity: .7;
+}
+.item-name-container:hover {
+  color: gray;
 }

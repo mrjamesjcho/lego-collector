@@ -41,7 +41,7 @@ export default class ProductDetails extends React.Component {
               <h3 className="product-price">{'$' + (this.state.product.price / 100)}</h3>
               <div className="product-short-description mt-2">{this.state.product.shortDescription}</div>
               <div className="button-container d-flex">
-                <a href='#' className='btn btn-primary mt-3' onClick={this.handleAddToCart}>Add to Cart</a>
+                <a href='#' className='btn btn-info mt-3' onClick={this.handleAddToCart}>Add to Cart</a>
               </div>
             </div>
           </div>
