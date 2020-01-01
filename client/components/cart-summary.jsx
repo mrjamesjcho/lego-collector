@@ -28,7 +28,7 @@ export default class CartSummary extends React.Component {
       });
     }
     return (
-      <div className="cart-summary-container container col-8 align-self-center">
+      <div className="cart-summary-container container col-lg-8 align-self-center">
         <div className="row px-4 py-2 back-to-catalog-container">
           <Link to='/products' className='back-to-catalog' >&lt; <u>continue shopping</u></Link>
         </div>
@@ -36,7 +36,7 @@ export default class CartSummary extends React.Component {
         <div className="cart-summary-items container d-flex-column">
           {cartItemElements}
         </div>
-        <h1 className="container mb-5 cart-summary-total">Item Total: {'$' + (itemTotal / 100)}</h1>
+        <h1 className="cart-total container mb-5">Item Total: {'$' + (itemTotal / 100)}</h1>
       </div>
     );
 
