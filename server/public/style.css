@@ -49,9 +49,8 @@ a:hover {
 }
 .item-info-container{
   overflow: hidden;
-  background-color: rgb(247, 247, 247);
 }
-.card-container{
+.item-card {
   height: 400px;
 }
 .product-details-image-info-container{
