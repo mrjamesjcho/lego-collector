@@ -31,7 +31,7 @@ export default class ProductList extends React.Component {
           itemName={product.name}
           itemPrice={product.price}
           itemDescription={product.shortDescription}
-          onAddToCart={this.props.onAddToCart} />
+          onAddCartItem={this.props.onAddCartItem} />
       );
     });
     return (

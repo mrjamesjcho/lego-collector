@@ -15,11 +15,15 @@ export default function CartSummaryItem(props) {
           <div className="item-qty d-flex justify-content-center align-items-center mr-4">
             <h6 className="mr-2">Qty:</h6>
             <div className="qty-change d-flex justify-content-center align-items-center">
-              <h5 className="qty-decrement btn btn-secondary d-flex justify-content-center align-items-center p-0">
+              <h5
+                className="qty-decrement btn btn-secondary d-flex justify-content-center align-items-center p-0"
+                onClick={() => props.onUpdateCartItem(props.item, -1)} >
                 &#8722;
               </h5>
               <h5 className="item-qty text-center mx-2">{props.itemQuantity}</h5>
-              <h5 className="qty-increment btn btn-secondary d-flex justify-content-center align-items-center p-0">
+              <h5
+                className="qty-increment btn btn-secondary d-flex justify-content-center align-items-center p-0"
+                onClick={() => props.onUpdateCartItem(props.item, 1)} >
                 &#x0002B;
               </h5>
             </div>
@@ -27,7 +31,7 @@ export default function CartSummaryItem(props) {
           <div className="remove-btn d-flex justify-content-center align-items-center mr-4">
             <h6
               className="remove-item btn btn-danger py-0"
-              onClick={() => props.onDeleteFromCart(props.item)}>Delete</h6>
+              onClick={() => props.onDeleteCartItem(props.item)}>Delete</h6>
           </div>
           <div className="item-price d-flex justify-content-center align-items-center">
             <h6 className="mr-2">Price:</h6>

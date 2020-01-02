@@ -13,8 +13,9 @@ export default class App extends React.Component {
     this.state = {
       cart: []
     };
-    this.addToCart = this.addToCart.bind(this);
-    this.deleteFromCart = this.deleteFromCart.bind(this);
+    this.addCartItem = this.addCartItem.bind(this);
+    this.updateCartItem = this.updateCartItem.bind(this);
+    this.deleteCartItem = this.deleteCartItem.bind(this);
   }
 
   getCartItems() {
@@ -26,7 +27,7 @@ export default class App extends React.Component {
       });
   }
 
-  addToCart(product) {
+  addCartItem(product) {
     const data = {
       method: 'POST',
       body: JSON.stringify({ 'id': product.id }),
@@ -53,12 +54,34 @@ export default class App extends React.Component {
       });
   }
 
-  deleteFromCart(cartItem) {
+  updateCartItem(cartItem, incDec) {
+    const data = {
+      method: 'PATCH',
+      body: JSON.stringify({
+        id: cartItem.id,
+        incDec: incDec
+      }),
+      headers: { 'Content-Type': 'application/json' }
+    };
+    fetch('/api/cart.php', data)
+      .then(res => {})
+      .then(data => {
+        const newCart = this.state.cart.map(item => {
+          if (item.id === cartItem.id) {
+            item.count += incDec;
+          }
+          return item;
+        });
+        this.setState({ cart: newCart });
+      })
+  }
+
+  deleteCartItem(cartItem) {
     console.log('cartItem: ', cartItem);
     const data = {
       method: 'DELETE',
       body: JSON.stringify({ 'id': cartItem.id }),
-      headers: { 'Contnet-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' }
     };
     fetch('/api/cart.php', data)
       .then(res => {})
@@ -91,13 +114,13 @@ export default class App extends React.Component {
           </Route>
           <Route
             path="/products"
-            render={props => <ProductList {...props} onAddToCart={this.addToCart} /> } />
+            render={props => <ProductList {...props} onAddCartItem={this.addCartItem} /> } />
           <Route
             path="/product/:id"
-            render={props => <ProductDetails {...props} onAddToCart={this.addToCart} /> } />
+            render={props => <ProductDetails {...props} onAddCartItem={this.addCartItem} /> } />
           <Route
             path="/cart"
-            render={props => <CartSummary {...props} cartItems={this.state.cart} onDeleteFromCart={this.deleteFromCart} /> } />
+            render={props => <CartSummary {...props} cartItems={this.state.cart} onUpdateCartItem={this.updateCartItem} onDeleteCartItem={this.deleteCartItem} /> } />
         </Switch>
       </Router>
     );
