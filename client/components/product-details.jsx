@@ -20,6 +20,19 @@ export default class ProductDetails extends React.Component {
   componentDidMount() {
     this.getProducts(this.props.match.params.id);
   }
+  renderThumbnails() {
+    const elements = [];
+    this.state.product.images.map(imgUrl => {
+      const urlArr = imgUrl.split('/');
+      elements.push(
+        <div className="thumbnail d-flex align-items-center justify-content-center">
+          <img src={`/${urlArr[1]}/thumbnails/${urlArr[2]}`} />
+        </div>
+
+      );
+    });
+    return elements;
+  }
   render() {
     if (this.state.product) {
       return (
@@ -27,7 +40,12 @@ export default class ProductDetails extends React.Component {
           <Link to='/products' className='back-to-catalog' >&lt; <u>continue shopping</u></Link>
           <div className="product-details-image-info-container row">
             <div className="product-details-image-container col-7 h-100 d-flex align-items-center">
-              <img src={this.state.imgSelected} className="item-image rounded h-100 w-100 m-auto p-2" />
+              <div className="thumbnail-container d-flex flex-column">
+                {this.renderThumbnails()}
+              </div>
+              <div className="product-img-container d-flex justify-content-center align-items-center flex-fill h-100">
+                <img src={this.state.imgSelected} className="item-image rounded m-auto p-2" />
+              </div>
             </div>
             <div className="product-info-container col-5 d-flex-column">
               <h1 className="product-name">{this.state.product.name}</h1>

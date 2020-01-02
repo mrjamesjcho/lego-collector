@@ -33,9 +33,6 @@ a:hover {
 .quick-look-thumbnail-row > div {
   scroll-snap-align: start;
 }
-.item-image, .carouselImage{
-  object-fit: contain;
-}
 .item-thumbnail{
   width: 80px;
   display: inline-block;
@@ -103,4 +100,16 @@ a:hover {
 }
 .item-name-container:hover, .cart-item-name:hover {
   color: gray;
+}
+.thumbnail {
+  width: 70px;
+  height: 70px;
+}
+.thumbnail:hover {
+  cursor: pointer;
+  opacity: .6;
+}
+.thumbnail > img, .product-img-container > img {
+  max-width: 100%;
+  max-height: 100%;
 }
