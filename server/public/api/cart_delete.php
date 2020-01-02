@@ -32,7 +32,7 @@ if(!$transactionResult){
   throw new Exception(mysqli_error($conn));
 }
 
-$query = "DELETE FROM `cartItems` WHERE `cartItems`.`id` = $id";
+$query = "DELETE FROM `cartItems` WHERE `cartItems`.`productID` = $id AND `cartItems`.`cartID` = $cartId";
 
 $result = mysqli_query($conn, $query);
 if(!$result){

@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
@@ -19,6 +21,7 @@ export default class App extends React.Component {
     fetch('/api/cart.php')
       .then(request => request.json())
       .then(data => {
+        console.log('cart: ', data);
         this.setState({ cart: data });
       });
   }
@@ -51,15 +54,17 @@ export default class App extends React.Component {
   }
 
   deleteFromCart(cartItem) {
+    console.log('cartItem: ', cartItem);
     const data = {
       method: 'DELETE',
-      body: JSON.stringify({ 'id': cartItem.cart_item_id }),
+      body: JSON.stringify({ 'id': cartItem.id }),
       headers: { 'Contnet-Type': 'application/json' }
     };
     fetch('/api/cart.php', data)
       .then(res => {})
       .then(data => {
-        const newCart = this.state.cart.filter(item => item.cart_item_id !== cartItem.cart_item_id);
+        const newCart = this.state.cart.filter(item => item.id !== cartItem.id);
+        console.log('newCart: ', newCart);
         this.setState({ cart: newCart });
       });
   }
