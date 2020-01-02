@@ -11,6 +11,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      products: [],
       cart: []
     };
     this.addCartItem = this.addCartItem.bind(this);
