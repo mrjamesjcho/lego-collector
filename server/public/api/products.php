@@ -1,4 +1,5 @@
 <?php
+
 require_once('functions.php');
 set_exception_handler('error_handler');
 require_once('db_connection.php');
@@ -13,12 +14,12 @@ if (!empty($_GET['id'])) {
   $whereClause = 'WHERE p.`id` = ' . $_GET['id'];
 }
 
-$query = 'SELECT p.`id`, p.`name`, p.`price`, p.`shortDescription`, p.`longDescription`,
-	               GROUP_CONCAT(`product_images`.`url`) AS "images"
+$query = "SELECT p.`id`, p.`name`, p.`price`, p.`shortDescription`, p.`longDescription`,
+	               GROUP_CONCAT(`product_images`.`url`) AS 'images'
 	          FROM `products` AS p
-            JOIN `product_images` ON p.`id` = `product_images`.`product_id` '
+            JOIN `product_images` ON p.`id` = `product_images`.`product_id` "
             . $whereClause .
-            ' GROUP BY p.`id`';
+            " GROUP BY p.`id`";
 
 $result = mysqli_query($conn, $query);
 
@@ -39,3 +40,5 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 $json_output = json_encode($output);
 print($json_output);
+
+?>

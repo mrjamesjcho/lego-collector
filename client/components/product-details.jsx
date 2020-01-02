@@ -6,14 +6,15 @@ export default class ProductDetails extends React.Component {
     super(props);
     this.state = {
       id: this.props.match.params.id,
-      product: null
+      product: null,
+      imgSelected: null
     };
   }
   getProducts(id) {
     fetch('/api/products.php?id=' + id)
       .then(response => response.json())
       .then(data => {
-        this.setState({ product: data[0] });
+        this.setState({ product: data[0], imgSelected: data[0].images[0] });
       });
   }
   componentDidMount() {
@@ -26,7 +27,7 @@ export default class ProductDetails extends React.Component {
           <Link to='/products' className='back-to-catalog' >&lt; <u>continue shopping</u></Link>
           <div className="product-details-image-info-container row">
             <div className="product-details-image-container col-7 h-100 d-flex align-items-center">
-              <img src={this.state.product.images[0]} className="item-image rounded h-100 w-100 m-auto p-2" />
+              <img src={this.state.imgSelected} className="item-image rounded h-100 w-100 m-auto p-2" />
             </div>
             <div className="product-info-container col-5 d-flex-column">
               <h1 className="product-name">{this.state.product.name}</h1>

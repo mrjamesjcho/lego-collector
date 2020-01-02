@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 import React from 'react';
 import ProductListItem from './product-list-item';
 
@@ -9,10 +11,10 @@ export default class ProductList extends React.Component {
     };
   }
   getProducts() {
-    fetch('api/products.php')
-      .then(response => response.json())
+    fetch('/api/products.php')
+      .then(res => res.json())
       .then(data => {
-        // console.log('products: ', data);
+        console.log('products: ', data);
         this.setState({ products: data });
       });
   }
