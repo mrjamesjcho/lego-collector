@@ -9,7 +9,7 @@ a:hover {
   color: inherit;
 }
 .headerContainer {
-  background-color: rgb(255, 217, 0);
+  background: rgb(255, 207, 0);
 }
 .shoppingCartImage {
   height: 30px;

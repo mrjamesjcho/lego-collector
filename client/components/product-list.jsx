@@ -22,7 +22,7 @@ export default class ProductList extends React.Component {
     this.getProducts();
   }
   render() {
-    const element = this.state.products.map(product => {
+    const elements = this.state.products.map(product => {
       return (
         <ProductListItem
           key={product.id}
@@ -37,8 +37,8 @@ export default class ProductList extends React.Component {
       );
     });
     return (
-      <div className="container d-flex flex-wrap justify-content-center mb-5">
-        {element}
+      <div className="container d-flex flex-wrap mb-5">
+        {elements}
       </div>
     );
   }
