@@ -53,20 +53,15 @@ export default class App extends React.Component {
   deleteFromCart(cartItem) {
     const data = {
       method: 'DELETE',
-      body: JSON.stringify({ id: cartItem.cart_item_id }),
+      body: JSON.stringify({ 'id': cartItem.cart_item_id }),
       headers: { 'Contnet-Type': 'application/json' }
     };
     fetch('/api/cart.php', data)
       .then(res => {})
       .then(data => {
-        const newCart = this.state.cart.map((item, index) => {
-          if (item.cart_item_id !== cartItem.cart_item_id) {
-            return item;
-          }
-        });
+        const newCart = this.state.cart.filter(item => item.cart_item_id !== cartItem.cart_item_id);
         this.setState({ cart: newCart });
       });
-
   }
 
   numOfItemsInCart() {
@@ -97,7 +92,7 @@ export default class App extends React.Component {
             render={props => <ProductDetails {...props} onAddToCart={this.addToCart} /> } />
           <Route
             path="/cart"
-            render={props => <CartSummary {...props} cartItems={this.state.cart} /> } />
+            render={props => <CartSummary {...props} cartItems={this.state.cart} onDeleteFromCart={this.deleteFromCart} /> } />
         </Switch>
       </Router>
     );

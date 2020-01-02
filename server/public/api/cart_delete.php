@@ -1,12 +1,14 @@
 <?php
 
+print('in cart delete');
+
 if(!defined('INTERNAL')){
   exit('cannot allow direct access');
 }
 
 $data = getBodyData();
 $data = json_decode($data, true);
-if(!$id){
+if(!$data){
   $error = 'must have a cart item id to delete from cart';
   throw new Exception($error);
 }
@@ -16,24 +18,13 @@ if ($id <= 0){
   throw new Exception($error);
 }
 
+print($data);
+
 if (empty($_SESSION['cartId'])){
   $cartId = false;
 } else {
   $cartId = $_SESSION['cartId'];
 }
-
-$query = "SELECT `price` FROM `products` WHERE `id` = $id";
-
-$result = mysqli_query($conn, $query);
-
-if(!$result){
-  throw new Exception(mysqli_error($conn));
-}
-if (mysqli_num_rows($result) === 0){
-  $error = 'invalid product id: '.$id;
-  throw new Exception($error);
-}
-$productData = mysqli_fetch_assoc($result);
 
 $transactionResult = mysqli_query($conn, 'START TRANSACTION');
 

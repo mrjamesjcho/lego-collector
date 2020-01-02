@@ -27,6 +27,7 @@ while($row = mysqli_fetch_assoc($result)){
   $row['id'] = (int)$row['id'];
   $row['count'] = (int)$row['count'];
   $row['price'] = (int)$row['price'];
+  $row['cart_item_id'] = (int)$row['cart_item_id'];
   $output[] = $row;
 }
 $json_output = json_encode($output);
