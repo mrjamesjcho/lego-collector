@@ -55,6 +55,9 @@ export default class App extends React.Component {
   }
 
   updateCartItem(cartItem, incDec) {
+    if (cartItem.count === 1 && incDec === -1) {
+      return;
+    }
     const data = {
       method: 'PATCH',
       body: JSON.stringify({
