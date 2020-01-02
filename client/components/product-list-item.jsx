@@ -18,7 +18,7 @@ export default function ProductListItem(props) {
             <h6 className="mb-0">{props.itemPrice.toString().slice(-2)}</h6>
           </div>
         </div>
-        <button className="addToCartBtn btn btn-info mt-auto mx-2 mb-2" onClick={() => props.onAddToCart(props.product)}>Add to Cart</button>
+        <button className="addToCartBtn btn btn-info mt-auto mx-2 mb-2" onClick={() => props.onAddCartItem(props.product)}>Add to Cart</button>
       </div>
     </div>
   );

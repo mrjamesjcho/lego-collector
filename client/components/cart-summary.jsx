@@ -27,7 +27,8 @@ export default class CartSummary extends React.Component {
           itemPrice={item.price}
           itemDescription={item.shortDescription}
           itemQuantity={item.count}
-          onDeleteFromCart={this.props.onDeleteFromCart} />;
+          onUpdateCartItem={this.props.onUpdateCartItem}
+          onDeleteCartItem={this.props.onDeleteCartItem} />;
       });
     }
     return (
