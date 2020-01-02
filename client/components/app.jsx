@@ -56,10 +56,10 @@ export default class App extends React.Component {
 
   updateCartItem(cartItem, incDec) {
     const data = {
-      method: 'UPDATE',
+      method: 'PATCH',
       body: JSON.stringify({
-        'id': cartItem.id,
-        'incDec': incDec
+        id: cartItem.id,
+        incDec: incDec
       }),
       headers: { 'Content-Type': 'application/json' }
     };

@@ -1,6 +1,6 @@
 <?php
 
-print('in cart delete');
+print('in cart update');
 
 if(!defined('INTERNAL')){
   exit('cannot allow direct access');

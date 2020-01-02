@@ -15,7 +15,7 @@ switch($_SERVER['REQUEST_METHOD']){
   case 'DELETE':
     require_once('cart_delete.php');
     break;
-  case 'UPDATE':
+  case 'PATCH':
     require_once('cart_update.php');
     break;
 }
