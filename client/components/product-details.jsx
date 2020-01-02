@@ -22,11 +22,14 @@ export default class ProductDetails extends React.Component {
   }
   renderThumbnails() {
     const elements = [];
-    this.state.product.images.map(imgUrl => {
+    this.state.product.images.map((imgUrl, index) => {
       const urlArr = imgUrl.split('/');
       elements.push(
-        <div className="thumbnail d-flex align-items-center justify-content-center">
-          <img src={`/${urlArr[1]}/thumbnails/${urlArr[2]}`} />
+        <div
+          key={index}
+          className="thumbnail d-flex align-items-center justify-content-center"
+          onClick={() => this.setState({ imgSelected: this.state.product.images[index] })} >
+          <img data-index={index} src={`/${urlArr[1]}/thumbnails/${urlArr[2]}`} />
         </div>
 
       );

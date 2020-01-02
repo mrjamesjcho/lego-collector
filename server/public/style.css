@@ -109,7 +109,7 @@ a:hover {
   cursor: pointer;
   opacity: .6;
 }
-.thumbnail > img, .product-img-container > img {
+.thumbnail > img, .product-img-container > img, .item-image {
   max-width: 100%;
   max-height: 100%;
 }
