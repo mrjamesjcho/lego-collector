@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function CartSummaryItem(props) {
   return (
-    <div className="container d-flex flex-wrap justify-content-center border rounded my-2 cart-item-container">
+    <div className="d-flex flex-wrap justify-content-center border rounded my-2 cart-item-container">
       <Link to={`/product/${props.id}`} className="image-container d-flex col-md-5 p-2">
         <img src={props.itemImage} className="cart-item-img rounded m-auto" />
       </Link>
