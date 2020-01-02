@@ -53,12 +53,34 @@ export default class App extends React.Component {
       });
   }
 
+  incDecCartItem(cartItem, incDec) {
+    const data = {
+      method: 'UPDATE',
+      body: JSON.stringify({
+        'id': cartItem.id,
+        'incDec': incDec
+      }),
+      headers: { 'Content-Type': 'application/json' }
+    };
+    fetch('/api/cart.php', data)
+      .then(res => {})
+      .then(data => {
+        const newCart = this.state.cart.map(item => {
+          if (item.id === cartItem.id) {
+            item.count += incDec;
+          }
+          return item;
+        });
+        this.setState({ cart: newCart });
+      })
+  }
+
   deleteFromCart(cartItem) {
     console.log('cartItem: ', cartItem);
     const data = {
       method: 'DELETE',
       body: JSON.stringify({ 'id': cartItem.id }),
-      headers: { 'Contnet-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' }
     };
     fetch('/api/cart.php', data)
       .then(res => {})
