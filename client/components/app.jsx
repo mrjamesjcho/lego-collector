@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
@@ -12,12 +14,14 @@ export default class App extends React.Component {
       cart: []
     };
     this.addToCart = this.addToCart.bind(this);
+    this.deleteFromCart = this.deleteFromCart.bind(this);
   }
 
   getCartItems() {
     fetch('/api/cart.php')
       .then(request => request.json())
       .then(data => {
+        console.log('cart: ', data);
         this.setState({ cart: data });
       });
   }
@@ -29,7 +33,7 @@ export default class App extends React.Component {
       headers: { 'Content-Type': 'application/json' }
     };
     fetch('/api/cart.php', data)
-      .then(response => {})
+      .then(res => {})
       .then(data => {
         var sameItemIndex = null;
         const newCart = this.state.cart.map((item, index) => {
@@ -45,6 +49,22 @@ export default class App extends React.Component {
           newCartProduct.images = product.images[0];
           newCart.push(newCartProduct);
         }
+        this.setState({ cart: newCart });
+      });
+  }
+
+  deleteFromCart(cartItem) {
+    console.log('cartItem: ', cartItem);
+    const data = {
+      method: 'DELETE',
+      body: JSON.stringify({ 'id': cartItem.id }),
+      headers: { 'Contnet-Type': 'application/json' }
+    };
+    fetch('/api/cart.php', data)
+      .then(res => {})
+      .then(data => {
+        const newCart = this.state.cart.filter(item => item.id !== cartItem.id);
+        console.log('newCart: ', newCart);
         this.setState({ cart: newCart });
       });
   }
@@ -77,7 +97,7 @@ export default class App extends React.Component {
             render={props => <ProductDetails {...props} onAddToCart={this.addToCart} /> } />
           <Route
             path="/cart"
-            render={props => <CartSummary {...props} cartItems={this.state.cart} /> } />
+            render={props => <CartSummary {...props} cartItems={this.state.cart} onDeleteFromCart={this.deleteFromCart} /> } />
         </Switch>
       </Router>
     );
