@@ -11,7 +11,7 @@ if(empty($_SESSION['cartId'])){
 
 $cartId = (int)$_SESSION['cartId'];
 
-$query = 'SELECT c.productID AS id, c.count, c.price, p.shortDescription,
+$query = 'SELECT c.productID AS id, c.count, c.price, p.shortDescription, p.name,
                  (SELECT i.url FROM product_images AS i WHERE c.productID = i.product_id LIMIT 1) AS "images"
             FROM cartItems AS c
             JOIN products AS p ON c.productID = p.id

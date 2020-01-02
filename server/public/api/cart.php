@@ -12,6 +12,12 @@ switch($_SERVER['REQUEST_METHOD']){
   case 'POST':
     require_once('cart_add.php');
     break;
+  case 'DELETE':
+    require_once('cart_delete.php');
+    break;
+  case 'PATCH':
+    require_once('cart_update.php');
+    break;
 }
 
 ?>

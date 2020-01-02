@@ -24,17 +24,18 @@ export default class ProductList extends React.Component {
       return (
         <ProductListItem
           key={product.id}
+          product={product}
           id={product.id}
           item={product}
           itemImages={product.images}
           itemName={product.name}
           itemPrice={product.price}
           itemDescription={product.shortDescription}
-          onClick={this.props.onClick} />
+          onAddCartItem={this.props.onAddCartItem} />
       );
     });
     return (
-      <div className="container d-flex flex-wrap">
+      <div className="container d-flex flex-wrap justify-content-center mb-5">
         {element}
       </div>
     );

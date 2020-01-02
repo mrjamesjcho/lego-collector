@@ -17,8 +17,8 @@ a:hover {
 .featuredItems, .carouselImage {
   height: 300px;
 }
-.itemPrice {
-  font-family: 'Open Sans', sans-serif;
+.item-price, .cart-total {
+  font-family: 'Montserrat', sans-serif;
 }
 .quick-look-thumbnail-container{
   scroll-snap-type: x mandatory;
@@ -49,21 +49,19 @@ a:hover {
 }
 .item-info-container{
   overflow: hidden;
-  background-color: rgb(247, 247, 247);
 }
-.card-container{
+.item-card {
   height: 400px;
 }
 .product-details-image-info-container{
   height: 400px;
 }
-.item-card,
 .back-to-catalog,
 .modal-close-button,
 .shopping-cart-container{
   cursor: pointer;
 }
-.shopping-cart-container, .cart-summary-total{
+.shopping-cart-container, .cart-total{
   font-size: 2rem;
 }
 .details-button-container{
@@ -84,7 +82,25 @@ a:hover {
 .item-card:hover .details-button-container{
   display: flex;
 }
+
+.item-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .cart-item-img {
-  max-width: 100%;
-  max-height: 100%;
+  height: 150px;
+}
+.qty-decrement, .qty-increment {
+  height: 20px;
+  width: 20px;
+}
+.qty-decrement:hover, .qty-increment:hover {
+  cursor: pointer;
+}
+.item-image-container:hover, .cart-item-img:hover {
+  opacity: .7;
+}
+.item-name-container:hover, .cart-item-name:hover {
+  color: gray;
 }

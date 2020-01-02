@@ -8,8 +8,6 @@ export default class ProductDetails extends React.Component {
       id: this.props.match.params.id,
       product: null
     };
-    this.handleBackToCatalog = this.handleBackToCatalog.bind(this);
-    this.handleAddToCart = this.handleAddToCart.bind(this);
   }
   getProducts(id) {
     fetch('/api/products.php?id=' + id)
@@ -17,12 +15,6 @@ export default class ProductDetails extends React.Component {
       .then(data => {
         this.setState({ product: data[0] });
       });
-  }
-  handleBackToCatalog() {
-    this.props.onBackToCatalog('catalog', {});
-  }
-  handleAddToCart() {
-    this.props.onAddToCart(this.state.product);
   }
   componentDidMount() {
     this.getProducts(this.props.match.params.id);
@@ -41,7 +33,7 @@ export default class ProductDetails extends React.Component {
               <h3 className="product-price">{'$' + (this.state.product.price / 100)}</h3>
               <div className="product-short-description mt-2">{this.state.product.shortDescription}</div>
               <div className="button-container d-flex">
-                <a href='#' className='btn btn-primary mt-3' onClick={this.handleAddToCart}>Add to Cart</a>
+                <a href='#' className='btn btn-info mt-3' onClick={() => this.props.onAddCartItem(this.state.product)}>Add to Cart</a>
               </div>
             </div>
           </div>
@@ -55,6 +47,5 @@ export default class ProductDetails extends React.Component {
     } else {
       return null;
     }
-
   }
 }
