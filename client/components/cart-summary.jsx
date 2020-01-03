@@ -32,7 +32,7 @@ export default class CartSummary extends React.Component {
       });
     }
     return (
-      <div className="cart-summary-container container col-lg-8 align-self-center">
+      <div className="cart-summary-container container col-lg-8 align-self-center mb-5">
         <div className="row px-4 py-2 back-to-catalog-container">
           <Link to='/products' className='back-to-catalog' >&lt; <u>continue shopping</u></Link>
         </div>
@@ -40,7 +40,10 @@ export default class CartSummary extends React.Component {
         <div className="cart-summary-items container d-flex-column">
           {cartItemElements}
         </div>
-        <h1 className="cart-total container mb-5">Item Total: {'$' + (itemTotal / 100)}</h1>
+        <div className="cart-total-checkout-container container d-flex">
+          <h1 className="cart-total my-auto">Item Total: {'$' + (itemTotal / 100)}</h1>
+          <button className="cart-checkout btn btn-primary ml-auto">Checkout</button>
+        </div>
       </div>
     );
 
