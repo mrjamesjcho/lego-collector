@@ -52,10 +52,8 @@ a, a:hover {
 .shoppingCartContainer, .cartTotal{
   font-size: 2rem;
 }
-.details-button-container{
-  display: none;
-  background-color: rgba(162, 161, 161, 0.2);
-  z-index: 1;
+.productDetailsImgInfoContainer {
+  height: 400px;
 }
 .productImg, .productDetailsImgContainer > img, .thumbnail > img {
   max-width: 100%;

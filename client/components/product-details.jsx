@@ -41,7 +41,7 @@ export default class ProductDetails extends React.Component {
       return (
         <div className='productDetailsContainer container'>
           <Link to='/products' className='back-to-catalog' >&lt; <u>continue shopping</u></Link>
-          <div className="productDetailsImageInfoContainer d-flex">
+          <div className="productDetailsImgInfoContainer d-flex">
             <div className="productDetailsImageContainer col-7 d-flex align-items-center h-100 ">
               <div className="thumbnailContainer d-flex flex-column">
                 {this.renderThumbnails()}
