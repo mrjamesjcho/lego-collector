@@ -7,10 +7,10 @@ export default function ProductListItem(props) {
     <div className="productContainer col-lg-3 col-md-4 col-sm-6 col-8 border-0 p-1" >
       <div className="productInfoContainer d-flex flex-column border h-100">
         <Link to={`/product/${props.product.id}`} className="productImgContainer d-flex">
-          <img src={props.product.images[0]} className="item-image m-auto p-2" />
+          <img src={props.product.images[0]} className="productImg m-auto p-2" />
         </Link>
         <div className="productNamePriceContainer d-flex flex-column flex-fill p-2">
-          <Link to={`/product/${props.product.id}`} className="product-name-container">
+          <Link to={`/product/${props.product.id}`} className="productNameContainer">
             <h5 className="productName mb-2">{props.product.name}</h5>
           </Link>
           <div className="productPriceContainer d-flex mb-1">

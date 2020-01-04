@@ -39,28 +39,28 @@ export default class ProductDetails extends React.Component {
   render() {
     if (this.state.product) {
       return (
-        <div className='product-details-container container'>
+        <div className='productDetailsContainer container'>
           <Link to='/products' className='back-to-catalog' >&lt; <u>continue shopping</u></Link>
-          <div className="product-details-image-info-container row">
-            <div className="product-details-image-container col-7 h-100 d-flex align-items-center">
-              <div className="thumbnail-container d-flex flex-column">
+          <div className="productDetailsImageInfoContainer d-flex">
+            <div className="productDetailsImageContainer col-7 d-flex align-items-center h-100 ">
+              <div className="thumbnailContainer d-flex flex-column">
                 {this.renderThumbnails()}
               </div>
-              <div className="product-img-container d-flex justify-content-center align-items-center flex-fill h-100">
+              <div className="productDetailsImgContainer d-flex justify-content-center align-items-center flex-fill h-100">
                 <img src={this.state.imgSelected} className="item-image rounded m-auto p-2" />
               </div>
             </div>
-            <div className="product-info-container col-5 d-flex-column">
-              <h1 className="product-name">{this.state.product.name}</h1>
-              <h3 className="product-price">{'$' + (this.state.product.price / 100)}</h3>
-              <div className="product-short-description mt-2">{this.state.product.shortDescription}</div>
-              <div className="button-container d-flex">
-                <a href='#' className='btn btn-info mt-3' onClick={() => this.props.onAddCartItem(this.state.product)}>Add to Cart</a>
+            <div className="productDetailsInfoContainer col-5 d-flex-column">
+              <h1 className="productName">{this.state.product.name}</h1>
+              <h3 className="price">{'$' + (this.state.product.price / 100)}</h3>
+              <div className="productShortDescription mt-2">{this.state.product.shortDescription}</div>
+              <div className="buttonContainer d-flex">
+                <a href='#' className='addToCartBtn btn btn-info mt-3' onClick={() => this.props.onAddCartItem(this.state.product)}>Add to Cart</a>
               </div>
             </div>
           </div>
-          <div className="row p-4">
-            <div className="product-long-description">
+          <div className="px-2 my-4">
+            <div className="productLongDescription">
               {this.state.product.longDescription}
             </div>
           </div>

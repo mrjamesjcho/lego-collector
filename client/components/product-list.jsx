@@ -11,7 +11,7 @@ export default function ProductList(props) {
     );
   });
   return (
-    <div className="container d-flex flex-wrap mb-5">
+    <div className="productListContainer container d-flex flex-wrap mb-5">
       {elements}
     </div>
   );
