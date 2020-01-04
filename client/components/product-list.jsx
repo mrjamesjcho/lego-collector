@@ -1,4 +1,5 @@
 import React from 'react';
+import Carousel from './carousel';
 import ProductListItem from './product-list-item';
 
 export default function ProductList(props) {
@@ -11,8 +12,11 @@ export default function ProductList(props) {
     );
   });
   return (
-    <div className="productListContainer container d-flex flex-wrap mb-5">
-      {elements}
-    </div>
+    <React.Fragment>
+      <Carousel />
+      <div className="productListContainer container d-flex flex-wrap mb-5">
+        {elements}
+      </div>
+    </React.Fragment>
   );
 }

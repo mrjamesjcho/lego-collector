@@ -11,6 +11,9 @@ a, a:hover {
 .shoppingCartImage {
   height: 30px;
 }
+.carouselItem {
+  height: 400px;
+}
 .productContainer {
   height: 400px;
 }
