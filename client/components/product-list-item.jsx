@@ -4,18 +4,18 @@ import { Link } from 'react-router-dom';
 export default function ProductListItem(props) {
 
   return (
-    <div className="item-card card col-lg-3 col-md-4 col-sm-6 col-8 border-0 p-1" >
-      <div className="item-info-container d-flex flex-column border h-100">
-        <Link to={`/product/${props.product.id}`} className="item-image-container d-flex h-50">
+    <div className="productContainer col-lg-3 col-md-4 col-sm-6 col-8 border-0 p-1" >
+      <div className="productInfoContainer d-flex flex-column border h-100">
+        <Link to={`/product/${props.product.id}`} className="productImgContainer d-flex">
           <img src={props.product.images[0]} className="item-image m-auto p-2" />
         </Link>
-        <div className="card-body d-flex-column h-25 p-2">
+        <div className="productNamePriceContainer d-flex flex-column flex-fill p-2">
           <Link to={`/product/${props.product.id}`} className="product-name-container">
-            <h5 className="card-title product-name mb-2">{props.product.name}</h5>
+            <h5 className="productName mb-2">{props.product.name}</h5>
           </Link>
-          <div className="card-text item-price-container d-flex mb-1">
-            <h4 className="item-price mb-0">{'$' + (Math.floor(props.product.price / 100))}</h4>
-            <h6 className="mb-0">{props.product.price.toString().slice(-2)}</h6>
+          <div className="productPriceContainer d-flex mb-1">
+            <h4 className="priceDollars mb-0">{'$' + (Math.floor(props.product.price / 100))}</h4>
+            <h6 className="priceCents mb-0">{props.product.price.toString().slice(-2)}</h6>
           </div>
         </div>
         <button className="addToCartBtn btn btn-info mt-auto mx-2 mb-2" onClick={() => props.onAddCartItem(props.product)}>Add to Cart</button>

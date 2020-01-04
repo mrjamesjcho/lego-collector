@@ -1,10 +1,7 @@
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
-a {
-  color: inherit;
-}
-a:hover {
+a, a:hover {
   text-decoration: none;
   color: inherit;
 }
@@ -14,11 +11,14 @@ a:hover {
 .shoppingCartImage {
   height: 30px;
 }
+.productContainer {
+  height: 400px;
+}
+.productImgContainer {
+  height: 60%;
+}
 .featuredItems, .carouselImage {
   height: 300px;
-}
-.item-price, .cart-total {
-  font-family: 'Montserrat', sans-serif;
 }
 .quick-look-thumbnail-container{
   scroll-snap-type: x mandatory;
@@ -44,15 +44,6 @@ a:hover {
 .prev-thumbnail:hover, .next-thumbnail:hover{
   background-color: lightgray;
 }
-.item-info-container{
-  overflow: hidden;
-}
-.item-card {
-  height: 400px;
-}
-.product-details-image-info-container{
-  height: 400px;
-}
 .back-to-catalog,
 .modal-close-button,
 .shopping-cart-container{
@@ -76,9 +67,6 @@ a:hover {
 .quick-look-image-option:hover .item-image{
   filter: opacity(.5);
 }
-.item-card:hover .details-button-container{
-  display: flex;
-}
 
 .item-name {
   white-space: nowrap;
@@ -95,7 +83,7 @@ a:hover {
 .qty-decrement:hover, .qty-increment:hover {
   cursor: pointer;
 }
-.item-image-container:hover, .cart-item-img:hover {
+.productImgContainer:hover, .cart-item-img:hover {
   opacity: .7;
 }
 .item-name-container:hover, .cart-item-name:hover {
