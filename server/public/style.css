@@ -49,7 +49,7 @@ a, a:hover {
 .shoppingCartContainer{
   cursor: pointer;
 }
-.shoppingCartContainer, .cart-total{
+.shoppingCartContainer, .cartTotal{
   font-size: 2rem;
 }
 .details-button-container{
@@ -61,6 +61,12 @@ a, a:hover {
   max-width: 100%;
   max-height: 100%;
 }
+.productImgContainer:hover, .cartItemImg:hover {
+  opacity: .7;
+}
+.productNameContainer:hover, .cartItemName:hover {
+  color: gray;
+}
 .thumbnail {
   width: 70px;
   height: 70px;
@@ -68,6 +74,16 @@ a, a:hover {
 .thumbnail:hover {
   cursor: pointer;
   opacity: .6;
+}
+.cartItemImg {
+  height: 150px;
+}
+.qtyDec, .qtyInc {
+  height: 20px;
+  width: 20px;
+}
+.qtyDec:hover, .qtyInc:hover {
+  cursor: pointer;
 }
 .quick-look-modal-container{
   background-color: rgba(0, 0, 0, 0.331);
@@ -84,20 +100,4 @@ a, a:hover {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-.cart-item-img {
-  height: 150px;
-}
-.qty-decrement, .qty-increment {
-  height: 20px;
-  width: 20px;
-}
-.qty-decrement:hover, .qty-increment:hover {
-  cursor: pointer;
-}
-.productImgContainer:hover, .cart-item-img:hover {
-  opacity: .7;
-}
-.productNameContainer:hover, .cart-item-name:hover {
-  color: gray;
 }

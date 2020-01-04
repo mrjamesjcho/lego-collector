@@ -21,13 +21,7 @@ export default class CartSummary extends React.Component {
         return (
           <CartSummaryItem
             key={item.id}
-            id={item.id}
             item={item}
-            itemImage={item.images}
-            itemName={item.name}
-            itemPrice={item.price}
-            itemDescription={item.shortDescription}
-            itemQuantity={item.count}
             onUpdateCartItem={this.props.onUpdateCartItem}
             onDeleteCartItem={this.props.onDeleteCartItem} />
         );
