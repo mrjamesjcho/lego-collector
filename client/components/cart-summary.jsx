@@ -18,31 +18,29 @@ export default class CartSummary extends React.Component {
     } else {
       cartItemElements = this.props.cartItems.map(item => {
         itemTotal += item.price * item.count;
-        return <CartSummaryItem
-          key={item.id}
-          id={item.id}
-          item={item}
-          itemImage={item.images}
-          itemName={item.name}
-          itemPrice={item.price}
-          itemDescription={item.shortDescription}
-          itemQuantity={item.count}
-          onUpdateCartItem={this.props.onUpdateCartItem}
-          onDeleteCartItem={this.props.onDeleteCartItem} />;
+        return (
+          <CartSummaryItem
+            key={item.id}
+            item={item}
+            onUpdateCartItem={this.props.onUpdateCartItem}
+            onDeleteCartItem={this.props.onDeleteCartItem} />
+        );
       });
     }
     return (
-      <div className="cart-summary-container container col-lg-8 align-self-center">
-        <div className="row px-4 py-2 back-to-catalog-container">
-          <Link to='/products' className='back-to-catalog' >&lt; <u>continue shopping</u></Link>
+      <div className="cartContainer container col-lg-8 align-self-center mb-5">
+        <div className="backToCatalogContainer pb-2">
+          <Link to='/products' className='backToCatalog'>&lt; <u>continue shopping</u></Link>
         </div>
-        <h1 className="cart-summary-header container">Shopping Cart</h1>
-        <div className="cart-summary-items container d-flex-column">
+        <h1 className="cartHeader">Shopping Cart</h1>
+        <div className="cartItems d-flex-column">
           {cartItemElements}
         </div>
-        <h1 className="cart-total container mb-5">Item Total: {'$' + (itemTotal / 100)}</h1>
+        <div className="cartTotalCheckoutContainer d-flex">
+          <h1 className="cartTotal my-auto">Item Total: {'$' + (itemTotal / 100)}</h1>
+          <button className="checkoutBtn btn btn-primary ml-auto">Checkout</button>
+        </div>
       </div>
     );
-
   }
 }
