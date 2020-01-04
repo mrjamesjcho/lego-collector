@@ -121,7 +121,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <Router className='app-container'>
+      <Router className='appContainer'>
         <Header numberOfItemsInCart={this.numOfItemsInCart()} />
         <Switch>
           <Route exact path="/">
