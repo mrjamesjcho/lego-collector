@@ -5,11 +5,11 @@ export default function CartSummaryItem(props) {
   return (
     <div className="d-flex flex-wrap justify-content-center border rounded my-2 cart-item-container">
       <Link to={`/product/${props.id}`} className="image-container d-flex col-md-5 p-2">
-        <img src={props.itemImage} className="cart-item-img rounded m-auto" />
+        <img src={props.item.images} className="cart-item-img rounded m-auto" />
       </Link>
       <div className="d-flex-column p-2 col-md-7 mt-2">
-        <Link to={`/product/${props.id}`} >
-          <h4 className="cart-item-name">{props.itemName}</h4>
+        <Link to={`/product/${props.item.id}`} >
+          <h4 className="cart-item-name">{props.item.name}</h4>
         </Link>
         <div className="item-price-qty d-flex mt-3">
           <div className="item-qty d-flex justify-content-center align-items-center mr-4">
@@ -20,7 +20,7 @@ export default function CartSummaryItem(props) {
                 onClick={() => props.onUpdateCartItem(props.item, -1)} >
                 &#8722;
               </h5>
-              <h5 className="item-qty text-center mx-2">{props.itemQuantity}</h5>
+              <h5 className="item-qty text-center mx-2">{props.item.count}</h5>
               <h5
                 className="qty-increment btn btn-secondary d-flex justify-content-center align-items-center p-0"
                 onClick={() => props.onUpdateCartItem(props.item, 1)} >

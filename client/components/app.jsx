@@ -19,6 +19,15 @@ export default class App extends React.Component {
     this.deleteCartItem = this.deleteCartItem.bind(this);
   }
 
+  getProducts() {
+    fetch('/api/products.php')
+      .then(res => res.json())
+      .then(data => {
+        console.log('products: ', data);
+        this.setState({ products: data });
+      });
+  }
+
   getCartItems() {
     fetch('/api/cart.php')
       .then(request => request.json())
@@ -26,6 +35,11 @@ export default class App extends React.Component {
         console.log('cart: ', data);
         this.setState({ cart: data });
       });
+  }
+
+  componentDidMount() {
+    this.getProducts();
+    this.getCartItems();
   }
 
   addCartItem(product) {
@@ -104,9 +118,6 @@ export default class App extends React.Component {
     this.state.cart.map(item => { numOfItems += item.count; });
     return numOfItems;
   }
-  componentDidMount() {
-    this.getCartItems();
-  }
 
   render() {
     return (
@@ -118,7 +129,7 @@ export default class App extends React.Component {
           </Route>
           <Route
             path="/products"
-            render={props => <ProductList {...props} onAddCartItem={this.addCartItem} /> } />
+            render={props => <ProductList {...props} products={this.state.products} onAddCartItem={this.addCartItem} /> } />
           <Route
             path="/product/:id"
             render={props => <ProductDetails {...props} onAddCartItem={this.addCartItem} /> } />
