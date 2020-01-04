@@ -10,19 +10,8 @@ export default class ProductList extends React.Component {
       products: []
     };
   }
-  getProducts() {
-    fetch('/api/products.php')
-      .then(res => res.json())
-      .then(data => {
-        console.log('products: ', data);
-        this.setState({ products: data });
-      });
-  }
-  componentDidMount() {
-    this.getProducts();
-  }
   render() {
-    const elements = this.state.products.map(product => {
+    const elements = this.props.products.map(product => {
       return (
         <ProductListItem
           key={product.id}

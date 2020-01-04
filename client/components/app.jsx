@@ -129,7 +129,7 @@ export default class App extends React.Component {
           </Route>
           <Route
             path="/products"
-            render={props => <ProductList {...props} onAddCartItem={this.addCartItem} /> } />
+            render={props => <ProductList {...props} products={this.state.products} onAddCartItem={this.addCartItem} /> } />
           <Route
             path="/product/:id"
             render={props => <ProductDetails {...props} onAddCartItem={this.addCartItem} /> } />
