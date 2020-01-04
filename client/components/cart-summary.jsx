@@ -18,23 +18,25 @@ export default class CartSummary extends React.Component {
     } else {
       cartItemElements = this.props.cartItems.map(item => {
         itemTotal += item.price * item.count;
-        return <CartSummaryItem
-          key={item.id}
-          id={item.id}
-          item={item}
-          itemImage={item.images}
-          itemName={item.name}
-          itemPrice={item.price}
-          itemDescription={item.shortDescription}
-          itemQuantity={item.count}
-          onUpdateCartItem={this.props.onUpdateCartItem}
-          onDeleteCartItem={this.props.onDeleteCartItem} />;
+        return (
+          <CartSummaryItem
+            key={item.id}
+            id={item.id}
+            item={item}
+            itemImage={item.images}
+            itemName={item.name}
+            itemPrice={item.price}
+            itemDescription={item.shortDescription}
+            itemQuantity={item.count}
+            onUpdateCartItem={this.props.onUpdateCartItem}
+            onDeleteCartItem={this.props.onDeleteCartItem} />
+        );
       });
     }
     return (
       <div className="cart-summary-container container col-lg-8 align-self-center mb-5">
-        <div className="row px-4 py-2 back-to-catalog-container">
-          <Link to='/products' className='back-to-catalog' >&lt; <u>continue shopping</u></Link>
+        <div className="row px-4 pb-2 back-to-catalog-container">
+          <Link to='/products' className='back-to-catalog'>&lt; <u>continue shopping</u></Link>
         </div>
         <h1 className="cart-summary-header container">Shopping Cart</h1>
         <div className="cart-summary-items container d-flex-column">
@@ -46,6 +48,5 @@ export default class CartSummary extends React.Component {
         </div>
       </div>
     );
-
   }
 }
