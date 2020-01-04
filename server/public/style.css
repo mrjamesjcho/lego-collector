@@ -46,10 +46,10 @@ a, a:hover {
 }
 .back-to-catalog,
 .modal-close-button,
-.shopping-cart-container{
+.shoppingCartContainer{
   cursor: pointer;
 }
-.shopping-cart-container, .cart-total{
+.shoppingCartContainer, .cart-total{
   font-size: 2rem;
 }
 .details-button-container{
