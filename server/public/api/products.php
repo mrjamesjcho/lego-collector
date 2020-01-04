@@ -14,7 +14,7 @@ if (!empty($_GET['id'])) {
   $whereClause = 'WHERE p.`id` = ' . $_GET['id'];
 }
 
-$query = "SELECT p.`id`, p.`name`, p.`price`, p.`shortDescription`, p.`longDescription`,
+$query = "SELECT p.`id`, p.`name`, p.`price`, p.`shortDescription`, p.`longDescription`, p.`featured`,
 	               GROUP_CONCAT(`product_images`.`url`) AS 'images'
 	          FROM `products` AS p
             JOIN `product_images` ON p.`id` = `product_images`.`product_id` "
@@ -36,6 +36,7 @@ while ($row = mysqli_fetch_assoc($result)) {
   $row['images'] = $images;
   $row['id'] = (int)$row['id'];
   $row['price'] = (int)$row['price'];
+  $row['featured'] = (int)$row['featured'];
   $output[] = $row;
 }
 $json_output = json_encode($output);

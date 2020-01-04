@@ -13,7 +13,7 @@ export default function ProductList(props) {
   });
   return (
     <React.Fragment>
-      <Carousel />
+      <Carousel featured={props.featured} />
       <div className="productListContainer container d-flex flex-wrap mb-5">
         {elements}
       </div>

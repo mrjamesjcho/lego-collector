@@ -1,13 +1,16 @@
 import React from 'react';
 
 export default function Carousel(props) {
+  // const indicatorElements = [];
+  // const carouselElements = [];
+
   return (
     <div className="carouselContainer container my-2">
-      <div id="carouselExampleCaptions" className="carousel slide" data-ride="carousel">
+      <div id="carouselCaptions" className="carousel slide" data-ride="carousel">
         <ol className="carousel-indicators">
-          <li data-target="#carouselExampleCaptions" data-slide-to="0" className="active"></li>
-          <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-          <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+          <li data-target="#carouselCaptions" data-slide-to="0" className="active"></li>
+          <li data-target="#carouselCaptions" data-slide-to="1"></li>
+          <li data-target="#carouselCaptions" data-slide-to="2"></li>
         </ol>
         <div className="carousel-inner">
           <div className="carouselItem carousel-item active">
