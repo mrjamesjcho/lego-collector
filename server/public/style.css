@@ -93,11 +93,10 @@ a, a:hover {
   height: 150px;
 }
 .qty {
-  min-width: 25px;
+  min-width: 40px;
 }
 .qtyDec, .qtyInc {
-  height: 20px;
-  width: 20px;
+  width: 25px;
 }
 .qtyDec:hover, .qtyInc:hover {
   cursor: pointer;
