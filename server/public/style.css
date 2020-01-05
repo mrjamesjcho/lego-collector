@@ -26,10 +26,6 @@ a, a:hover {
 .featuredItems, .carouselImage {
   height: 300px;
 }
-/* .addToCartBtn {
-  background-color: rgb(255, 207, 0);
-  border-color: rgb(255, 207, 0);
-} */
 .quick-look-thumbnail-container{
   scroll-snap-type: x mandatory;
 }
@@ -85,6 +81,9 @@ a, a:hover {
 }
 .cartItemImg {
   height: 150px;
+}
+.qty {
+  min-width: 25px;
 }
 .qtyDec, .qtyInc {
   height: 20px;

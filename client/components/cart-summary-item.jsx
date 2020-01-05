@@ -18,13 +18,13 @@ export default function CartSummaryItem(props) {
             <h6 className="qtyTitle mr-2">Qty:</h6>
             <div className="qtyChange d-flex justify-content-center align-items-center">
               <h5
-                className="qtyDec btn btn-secondary d-flex justify-content-center align-items-center p-0"
+                className="qtyDec btn btn-light d-flex justify-content-center align-items-center p-0"
                 onClick={() => props.onUpdateCartItem(props.item, -1)} >
                 &#8722;
               </h5>
               <h5 className="qty text-center mx-2">{props.item.count}</h5>
               <h5
-                className="qtyInc btn btn-secondary d-flex justify-content-center align-items-center p-0"
+                className="qtyInc btn btn-light d-flex justify-content-center align-items-center p-0"
                 onClick={() => props.onUpdateCartItem(props.item, 1)} >
                 &#x0002B;
               </h5>
