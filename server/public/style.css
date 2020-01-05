@@ -98,7 +98,7 @@ a, a:hover {
 .qtyDec, .qtyInc {
   width: 25px;
 }
-.qtyDec:hover, .qtyInc:hover {
+.qtyDec:hover, .qtyInc:hover, .removeBtn {
   cursor: pointer;
 }
 .quick-look-modal-container{
