@@ -5,6 +5,9 @@ a, a:hover {
   text-decoration: none;
   color: inherit;
 }
+.continueShopping:hover {
+  text-decoration: underline;
+}
 .headerContainer {
   background: #ffc107;
 }
@@ -61,7 +64,7 @@ a, a:hover {
 .productDetailsImgInfoContainer {
   height: 400px;
 }
-.productImg, .productDetailsImgContainer > img, .thumbnail > img {
+.productImg, .productDetailsImgContainer > img, .thumbnail > img, .cartItemImg {
   max-width: 100%;
   max-height: 100%;
 }
@@ -79,7 +82,7 @@ a, a:hover {
   cursor: pointer;
   opacity: .6;
 }
-.cartItemImg {
+.cartItemContainer {
   height: 150px;
 }
 .qty {
