@@ -16,7 +16,7 @@ export default class ThumbnailCarousel extends React.Component {
         <div
           key={index}
           className="thumbnail d-flex align-items-center justify-content-center"
-          onClick={this.props.onThumbnailClick(imgUrl)} >
+          onClick={() => this.props.onThumbnailClick(imgUrl)} >
           <img src={`/${urlArr[1]}/thumbnails/${urlArr[2]}`} />
         </div>
       );
