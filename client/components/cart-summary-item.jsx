@@ -33,7 +33,7 @@ export default function CartSummaryItem(props) {
           <div
             className="removeBtnContainer d-flex justify-content-center align-items-center mr-4"
             onClick={() => props.onDeleteCartItem(props.item)} >
-            <h6 className="removeBtn btn btn-danger py-0 m-0">Delete</h6>
+            <h6 className="removeBtn btn btn-link py-0 m-0">Delete</h6>
           </div>
           <div className="cartItemPriceContainer d-flex justify-content-center align-items-center">
             <h5 className="cartItemPrice m-0">{'$' + (props.item.price / 100)}</h5>
