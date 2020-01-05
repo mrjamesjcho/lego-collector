@@ -6,7 +6,7 @@ a, a:hover {
   color: inherit;
 }
 .headerContainer {
-  background: rgb(255, 207, 0);
+  background: #ffc107;
 }
 .shoppingCartImage {
   height: 30px;
@@ -26,6 +26,10 @@ a, a:hover {
 .featuredItems, .carouselImage {
   height: 300px;
 }
+/* .addToCartBtn {
+  background-color: rgb(255, 207, 0);
+  border-color: rgb(255, 207, 0);
+} */
 .quick-look-thumbnail-container{
   scroll-snap-type: x mandatory;
 }
