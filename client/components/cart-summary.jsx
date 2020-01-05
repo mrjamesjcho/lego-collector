@@ -29,11 +29,13 @@ export default class CartSummary extends React.Component {
     }
     return (
       <div className="cartContainer container col-lg-8 align-self-center mb-5">
-        <div className="backToCatalogContainer pb-2">
-          <Link to='/products' className='backToCatalog'>&lt; <u>continue shopping</u></Link>
+        <div className="continueShoppingContainer pb-2">
+          <Link to='/products' className='continueShoppingLink'>
+            &lt; <span className="continueShopping">continue shopping</span>
+          </Link>
         </div>
         <h1 className="cartHeader">Shopping Cart</h1>
-        <div className="cartItems d-flex-column">
+        <div className="cartItems d-flex-column border-top">
           {cartItemElements}
         </div>
         <div className="cartTotalCheckoutContainer d-flex">

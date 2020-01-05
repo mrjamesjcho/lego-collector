@@ -12,6 +12,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       products: [],
+      featured: [],
       cart: []
     };
     this.addCartItem = this.addCartItem.bind(this);
@@ -24,7 +25,8 @@ export default class App extends React.Component {
       .then(res => res.json())
       .then(data => {
         console.log('products: ', data);
-        this.setState({ products: data });
+        const featured = data.filter(product => product.featured);
+        this.setState({ products: data, featured: featured });
       });
   }
 
@@ -129,7 +131,7 @@ export default class App extends React.Component {
           </Route>
           <Route
             path="/products"
-            render={props => <ProductList {...props} products={this.state.products} onAddCartItem={this.addCartItem} /> } />
+            render={props => <ProductList {...props} products={this.state.products} featured={this.state.featured} onAddCartItem={this.addCartItem} /> } />
           <Route
             path="/product/:id"
             render={props => <ProductDetails {...props} onAddCartItem={this.addCartItem} /> } />

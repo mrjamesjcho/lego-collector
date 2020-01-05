@@ -40,7 +40,9 @@ export default class ProductDetails extends React.Component {
     if (this.state.product) {
       return (
         <div className='productDetailsContainer container'>
-          <Link to='/products' className='back-to-catalog' >&lt; <u>continue shopping</u></Link>
+          <Link to='/products' className='continueShoppingLink' >
+            &lt; <span className="continueShopping">continue shopping</span>
+          </Link>
           <div className="productDetailsImgInfoContainer d-flex">
             <div className="productDetailsImageContainer col-7 d-flex align-items-center h-100 ">
               <div className="thumbnailContainer d-flex flex-column align-self-start">
@@ -55,7 +57,7 @@ export default class ProductDetails extends React.Component {
               <h3 className="price">{'$' + (this.state.product.price / 100)}</h3>
               <div className="productShortDescription mt-2">{this.state.product.shortDescription}</div>
               <div className="buttonContainer d-flex">
-                <a href='#' className='addToCartBtn btn btn-info mt-3' onClick={() => this.props.onAddCartItem(this.state.product)}>Add to Cart</a>
+                <a href='#' className='addToCartBtn btn btn-warning mt-3' onClick={() => this.props.onAddCartItem(this.state.product)}>Add to Cart</a>
               </div>
             </div>
           </div>
