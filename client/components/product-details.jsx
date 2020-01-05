@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ThumbnailCarousel from './thumbnail-carousel';
 
 export default class ProductDetails extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ export default class ProductDetails extends React.Component {
       product: null,
       imgSelected: null
     };
+    this.handleThumbnailClick = this.handleThumbnailClick.bind(this);
   }
   getProducts(id) {
     fetch('/api/products.php?id=' + id)
@@ -19,6 +21,9 @@ export default class ProductDetails extends React.Component {
   }
   componentDidMount() {
     this.getProducts(this.props.match.params.id);
+  }
+  handleThumbnailClick(imgUrl) {
+    this.setState({ imgSelected: imgUrl });
   }
   renderThumbnails() {
     const elements = [];
@@ -46,7 +51,9 @@ export default class ProductDetails extends React.Component {
           <div className="productDetailsImgInfoContainer d-flex">
             <div className="productDetailsImageContainer col-7 d-flex align-items-center h-100 ">
               <div className="thumbnailContainer d-flex flex-column align-self-start">
-                {this.renderThumbnails()}
+                <ThumbnailCarousel
+                  thumbnails={this.state.product.images}
+                  onThumbnailClick={this.handleThumbnailClick} />
               </div>
               <div className="productDetailsImgContainer d-flex justify-content-center align-items-center flex-fill h-100">
                 <img src={this.state.imgSelected} className="item-image rounded m-auto p-2" />
