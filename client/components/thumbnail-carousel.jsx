@@ -4,8 +4,10 @@ import './styles/thumbnail-carousel.css';
 export default class ThumbnailCarousel extends React.Component {
   constructor(props) {
     super(props);
+    this.scrollOffset = 74;
     this.state = {
-      thumbnails: props.thumbnails
+      thumbnails: props.thumbnails,
+      thumbnailsOffset: 0
     };
   }
   renderThumbnails() {
@@ -32,8 +34,10 @@ export default class ThumbnailCarousel extends React.Component {
               &and;
           </h4>
           : null}
-        <div className={`thumbnailContainer ${thumbnailNav ? 'thumbnailNav' : ''} d-flex flex-column overflow-hidden`}>
-          {this.renderThumbnails()}
+        <div className={`thumbnailContainer ${thumbnailNav ? 'thumbnailNav' : ''} overflow-hidden`}>
+          <div className="thumbnailScrollable d-flex flex-column">
+            {this.renderThumbnails()}
+          </div>
         </div>
         {thumbnailNav
           ? <h4 className="thumbnailNext text-info d-flex justify-content-center w-50 my-0 mx-auto">

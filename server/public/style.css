@@ -94,17 +94,6 @@ a, a:hover {
 .qtyDec:hover, .qtyInc:hover, .removeBtn {
   cursor: pointer;
 }
-.quick-look-modal-container{
-  background-color: rgba(0, 0, 0, 0.331);
-  z-index: 2;
-}
-.quick-look-modal{
-  background-color: white;
-}
-.quick-look-image-option:hover .item-image{
-  filter: opacity(.5);
-}
-
 .item-name {
   white-space: nowrap;
   overflow: hidden;
