@@ -1,4 +1,4 @@
-.thumbnailContainer {
+.thumbnailContolsContainer {
   min-width: 84px;
   max-width: 84px;
 }
@@ -10,7 +10,7 @@
   margin: 5px 0;
   padding: 2px;
 }
-.thumbnail:hover {
+.thumbnail:hover, .thumbnailPrev:hover, .thumbnailNext:hover {
   cursor: pointer;
   opacity: .6;
 }

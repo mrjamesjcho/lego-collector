@@ -25,8 +25,16 @@ export default class ThumbnailCarousel extends React.Component {
   }
   render() {
     return (
-      <div className="thumbnailContainer h-100 d-flex flex-column align-self-start overflow-hidden">
-        {this.renderThumbnails()}
+      <div className="thumbnailControlsContainer d-flex flex-column align-self-start">
+        <h4 className="thumbnailPrev text-info d-flex justify-content-center w-50 my-0 mx-auto">
+          &and;
+        </h4>
+        <div className="thumbnailContainer h-100 d-flex flex-column overflow-hidden">
+          {this.renderThumbnails()}
+        </div>
+        <h4 className="thumbnailNext text-info d-flex justify-content-center w-50 my-0 mx-auto">
+          &or;
+        </h4>
       </div>
     );
   }
