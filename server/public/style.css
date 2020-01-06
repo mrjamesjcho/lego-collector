@@ -81,14 +81,7 @@ a, a:hover {
 .productNameContainer:hover, .cartItemName:hover {
   color: gray;
 }
-.thumbnail {
-  width: 70px;
-  height: 70px;
-}
-.thumbnail:hover {
-  cursor: pointer;
-  opacity: .6;
-}
+
 .cartItemContainer {
   height: 150px;
 }
