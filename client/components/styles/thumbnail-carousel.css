@@ -1,15 +1,20 @@
 .thumbnailContainer {
-  min-width: 60px;
-  max-width: 60px;
+  min-width: 84px;
+  max-width: 84px;
 }
 .thumbnail {
-  min-width: 60px;
-  min-height: 50px;
-  max-width: 60px;
-  max-height: 50px;
-  margin: 10px 0;
+  min-width: 84px;
+  max-width: 84px;
+  min-height: 64px;
+  max-height: 64px;
+  margin: 5px 0;
+  padding: 2px;
 }
 .thumbnail:hover {
   cursor: pointer;
   opacity: .6;
+}
+.thumbnail > img {
+  max-width: 80px;
+  max-height: 60px;
 }
