@@ -34,11 +34,10 @@ export default class ProductDetails extends React.Component {
           </Link>
           <div className="productDetailsImgInfoContainer d-flex">
             <div className="productDetailsImageContainer col-7 d-flex align-items-center h-100 ">
-              <div className="thumbnailContainer d-flex flex-column align-self-start">
-                <ThumbnailCarousel
-                  thumbnails={this.state.product.images}
-                  onThumbnailClick={this.handleThumbnailClick} />
-              </div>
+              <ThumbnailCarousel
+                thumbnails={this.state.product.images}
+                imgSelected={this.state.imgSelected}
+                onThumbnailClick={this.handleThumbnailClick} />
               <div className="productDetailsImgContainer d-flex justify-content-center align-items-center flex-fill h-100">
                 <img src={this.state.imgSelected} className="item-image rounded m-auto p-2" />
               </div>

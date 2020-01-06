@@ -8,19 +8,26 @@ export default class ThumbnailCarousel extends React.Component {
       thumbnails: props.thumbnails
     };
   }
-  render() {
+  renderThumbnails() {
     const elements = [];
     this.state.thumbnails.map((imgUrl, index) => {
       const urlArr = imgUrl.split('/');
       elements.push(
         <div
           key={index}
-          className="thumbnail d-flex align-items-center justify-content-center"
+          className="thumbnail d-flex justify-content-center align-items-center border"
           onClick={() => this.props.onThumbnailClick(imgUrl)} >
           <img src={`/${urlArr[1]}/thumbnails/${urlArr[2]}`} />
         </div>
       );
     });
     return elements;
+  }
+  render() {
+    return (
+      <div className="thumbnailContainer h-100 d-flex flex-column align-self-start overflow-hidden">
+        {this.renderThumbnails()}
+      </div>
+    );
   }
 }
