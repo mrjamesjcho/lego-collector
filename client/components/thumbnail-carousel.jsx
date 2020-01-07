@@ -4,9 +4,25 @@ import './styles/thumbnail-carousel.css';
 export default class ThumbnailCarousel extends React.Component {
   constructor(props) {
     super(props);
+    this.scrollOffset = 74;
+    this.fourThumbnailHeight = 296;
     this.state = {
-      thumbnails: props.thumbnails
+      thumbnails: props.thumbnails,
+      thumbnailsOffset: 0,
+      maxOffset: this.fourThumbnailHeight - props.thumbnails.length * this.scrollOffset
     };
+    this.handleThumbnailNavClick = this.handleThumbnailNavClick.bind(this);
+  }
+  handleThumbnailNavClick(e) {
+    const currentOffset = this.state.thumbnailsOffset;
+    if (currentOffset === 0 && parseInt(e.target.dataset.tnav) === 1) {
+      return;
+    }
+    if (currentOffset === this.state.maxOffset && parseInt(e.target.dataset.tnav) === -1) {
+      return;
+    }
+    const newOffset = currentOffset + parseInt(e.target.dataset.tnav) * this.scrollOffset;
+    this.setState({ thumbnailsOffset: newOffset });
   }
   renderThumbnails() {
     const elements = [];
@@ -24,17 +40,33 @@ export default class ThumbnailCarousel extends React.Component {
     return elements;
   }
   render() {
+    const thumbnailNav = this.state.thumbnails.length > 5;
+    const offsetStyle = { transform: `translateY(${this.state.thumbnailsOffset}px)` };
     return (
-      <div className="thumbnailControlsContainer d-flex flex-column align-self-start">
-        <h4 className="thumbnailPrev text-info d-flex justify-content-center w-50 my-0 mx-auto">
-          &and;
-        </h4>
-        <div className="thumbnailContainer h-100 d-flex flex-column overflow-hidden">
-          {this.renderThumbnails()}
+      <div className="thumbnailControlsContainer d-flex flex-column align-self-start h-100">
+        {thumbnailNav
+          ? <h4
+            className="thumbnailPrev text-info d-flex justify-content-center w-50 my-0 mx-auto"
+            data-tnav={1}
+            onClick={this.handleThumbnailNavClick} >
+              &and;
+          </h4>
+          : null}
+        <div className={`thumbnailContainer ${thumbnailNav ? 'thumbnailNav' : ''} overflow-hidden`}>
+          <div
+            className="thumbnailScrollable d-flex flex-column"
+            style={offsetStyle} >
+            {this.renderThumbnails()}
+          </div>
         </div>
-        <h4 className="thumbnailNext text-info d-flex justify-content-center w-50 my-0 mx-auto">
-          &or;
-        </h4>
+        {thumbnailNav
+          ? <h4
+            className="thumbnailNext text-info d-flex justify-content-center w-50 my-0 mx-auto"
+            data-tnav={-1}
+            onClick={this.handleThumbnailNavClick} >
+              &or;
+          </h4>
+          : null}
       </div>
     );
   }
