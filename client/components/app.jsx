@@ -5,6 +5,7 @@ import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
+import Checkout from './checkout';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 export default class App extends React.Component {
@@ -138,6 +139,9 @@ export default class App extends React.Component {
           <Route
             path="/cart"
             render={props => <CartSummary {...props} cartItems={this.state.cart} onUpdateCartItem={this.updateCartItem} onDeleteCartItem={this.deleteCartItem} /> } />
+          <Route
+            path="/checkout"
+            render={props => <Checkout {...props} /> } />
         </Switch>
       </Router>
     );

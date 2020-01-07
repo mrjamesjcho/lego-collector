@@ -34,13 +34,17 @@ export default class CartSummary extends React.Component {
             &lt; <span className="continueShopping">continue shopping</span>
           </Link>
         </div>
-        <h1 className="cartHeader">Shopping Cart</h1>
+        <h1 className="cartHeader">My Cart</h1>
         <div className="cartItems d-flex-column border-top">
           {cartItemElements}
         </div>
         <div className="cartTotalCheckoutContainer d-flex">
           <h1 className="cartTotal my-auto">Item Total: {'$' + (itemTotal / 100)}</h1>
-          <button className="checkoutBtn btn btn-primary ml-auto">Checkout</button>
+          <Link
+            to='/checkout'
+            className='ml-auto' >
+            <button className="checkoutBtn btn btn-primary">Checkout</button>
+          </Link>
         </div>
       </div>
     );
