@@ -5,14 +5,22 @@ export default class ThumbnailCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.scrollOffset = 74;
+    this.fourThumbnailHeight = 296;
     this.state = {
       thumbnails: props.thumbnails,
-      thumbnailsOffset: 0
+      thumbnailsOffset: 0,
+      maxOffset: this.fourThumbnailHeight - props.thumbnails.length * this.scrollOffset
     };
     this.handleThumbnailNavClick = this.handleThumbnailNavClick.bind(this);
   }
   handleThumbnailNavClick(e) {
     const currentOffset = this.state.thumbnailsOffset;
+    if (currentOffset === 0 && parseInt(e.target.dataset.tnav) === 1) {
+      return;
+    }
+    if (currentOffset === this.state.maxOffset && parseInt(e.target.dataset.tnav) === -1) {
+      return;
+    }
     const newOffset = currentOffset + parseInt(e.target.dataset.tnav) * this.scrollOffset;
     this.setState({ thumbnailsOffset: newOffset });
   }
