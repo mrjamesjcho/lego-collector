@@ -1,0 +1,27 @@
+.thumbnailContolsContainer {
+  min-width: 84px;
+  max-width: 84px;
+}
+.thumbnailScrollable {
+  transition: transform .3s ease-in;
+}
+.thumbnail {
+  min-width: 84px;
+  max-width: 84px;
+  min-height: 64px;
+  max-height: 64px;
+  margin: 5px 0;
+  padding: 2px;
+}
+.thumbnail:hover, .thumbnailPrev:hover, .thumbnailNext:hover {
+  cursor: pointer;
+  opacity: .6;
+}
+.thumbnailNav {
+  min-height: 296px;
+  max-height: 296px;
+}
+.thumbnail > img {
+  max-width: 80px;
+  max-height: 60px;
+}

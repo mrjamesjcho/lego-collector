@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ThumbnailCarousel from './thumbnail-carousel';
 
 export default class ProductDetails extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ export default class ProductDetails extends React.Component {
       product: null,
       imgSelected: null
     };
+    this.handleThumbnailClick = this.handleThumbnailClick.bind(this);
   }
   getProducts(id) {
     fetch('/api/products.php?id=' + id)
@@ -20,32 +22,22 @@ export default class ProductDetails extends React.Component {
   componentDidMount() {
     this.getProducts(this.props.match.params.id);
   }
-  renderThumbnails() {
-    const elements = [];
-    this.state.product.images.map((imgUrl, index) => {
-      const urlArr = imgUrl.split('/');
-      elements.push(
-        <div
-          key={index}
-          className="thumbnail d-flex align-items-center justify-content-center"
-          onClick={() => this.setState({ imgSelected: this.state.product.images[index] })} >
-          <img data-index={index} src={`/${urlArr[1]}/thumbnails/${urlArr[2]}`} />
-        </div>
-
-      );
-    });
-    return elements;
+  handleThumbnailClick(imgUrl) {
+    this.setState({ imgSelected: imgUrl });
   }
   render() {
     if (this.state.product) {
       return (
         <div className='productDetailsContainer container'>
-          <Link to='/products' className='back-to-catalog' >&lt; <u>continue shopping</u></Link>
+          <Link to='/products' className='continueShoppingLink' >
+            &lt; <span className="continueShopping">continue shopping</span>
+          </Link>
           <div className="productDetailsImgInfoContainer d-flex">
             <div className="productDetailsImageContainer col-7 d-flex align-items-center h-100 ">
-              <div className="thumbnailContainer d-flex flex-column">
-                {this.renderThumbnails()}
-              </div>
+              <ThumbnailCarousel
+                thumbnails={this.state.product.images}
+                imgSelected={this.state.imgSelected}
+                onThumbnailClick={this.handleThumbnailClick} />
               <div className="productDetailsImgContainer d-flex justify-content-center align-items-center flex-fill h-100">
                 <img src={this.state.imgSelected} className="item-image rounded m-auto p-2" />
               </div>
@@ -55,7 +47,7 @@ export default class ProductDetails extends React.Component {
               <h3 className="price">{'$' + (this.state.product.price / 100)}</h3>
               <div className="productShortDescription mt-2">{this.state.product.shortDescription}</div>
               <div className="buttonContainer d-flex">
-                <a href='#' className='addToCartBtn btn btn-info mt-3' onClick={() => this.props.onAddCartItem(this.state.product)}>Add to Cart</a>
+                <a href='#' className='addToCartBtn btn btn-warning mt-3' onClick={() => this.props.onAddCartItem(this.state.product)}>Add to Cart</a>
               </div>
             </div>
           </div>
