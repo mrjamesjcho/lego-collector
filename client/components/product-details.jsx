@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ThumbnailCarousel from './thumbnail-carousel';
 
 export default class ProductDetails extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ export default class ProductDetails extends React.Component {
       product: null,
       imgSelected: null
     };
+    this.handleThumbnailClick = this.handleThumbnailClick.bind(this);
   }
   getProducts(id) {
     fetch('/api/products.php?id=' + id)
@@ -20,21 +22,8 @@ export default class ProductDetails extends React.Component {
   componentDidMount() {
     this.getProducts(this.props.match.params.id);
   }
-  renderThumbnails() {
-    const elements = [];
-    this.state.product.images.map((imgUrl, index) => {
-      const urlArr = imgUrl.split('/');
-      elements.push(
-        <div
-          key={index}
-          className="thumbnail d-flex align-items-center justify-content-center"
-          onClick={() => this.setState({ imgSelected: this.state.product.images[index] })} >
-          <img data-index={index} src={`/${urlArr[1]}/thumbnails/${urlArr[2]}`} />
-        </div>
-
-      );
-    });
-    return elements;
+  handleThumbnailClick(imgUrl) {
+    this.setState({ imgSelected: imgUrl });
   }
   render() {
     if (this.state.product) {
@@ -45,9 +34,10 @@ export default class ProductDetails extends React.Component {
           </Link>
           <div className="productDetailsImgInfoContainer d-flex">
             <div className="productDetailsImageContainer col-7 d-flex align-items-center h-100 ">
-              <div className="thumbnailContainer d-flex flex-column align-self-start">
-                {this.renderThumbnails()}
-              </div>
+              <ThumbnailCarousel
+                thumbnails={this.state.product.images}
+                imgSelected={this.state.imgSelected}
+                onThumbnailClick={this.handleThumbnailClick} />
               <div className="productDetailsImgContainer d-flex justify-content-center align-items-center flex-fill h-100">
                 <img src={this.state.imgSelected} className="item-image rounded m-auto p-2" />
               </div>
