@@ -34,7 +34,7 @@ export default class Checkout extends React.Component {
           </Link>
         </div>
         <h1 className="cartHeader">My Cart</h1>
-        <form className="col-sm-8 border py-3">
+        <form className="col-sm-8 border-top py-3">
           <h5 className="mb-3">Billing and Shipping Address</h5>
           <div className="form-row">
             <div className="form-group col">
@@ -77,6 +77,8 @@ export default class Checkout extends React.Component {
               <input type="text" className="form-control" id="inputZip" />
             </div>
           </div>
+        </form>
+        <form className="col-sm-8 border-top py-3">
           <h5>Payment Details</h5>
           <div className="form-row">
             <div className="form-group col-md-6">
@@ -102,15 +104,17 @@ export default class Checkout extends React.Component {
               <input type="number" className="form-control" id="inputCreditCardCvv" />
             </div>
           </div>
+        </form>
+        <form className="col-sm-8 border-top py-3">
           <div className="form-group">
             <div className="form-check">
               <input className="form-check-input" type="checkbox" id="gridCheck" />
               <label className="form-check-label" htmlFor="gridCheck">
-                I accept that this website is for demonstration purposes, that no payment processing will be done, and that personal information such as names, addresses, or real credit card numbers should not be used on submission of this form.              </label>
+                  I accept that this website is for demonstration purposes, that no payment processing will be done, and that personal information such as names, addresses, or real credit card numbers should not be used on submission of this form.              </label>
             </div>
           </div>
-          <button type="submit" className="btn btn-warning">Place your order</button>
         </form>
+        <button type="submit" className="btn btn-warning ml-3">Place your order</button>
       </div >
     );
   }
