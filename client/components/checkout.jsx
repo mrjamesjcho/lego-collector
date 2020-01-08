@@ -69,7 +69,7 @@ export default class Checkout extends React.Component {
     const elements = [];
     this.props.cartItems.map(item => {
       elements.push(
-        <div key={item.id} className="checkoutCartItem d-flex py-3 border-top">
+        <div key={item.id} className="checkoutCartItem d-flex p-3 border-top">
           <div className="checkoutCartItemImgContainer d-flex justify-content-center">
             <img className="checkoutCartItemImg" src={item.images} alt={item.name} />
           </div>
@@ -85,8 +85,13 @@ export default class Checkout extends React.Component {
       );
     });
     elements.push(
-      <div key={0} className="border-top border-bottom">
-
+      <div key={0} className="border-top d-flex justify-content-between border-bottom p-3">
+        <div>
+          Order total:
+        </div>
+        <div>
+          {`$${this.props.cartTotal / 100}`}
+        </div>
       </div>
     );
     return elements;

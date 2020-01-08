@@ -146,10 +146,10 @@ export default class App extends React.Component {
             render={props => <ProductDetails {...props} onAddCartItem={this.addCartItem} /> } />
           <Route
             path="/cart"
-            render={props => <CartSummary {...props} cartItems={this.state.cart} onUpdateCartItem={this.updateCartItem} onDeleteCartItem={this.deleteCartItem} /> } />
+            render={props => <CartSummary {...props} cartItems={this.state.cart} cartTotal={this.state.cartTotal} onUpdateCartItem={this.updateCartItem} onDeleteCartItem={this.deleteCartItem} /> } />
           <Route
             path="/checkout"
-            render={props => <Checkout {...props} cartItems={this.state.cart} /> } />
+            render={props => <Checkout {...props} cartItems={this.state.cart} cartTotal={this.state.cartTotal} /> } />
         </Switch>
       </Router>
     );
