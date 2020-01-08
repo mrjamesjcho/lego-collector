@@ -29,7 +29,7 @@ export default class CartSummary extends React.Component {
   }
   render() {
     return (
-      <div className="cartContainer container col-lg-8 align-self-center mb-5">
+      <div className="cartContainer container mb-5">
         <div className="continueShoppingContainer pb-2">
           <Link to='/products' className='continueShoppingLink'>
             &lt; <span className="continueShopping">continue shopping</span>

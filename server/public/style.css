@@ -36,19 +36,6 @@ a, a:hover {
 .featuredItems, .carouselImage {
   height: 300px;
 }
-.quick-look-thumbnail-container{
-  scroll-snap-type: x mandatory;
-}
-.quick-look-thumbnail-row{
-  width: 90%;
-  overflow-y: hidden;
-  display: inline-block;
-  white-space: nowrap;
-  overflow-x: auto;
-}
-.quick-look-thumbnail-row > div {
-  scroll-snap-align: start;
-}
 .item-thumbnail{
   width: 80px;
   display: inline-block;

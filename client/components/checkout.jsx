@@ -85,7 +85,7 @@ export default class Checkout extends React.Component {
       );
     });
     elements.push(
-      <div key={0} className="border-top d-flex justify-content-between border-bottom p-3">
+      <div key={0} className="border-top d-flex justify-content-between border-bottom px-4 py-3">
         <div>
           Order total:
         </div>
@@ -98,7 +98,7 @@ export default class Checkout extends React.Component {
   }
   render() {
     return (
-      <div className = "checkoutContainer container col-lg-10 align-self-center mb-5" >
+      <div className = "checkoutContainer container mb-5" >
         <div className="continueShoppingContainer pb-2">
           <Link to='/products' className='continueShoppingLink'>
           &lt; <span className="continueShopping">continue shopping</span>
@@ -106,7 +106,7 @@ export default class Checkout extends React.Component {
         </div>
         <h1 className="cartHeader">My Cart</h1>
         <div className="checkoutFormCartContainer d-flex">
-          <div className="checkoutFormContainer col-sm-7 p-0">
+          <div className="checkoutFormContainer col-sm-8 p-0">
             <form className="border-top py-3 px-3">
               <h5 className="mb-3">Billing and Shipping Address</h5>
               <div className="form-row">
@@ -116,11 +116,11 @@ export default class Checkout extends React.Component {
                 </div>
               </div>
               <div className="form-row">
-                <div className="form-group col-md-6">
+                <div className="form-group col-lg-4 col-md-5">
                   <label htmlFor="inputPhone">Phone</label>
                   <input type="number" className="form-control" id="inputPhone" />
                 </div>
-                <div className="form-group col-md-6">
+                <div className="form-group col-lg-8 col-md-7">
                   <label htmlFor="inputEmail">Email</label>
                   <input type="email" className="form-control" id="inputEmail" />
                 </div>
@@ -186,7 +186,7 @@ export default class Checkout extends React.Component {
             </form>
             <button type="submit" className="btn btn-warning ml-3">Place your order</button>
           </div>
-          <div className="checkoutCartContainer col-5">
+          <div className="checkoutCartContainer col-4">
             {this.renderCartItems()}
           </div>
         </div>
