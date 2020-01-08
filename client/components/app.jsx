@@ -14,7 +14,8 @@ export default class App extends React.Component {
     this.state = {
       products: [],
       featured: [],
-      cart: []
+      cart: [],
+      cartTotal: null
     };
     this.addCartItem = this.addCartItem.bind(this);
     this.updateCartItem = this.updateCartItem.bind(this);
@@ -32,11 +33,18 @@ export default class App extends React.Component {
   }
 
   getCartItems() {
+    let cartTotal = 0;
     fetch('/api/cart.php')
       .then(request => request.json())
       .then(data => {
         console.log('cart: ', data);
-        this.setState({ cart: data });
+        data.map(cartItem => {
+          cartTotal += cartItem.count * cartItem.price;
+        });
+        this.setState({
+          cart: data,
+          cartTotal: cartTotal
+        });
       });
   }
 

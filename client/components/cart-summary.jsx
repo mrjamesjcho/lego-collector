@@ -43,7 +43,7 @@ export default class CartSummary extends React.Component {
           <Link
             to='/checkout'
             className='ml-auto' >
-            <button className="checkoutBtn btn btn-primary">Checkout</button>
+            <button className="checkoutBtn btn btn-primary">Proceed to checkout</button>
           </Link>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './styles/checkout.css';
 
 export default class Checkout extends React.Component {
   constructor(props) {
@@ -64,18 +65,44 @@ export default class Checkout extends React.Component {
     }
     return elements;
   }
+  renderCartItems() {
+    const elements = [];
+    this.props.cartItems.map(item => {
+      elements.push(
+        <div key={item.id} className="checkoutCartItem d-flex py-3 border-top">
+          <div className="checkoutCartItemImgContainer d-flex justify-content-center">
+            <img className="checkoutCartItemImg" src={item.images} alt={item.name} />
+          </div>
+          <div className="ml-3">
+            <div className="checkoutCartItemName">
+              {item.name}
+            </div>
+            <div className="checkoutCartItemQty">
+              {`Quantity: ${item.count}`}
+            </div>
+          </div>
+        </div>
+      );
+    });
+    elements.push(
+      <div key={0} className="border-top border-bottom">
+
+      </div>
+    );
+    return elements;
+  }
   render() {
     return (
-      <div className = "checkoutContainer container col-lg-8 align-self-center mb-5" >
+      <div className = "checkoutContainer container col-lg-10 align-self-center mb-5" >
         <div className="continueShoppingContainer pb-2">
           <Link to='/products' className='continueShoppingLink'>
           &lt; <span className="continueShopping">continue shopping</span>
           </Link>
         </div>
         <h1 className="cartHeader">My Cart</h1>
-        <div className="checkoutFormCartContainer">
-          <div className="checkoutFormContainer col-sm-8 p-0">
-            <form className="border-top py-3">
+        <div className="checkoutFormCartContainer d-flex">
+          <div className="checkoutFormContainer col-sm-7 p-0">
+            <form className="border-top py-3 px-3">
               <h5 className="mb-3">Billing and Shipping Address</h5>
               <div className="form-row">
                 <div className="form-group col">
@@ -118,7 +145,7 @@ export default class Checkout extends React.Component {
                 </div>
               </div>
             </form>
-            <form className="border-top py-3">
+            <form className="border-top py-3 px-3">
               <h5>Payment Details</h5>
               <div className="form-row">
                 <div className="form-group col-md-6">
@@ -143,7 +170,7 @@ export default class Checkout extends React.Component {
                 </div>
               </div>
             </form>
-            <form className="border-top py-3">
+            <form className="border-top py-3 px-3">
               <div className="form-group">
                 <div className="form-check">
                   <input className="form-check-input" type="checkbox" id="gridCheck" />
@@ -152,7 +179,10 @@ export default class Checkout extends React.Component {
                 </div>
               </div>
             </form>
-            <button type="submit" className="btn btn-warning">Place your order</button>
+            <button type="submit" className="btn btn-warning ml-3">Place your order</button>
+          </div>
+          <div className="checkoutCartContainer col-5">
+            {this.renderCartItems()}
           </div>
         </div>
       </div >
