@@ -5,6 +5,7 @@ export default class Checkout extends React.Component {
   constructor(props) {
     super(props);
     this.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+    this.months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
     this.state = {
       name: '',
       phone: null,
@@ -24,6 +25,44 @@ export default class Checkout extends React.Component {
   }
   handleInputChange(e) {
 
+  }
+  renderStateOptions() {
+    const elements = [];
+    elements.push(
+      <option key={0} defaultValue></option>
+    );
+    for (let stateIndex = 0; stateIndex < 50; stateIndex++) {
+      elements.push(
+        <option key={stateIndex + 1}>{this.states[stateIndex]}</option>
+      );
+    }
+    return elements;
+  }
+  renderMonthOptions() {
+    const elements = [];
+    elements.push(
+      <option key={0} defaultValue></option>
+    );
+    for (let monthIndex = 0; monthIndex < 12; monthIndex++) {
+      elements.push(
+        <option key={monthIndex + 1} >{this.months[monthIndex]}</option>
+      );
+    }
+    return elements;
+  }
+  renderYearOptions() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const elements = [];
+    elements.push(
+      <option key={0} defaultValue></option>
+    );
+    for (let yearOption = year; yearOption < year + 10; yearOption++) {
+      elements.push(
+        <option key={yearOption} >{yearOption}</option>
+      );
+    }
+    return elements;
   }
   render() {
     return (
@@ -68,8 +107,7 @@ export default class Checkout extends React.Component {
             <div className="form-group col-md-4">
               <label htmlFor="inputState">State</label>
               <select id="inputState" className="form-control">
-                <option defaultValue></option>
-                <option>...</option>
+                {this.renderStateOptions()}
               </select>
             </div>
             <div className="form-group col-md-2">
@@ -83,20 +121,18 @@ export default class Checkout extends React.Component {
           <div className="form-row">
             <div className="form-group col-md-6">
               <label htmlFor="inputCreditCard">Credit Card Number</label>
-              <input type="number" className="form-control" id="inputCity" />
+              <input type="number" className="form-control" id="inputCreditCard" />
             </div>
             <div className="form-group col-md-2">
               <label htmlFor="inputCreditCardMonth">Month</label>
               <select id="inputCreditCardMonth" className="form-control">
-                <option defaultValue></option>
-                <option>...</option>
+                {this.renderMonthOptions()}
               </select>
             </div>
             <div className="form-group col-md-2">
               <label htmlFor="inputCreditCardYear">Year</label>
               <select id="inputCreditCardYear" className="form-control">
-                <option defaultValue></option>
-                <option>...</option>
+                {this.renderYearOptions()}
               </select>
             </div>
             <div className="form-group col-md-2">
