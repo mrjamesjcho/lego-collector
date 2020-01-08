@@ -31,7 +31,7 @@ export default class ThumbnailCarousel extends React.Component {
       elements.push(
         <div
           key={index}
-          className={`thumbnail d-flex justify-content-center align-items-center border ${imgUrl === this.props.imgSelected ? 'border-info' : ''} overflow-hidden`}
+          className={`thumbnail d-flex justify-content-center align-items-center border ${imgUrl === this.props.imgSelected ? 'border-primary' : ''} overflow-hidden`}
           onClick={() => this.props.onThumbnailClick(imgUrl)} >
           <img src={`/${urlArr[1]}/thumbnails/${urlArr[2]}`} />
         </div>

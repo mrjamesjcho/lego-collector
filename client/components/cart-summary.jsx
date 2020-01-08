@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CartSummaryItem from './cart-summary-item';
+import './styles/cart.css';
 
 export default class CartSummary extends React.Component {
   constructor(props) {
@@ -44,7 +45,7 @@ export default class CartSummary extends React.Component {
           <Link
             to='/checkout'
             className='ml-auto' >
-            <button className="checkoutBtn btn btn-primary">Proceed to checkout</button>
+            <button className="checkoutBtn btn btn-warning">Proceed to checkout</button>
           </Link>
         </div>
       </div>
