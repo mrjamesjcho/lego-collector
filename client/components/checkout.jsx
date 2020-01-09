@@ -107,84 +107,158 @@ export default class Checkout extends React.Component {
         <h1 className="cartHeader">My Cart</h1>
         <div className="checkoutFormCartContainer d-flex">
           <div className="checkoutFormContainer col-sm-8 p-0">
-            <form className="border-top py-3 px-3">
-              <h5 className="mb-3">Billing and Shipping Address</h5>
-              <div className="form-row">
-                <div className="form-group col">
-                  <label htmlFor="inputName">Full Name</label>
-                  <input type="text" className="form-control" id="checkoutName" />
+            <form>
+              <div className="border-top p-3">
+                <h5 className="mb-3">Billing and Shipping Address</h5>
+                <div className="form-row">
+                  <div className="form-group col">
+                    <label htmlFor="inputName">Full Name</label>
+                    <input
+                      id="checkoutName"
+                      name="name"
+                      type="text"
+                      className="form-control"
+                      value={this.state.name}
+                      onChange={this.handleInputChange} />
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-lg-4 col-md-5">
+                    <label htmlFor="inputPhone">Phone</label>
+                    <input
+                      id="inputPhone"
+                      type="number"
+                      className="form-control"
+                      value={this.state.phone}
+                      onChange={this.handleInputChange} />
+                  </div>
+                  <div className="form-group col-lg-8 col-md-7">
+                    <label htmlFor="inputEmail">Email</label>
+                    <input
+                      id="inputEmail"
+                      type="email"
+                      className="form-control"
+                      value={this.state.email}
+                      onChange={this.handleInputChange} />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="inputAddress">Address</label>
+                  <input
+                    id="inputAddress"
+                    type="text"
+                    className="form-control"
+                    value={this.state.address1}
+                    onChange={this.handleInputChange} />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="inputAddress2">Address 2</label>
+                  <input
+                    id="inputAddress2"
+                    type="text"
+                    className="form-control"
+                    value={this.state.address2}
+                    onChange={this.handleInputChange} />
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="inputCity">City</label>
+                    <input
+                      id="inputCity"
+                      type="text"
+                      className="form-control"
+                      value={this.state.city}
+                      onChange={this.handleInputChange} />
+                  </div>
+                  <div className="form-group col-md-4">
+                    <label htmlFor="inputState">State</label>
+                    <select
+                      id="inputState"
+                      className="form-control"
+                      value={this.state.state}
+                      onChange={this.handleInputChange} >
+                      {this.renderStateOptions()}
+                    </select>
+                  </div>
+                  <div className="form-group col-md-2">
+                    <label htmlFor="inputZip">Zip</label>
+                    <input
+                      id="inputZip"
+                      type="number"
+                      className="form-control"
+                      value={this.state.zip}
+                      onChange={this.handleInputChange} />
+                  </div>
                 </div>
               </div>
-              <div className="form-row">
-                <div className="form-group col-lg-4 col-md-5">
-                  <label htmlFor="inputPhone">Phone</label>
-                  <input type="number" className="form-control" id="inputPhone" />
-                </div>
-                <div className="form-group col-lg-8 col-md-7">
-                  <label htmlFor="inputEmail">Email</label>
-                  <input type="email" className="form-control" id="inputEmail" />
+
+              <div className="border-top p-3">
+                <h5>Payment Details</h5>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="inputCreditCard">Credit Card Number</label>
+                    <input
+                      id="inputCreditCard"
+                      type="number"
+                      className="form-control"
+                      value={this.state.cc}
+                      onChange={this.handleInputChange} />
+                  </div>
+                  <div className="form-group col-md-2">
+                    <label htmlFor="inputCreditCardMonth">Month</label>
+                    <select
+                      id="inputCreditCardMonth"
+                      className="form-control"
+                      value={this.state.month}
+                      onChange={this.handleInputChange} >
+                      {this.renderMonthOptions()}
+                    </select>
+                  </div>
+                  <div className="form-group col-md-2">
+                    <label htmlFor="inputCreditCardYear">Year</label>
+                    <select
+                      id="inputCreditCardYear"
+                      type="number"
+                      className="form-control"
+                      value={this.state.year}
+                      onChange={this.handleInputChange} >
+                      {this.renderYearOptions()}
+                    </select>
+                  </div>
+                  <div className="form-group col-md-2">
+                    <label htmlFor="inputCreditCardCvv">CVV</label>
+                    <input
+                      id="inputCreditCardCvv"
+                      type="number"
+                      className="form-control"
+                      value={this.state.cvv}
+                      onChange={this.handleInputChange} />
+                  </div>
                 </div>
               </div>
-              <div className="form-group">
-                <label htmlFor="inputAddress">Address</label>
-                <input type="text" className="form-control" id="inputAddress" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="inputAddress2">Address 2</label>
-                <input type="text" className="form-control" id="inputAddress2" />
-              </div>
-              <div className="form-row">
-                <div className="form-group col-md-6">
-                  <label htmlFor="inputCity">City</label>
-                  <input type="text" className="form-control" id="inputCity" />
+
+              <div className="border-top p-3">
+                <div className="form-group">
+                  <div className="form-check">
+                    <input
+                      id="gridCheck"
+                      type="checkbox"
+                      className="form-check-input"
+                      checked={this.state.checkbox}
+                      value={this.state.checkbox}
+                      onChange={this.handleInputChange} />
+                    <label className="form-check-label" htmlFor="gridCheck">
+                      I accept that this website is for demonstration purposes, that no payment processing will be done, and that personal information such as names, addresses, or real credit card numbers should not be used on submission of this form.
+                    </label>
+                    <div className="invalid-feedback">
+                      You must agree before submitting.
+                    </div>
+                  </div>
                 </div>
-                <div className="form-group col-md-4">
-                  <label htmlFor="inputState">State</label>
-                  <select id="inputState" className="form-control">
-                    {this.renderStateOptions()}
-                  </select>
-                </div>
-                <div className="form-group col-md-2">
-                  <label htmlFor="inputZip">Zip</label>
-                  <input type="number" className="form-control" id="inputZip" />
-                </div>
+                <button type="submit" className="btn btn-warning">Place your order</button>
               </div>
+
             </form>
-            <form className="border-top py-3 px-3">
-              <h5>Payment Details</h5>
-              <div className="form-row">
-                <div className="form-group col-md-6">
-                  <label htmlFor="inputCreditCard">Credit Card Number</label>
-                  <input type="number" className="form-control" id="inputCreditCard" />
-                </div>
-                <div className="form-group col-md-2">
-                  <label htmlFor="inputCreditCardMonth">Month</label>
-                  <select id="inputCreditCardMonth" className="form-control">
-                    {this.renderMonthOptions()}
-                  </select>
-                </div>
-                <div className="form-group col-md-2">
-                  <label htmlFor="inputCreditCardYear">Year</label>
-                  <select id="inputCreditCardYear" className="form-control">
-                    {this.renderYearOptions()}
-                  </select>
-                </div>
-                <div className="form-group col-md-2">
-                  <label htmlFor="inputCreditCardCvv">CVV</label>
-                  <input type="number" className="form-control" id="inputCreditCardCvv" />
-                </div>
-              </div>
-            </form>
-            <form className="border-top py-3 px-3">
-              <div className="form-group">
-                <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="gridCheck" />
-                  <label className="form-check-label" htmlFor="gridCheck">
-                  I accept that this website is for demonstration purposes, that no payment processing will be done, and that personal information such as names, addresses, or real credit card numbers should not be used on submission of this form.              </label>
-                </div>
-              </div>
-            </form>
-            <button type="submit" className="btn btn-warning ml-3">Place your order</button>
           </div>
           <div className="checkoutCartContainer col-4">
             {this.renderCartItems()}
