@@ -48,6 +48,14 @@ export default class App extends React.Component {
       });
   }
 
+  getCartTotal(cart) {
+    let cartTotal = 0;
+    cart.map(cartItem => {
+      cartTotal += cartItem.count * cartItem.price;
+    });
+    return cartTotal;
+  }
+
   componentDidMount() {
     this.getProducts();
     this.getCartItems();
@@ -76,7 +84,11 @@ export default class App extends React.Component {
           newCartProduct.images = product.images[0];
           newCart.push(newCartProduct);
         }
-        this.setState({ cart: newCart });
+        const newCartTotal = this.getCartTotal(newCart);
+        this.setState({
+          cart: newCart,
+          cartTotal: newCartTotal
+        });
       });
   }
 
@@ -95,13 +107,18 @@ export default class App extends React.Component {
     fetch('/api/cart.php', data)
       .then(res => {})
       .then(data => {
+        let newCartTotal = this.state.cartTotal;
         const newCart = this.state.cart.map(item => {
           if (item.id === cartItem.id) {
             item.count += incDec;
+            newCartTotal += incDec * item.price;
           }
           return item;
         });
-        this.setState({ cart: newCart });
+        this.setState({
+          cart: newCart,
+          cartTotal: newCartTotal
+        });
       })
   }
 
@@ -117,7 +134,11 @@ export default class App extends React.Component {
       .then(data => {
         const newCart = this.state.cart.filter(item => item.id !== cartItem.id);
         console.log('newCart: ', newCart);
-        this.setState({ cart: newCart });
+        const newCartTotal = this.getCartTotal(newCart);
+        this.setState({
+          cart: newCart,
+          cartTotal: newCartTotal
+        });
       });
   }
 
