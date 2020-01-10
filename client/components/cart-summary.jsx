@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CartSummaryItem from './cart-summary-item';
+import './styles/cart.css';
 
 export default class CartSummary extends React.Component {
   constructor(props) {
@@ -10,14 +11,12 @@ export default class CartSummary extends React.Component {
   handleBackToCatalog() {
     this.props.onBackToCatalog('catalog', {});
   }
-  render() {
-    var cartItemElements = null;
-    var itemTotal = 0;
+  renderCartItems() {
+    var elements = null;
     if (this.props.cartItems.length === 0) {
-      cartItemElements = 'Your cart is empty';
+      elements = 'Your cart is empty';
     } else {
-      cartItemElements = this.props.cartItems.map(item => {
-        itemTotal += item.price * item.count;
+      elements = this.props.cartItems.map(item => {
         return (
           <CartSummaryItem
             key={item.id}
@@ -27,20 +26,27 @@ export default class CartSummary extends React.Component {
         );
       });
     }
+    return elements;
+  }
+  render() {
     return (
-      <div className="cartContainer container col-lg-8 align-self-center mb-5">
+      <div className="cartContainer container mb-5">
         <div className="continueShoppingContainer pb-2">
           <Link to='/products' className='continueShoppingLink'>
             &lt; <span className="continueShopping">continue shopping</span>
           </Link>
         </div>
-        <h1 className="cartHeader">Shopping Cart</h1>
+        <h1 className="cartHeader">My Cart</h1>
         <div className="cartItems d-flex-column border-top">
-          {cartItemElements}
+          {this.renderCartItems()}
         </div>
         <div className="cartTotalCheckoutContainer d-flex">
-          <h1 className="cartTotal my-auto">Item Total: {'$' + (itemTotal / 100)}</h1>
-          <button className="checkoutBtn btn btn-primary ml-auto">Checkout</button>
+          <h1 className="cartTotal my-auto">Item Total: {'$' + (this.props.cartTotal / 100)}</h1>
+          <Link
+            to='/checkout'
+            className='ml-auto' >
+            <button className="checkoutBtn btn btn-warning">Proceed to checkout</button>
+          </Link>
         </div>
       </div>
     );

@@ -13,7 +13,7 @@ export default function CartSummaryItem(props) {
         <Link to={`/product/${props.item.id}`} >
           <h4 className="cartItemName">{props.item.name}</h4>
         </Link>
-        <div className="cartItemPriceQtyContainer d-flex mt-3">
+        <div className="cartItemPriceQtyContainer d-flex justify-content-between mt-3 pr-3">
           <div className="qtyContainer d-flex justify-content-center align-items-center mr-4">
             <h6 className="qtyTitle mr-2 my-0">Qty:</h6>
             <div className="qtyChange d-flex justify-content-center align-items-center border rounded overflow-hidden">
@@ -31,7 +31,7 @@ export default function CartSummaryItem(props) {
             </div>
           </div>
           <div
-            className="removeBtnContainer d-flex justify-content-center align-items-center mr-4"
+            className="removeBtnContainer d-flex justify-content-center align-items-center"
             onClick={() => props.onDeleteCartItem(props.item)} >
             <h6 className="removeBtn btn btn-link py-0 m-0">Delete</h6>
           </div>
