@@ -1,3 +1,6 @@
-.productListContainer .productContainer:hover {
-  border: 1px solid #007bff !important;
+.productContainer {
+  height: 400px;
+}
+.productImgContainer {
+  height: 60%;
 }
