@@ -5,6 +5,7 @@ import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
+import Checkout from './checkout';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 export default class App extends React.Component {
@@ -13,7 +14,8 @@ export default class App extends React.Component {
     this.state = {
       products: [],
       featured: [],
-      cart: []
+      cart: [],
+      cartTotal: null
     };
     this.addCartItem = this.addCartItem.bind(this);
     this.updateCartItem = this.updateCartItem.bind(this);
@@ -31,12 +33,27 @@ export default class App extends React.Component {
   }
 
   getCartItems() {
+    let cartTotal = 0;
     fetch('/api/cart.php')
       .then(request => request.json())
       .then(data => {
         console.log('cart: ', data);
-        this.setState({ cart: data });
+        data.map(cartItem => {
+          cartTotal += cartItem.count * cartItem.price;
+        });
+        this.setState({
+          cart: data,
+          cartTotal: cartTotal
+        });
       });
+  }
+
+  getCartTotal(cart) {
+    let cartTotal = 0;
+    cart.map(cartItem => {
+      cartTotal += cartItem.count * cartItem.price;
+    });
+    return cartTotal;
   }
 
   componentDidMount() {
@@ -67,7 +84,11 @@ export default class App extends React.Component {
           newCartProduct.images = product.images[0];
           newCart.push(newCartProduct);
         }
-        this.setState({ cart: newCart });
+        const newCartTotal = this.getCartTotal(newCart);
+        this.setState({
+          cart: newCart,
+          cartTotal: newCartTotal
+        });
       });
   }
 
@@ -86,13 +107,18 @@ export default class App extends React.Component {
     fetch('/api/cart.php', data)
       .then(res => {})
       .then(data => {
+        let newCartTotal = this.state.cartTotal;
         const newCart = this.state.cart.map(item => {
           if (item.id === cartItem.id) {
             item.count += incDec;
+            newCartTotal += incDec * item.price;
           }
           return item;
         });
-        this.setState({ cart: newCart });
+        this.setState({
+          cart: newCart,
+          cartTotal: newCartTotal
+        });
       })
   }
 
@@ -108,7 +134,11 @@ export default class App extends React.Component {
       .then(data => {
         const newCart = this.state.cart.filter(item => item.id !== cartItem.id);
         console.log('newCart: ', newCart);
-        this.setState({ cart: newCart });
+        const newCartTotal = this.getCartTotal(newCart);
+        this.setState({
+          cart: newCart,
+          cartTotal: newCartTotal
+        });
       });
   }
 
@@ -137,7 +167,10 @@ export default class App extends React.Component {
             render={props => <ProductDetails {...props} onAddCartItem={this.addCartItem} /> } />
           <Route
             path="/cart"
-            render={props => <CartSummary {...props} cartItems={this.state.cart} onUpdateCartItem={this.updateCartItem} onDeleteCartItem={this.deleteCartItem} /> } />
+            render={props => <CartSummary {...props} cartItems={this.state.cart} cartTotal={this.state.cartTotal} onUpdateCartItem={this.updateCartItem} onDeleteCartItem={this.deleteCartItem} /> } />
+          <Route
+            path="/checkout"
+            render={props => <Checkout {...props} cartItems={this.state.cart} cartTotal={this.state.cartTotal} /> } />
         </Switch>
       </Router>
     );

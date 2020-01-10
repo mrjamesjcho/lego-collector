@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './styles/carousel.css';
 
 export default function Carousel(props) {
   const indicatorElements = [];
@@ -12,7 +14,8 @@ export default function Carousel(props) {
         data-slide-to={index} ></li>
     );
     carouselElements.push(
-      <div
+      <Link
+        to={`/product/${product.id}`}
         key={index}
         className={`carouselItem carousel-item ${index === 0 ? 'active' : ''}`} >
         <img src={product.images[0]} className="d-block w-100" alt={product.name} />
@@ -20,7 +23,7 @@ export default function Carousel(props) {
           <h1>{product.name}</h1>
           <p>{product.shortDescription}</p>
         </div>
-      </div>
+      </Link>
     );
   });
   return (

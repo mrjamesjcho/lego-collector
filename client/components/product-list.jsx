@@ -1,6 +1,7 @@
 import React from 'react';
 import Carousel from './carousel';
 import ProductListItem from './product-list-item';
+import './styles/product-list.css';
 
 export default function ProductList(props) {
   const elements = props.products.map(product => {
@@ -14,8 +15,10 @@ export default function ProductList(props) {
   return (
     <React.Fragment>
       <Carousel featured={props.featured} />
-      <div className="productListContainer container d-flex flex-wrap mb-5 border-top border-left p-0">
-        {elements}
+      <div className="productListContainer container p-sm-0 px-3">
+        <div className="productListBorder d-flex flex-wrap mb-5 border-top border-left">
+          {elements}
+        </div>
       </div>
     </React.Fragment>
   );

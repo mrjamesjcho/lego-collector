@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function ProductListItem(props) {
 
   return (
-    <div className="productContainer col-lg-3 col-md-4 col-sm-6 col-8 d-flex flex-column p-1 border-right border-bottom" >
+    <div className="productContainer col-lg-3 col-md-4 col-sm-6 col-12 d-flex flex-column p-1 border-right border-bottom" >
       <Link to={`/product/${props.product.id}`} className="productImgContainer d-flex">
         <img src={props.product.images[0]} className="productImg m-auto p-2" />
       </Link>
