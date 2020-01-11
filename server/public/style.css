@@ -5,7 +5,7 @@ a, a:hover {
   text-decoration: none;
   color: inherit;
 }
-.continueShopping:hover {
+.continueShopping:hover, .productNameContainer:hover, .cartItemName:hover {
   text-decoration: underline;
 }
 .item-thumbnail{
@@ -27,20 +27,13 @@ a, a:hover {
 .shoppingCartContainer, .cartTotal{
   font-size: 2rem;
 }
-.productDetailsImgInfoContainer {
-  height: 400px;
-}
-.productImg, .productDetailsImgContainer > img, .thumbnail > img, .cartItemImg {
+.productImg, .thumbnail > img, .cartItemImg {
   max-width: 100%;
   max-height: 100%;
 }
-.productImgContainer:hover, .cartItemImg:hover {
+.productImg:hover, .cartItemImg:hover {
   opacity: .7;
 }
-.productNameContainer:hover, .cartItemName:hover {
-  color: gray;
-}
-
 .cartItemContainer {
   height: 150px;
 }
