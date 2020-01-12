@@ -3,7 +3,7 @@ import './styles/delete-confirm.css';
 
 export default function DeleteConfirm(props) {
   return (
-    <div className="deleteConfirmBackground d-flex justify-content-center align-items-center position-absolute h-100 w-100">
+    <div className="deleteConfirmBackground d-flex justify-content-center align-items-center fixed-top h-100 w-100">
       <div className="deleteConfirmContainer col-4 bg-white p-3 border rounded">
         <h5 className="deleteConfirmItemName text-center">{props.item.name}</h5>
         <div className="deleteConfirmImgContainer d-flex p-2">
