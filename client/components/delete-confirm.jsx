@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles/delete-confirm.css';
 
 export default function DeleteConfirm(props) {
   return (
