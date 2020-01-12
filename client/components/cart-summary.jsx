@@ -11,9 +11,15 @@ export default class CartSummary extends React.Component {
       itemToRemove: null
     };
     this.handleBackToCatalog = this.handleBackToCatalog.bind(this);
+    this.handleDeleteCartItem = this.handleDeleteCartItem.bind(this);
   }
   handleBackToCatalog() {
     this.props.onBackToCatalog('catalog', {});
+  }
+  handleDeleteCartItem(cartItem) {
+    this.setState({
+      itemToRemove: cartItem
+    });
   }
   renderCartItems() {
     var elements = null;
@@ -52,7 +58,7 @@ export default class CartSummary extends React.Component {
             <button className="checkoutBtn btn btn-warning">Proceed to checkout</button>
           </Link>
         </div>
-        <DeleteConfirm cartItem={this.state.itemToRemove} />
+        <DeleteConfirm cartItem={this.state.itemToRemove} onDeleteCartItem={this.props.onDeleteCartItem} />
       </div>
     );
   }
