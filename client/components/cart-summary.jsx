@@ -7,6 +7,9 @@ import DeleteConfirm from './delete-confirm';
 export default class CartSummary extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      itemToRemove: null
+    };
     this.handleBackToCatalog = this.handleBackToCatalog.bind(this);
   }
   handleBackToCatalog() {
@@ -31,7 +34,7 @@ export default class CartSummary extends React.Component {
   }
   render() {
     return (
-      <div className="cartContainer container position-relative mb-5">
+      <div className="cartContainer container mb-5">
         <div className="continueShoppingContainer pb-2">
           <Link to='/products' className='continueShoppingLink'>
             &lt; <span className="continueShopping">continue shopping</span>
@@ -49,7 +52,7 @@ export default class CartSummary extends React.Component {
             <button className="checkoutBtn btn btn-warning">Proceed to checkout</button>
           </Link>
         </div>
-        <DeleteConfirm />
+        <DeleteConfirm cartItem={this.state.itemToRemove} />
       </div>
     );
   }
