@@ -32,7 +32,7 @@ export default class CartSummary extends React.Component {
             key={item.id}
             item={item}
             onUpdateCartItem={this.props.onUpdateCartItem}
-            onDeleteCartItem={this.props.onDeleteCartItem} />
+            onDeleteCartItem={this.handleDeleteCartItem} />
         );
       });
     }
