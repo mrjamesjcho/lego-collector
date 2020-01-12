@@ -6,15 +6,18 @@ export default function DeleteConfirm(props) {
     return;
   }
   return (
-    <div className="deleteConfirmBackground justify-content-center align-items-center position-absolute h-100 w-100">
-      <div className="deleteConfirmContainer container col-4 border">
-        <div className="deleteConfirmImgContainer">
+    <div className="deleteConfirmBackground d-flex justify-content-center align-items-center position-absolute h-100 w-100">
+      <div className="deleteConfirmContainer container col-4 bg-white p-3 border rounded">
+        <h5 className="deleteConfirmItemName text-center">{props.item.name}</h5>
+        <div className="deleteConfirmImgContainer d-flex p-2">
           <img
-            className="deleteConfirmImg"
+            className="deleteConfirmImg m-auto"
             src={props.item.images}
             alt={props.item.name} />
         </div>
-        <div>Remove item from cart?</div>
+        <div className="text-center">
+          Remove item from cart?
+        </div>
       </div>
     </div>
   );

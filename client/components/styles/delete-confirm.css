@@ -1,9 +1,10 @@
 .deleteConfirmBackground {
   top: 0;
   left: 0;
+  background-color: rgba(128, 128, 128, 0.4);
 }
 .deleteConfirmImgContainer {
-  height: 400px;
+  height: 200px;
 }
 .deleteConfirmImg {
   max-height: 100%;
