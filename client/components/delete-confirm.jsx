@@ -15,8 +15,19 @@ export default function DeleteConfirm(props) {
             src={props.item.images}
             alt={props.item.name} />
         </div>
-        <div className="text-center">
-          Remove item from cart?
+        <div className="text-center mb-2">
+          Delete item from cart?
+        </div>
+        <div className="deleteConfirmButtons d-flex justify-content-center">
+          <button
+            className="btn btn-secondary w-50 mr-1"
+            onClick={() => props.onCancelDeleteCartItem(null)}>
+              Cancel
+          </button>
+          <button
+            className="btn btn-warning w-50 ml-1">
+              Delete
+          </button>
         </div>
       </div>
     </div>

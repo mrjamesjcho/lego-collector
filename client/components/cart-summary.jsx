@@ -40,7 +40,12 @@ export default class CartSummary extends React.Component {
   }
   renderDeleteConfirmModal() {
     if (this.state.itemToRemove) {
-      return <DeleteConfirm item={this.state.itemToRemove} onDeleteCartItem={this.props.onDeleteCartItem} />;
+      return (
+        <DeleteConfirm
+          item={this.state.itemToRemove}
+          onCancelDeleteCartItem={this.handleDeleteCartItem}
+          onDeleteCartItem={this.props.onDeleteCartItem} />
+      );
     }
   }
   render() {
