@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import CartSummaryItem from './cart-summary-item';
 import './styles/cart.css';
+import DeleteConfirm from './delete-confirm';
 
 export default class CartSummary extends React.Component {
   constructor(props) {
@@ -48,6 +49,7 @@ export default class CartSummary extends React.Component {
             <button className="checkoutBtn btn btn-warning">Proceed to checkout</button>
           </Link>
         </div>
+        <DeleteConfirm />
       </div>
     );
   }
