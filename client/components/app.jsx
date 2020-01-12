@@ -142,6 +142,24 @@ export default class App extends React.Component {
       });
   }
 
+  placeOrder(orderInfo) {
+    orderInfo.items = this.state.cart;
+    const data = {
+      method: 'POST',
+      body: JSON.stringify(orderInfo),
+      headers: { 'Content-Type': 'application/json' }
+    };
+    fetch('/api/orders.php', data)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        this.setState({
+          cart: [],
+          cartTotal: 0
+        })
+      })
+  }
+
   numOfItemsInCart() {
     var numOfItems = 0;
     if (this.state.cart.length === 0) {
