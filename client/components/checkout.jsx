@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './styles/checkout.css';
@@ -25,7 +27,12 @@ export default class Checkout extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
   handleInputChange(e) {
-
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value
+    });
   }
   renderStateOptions() {
     const elements = [];
@@ -255,7 +262,12 @@ export default class Checkout extends React.Component {
                     </div>
                   </div>
                 </div>
-                <button type="submit" className="btn btn-warning">Place your order</button>
+                <button
+                  type="submit"
+                  className="btn btn-warning"
+                  onClick={() => console.log(this.state)} >
+                  Place your order
+                </button>
               </div>
 
             </form>
