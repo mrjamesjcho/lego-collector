@@ -38,6 +38,11 @@ export default class CartSummary extends React.Component {
     }
     return elements;
   }
+  renderDeleteConfirmModal() {
+    if (this.state.itemToRemove) {
+      return <DeleteConfirm item={this.state.itemToRemove} onDeleteCartItem={this.props.onDeleteCartItem} />;
+    }
+  }
   render() {
     return (
       <div className="cartContainer container mb-5">
@@ -58,7 +63,7 @@ export default class CartSummary extends React.Component {
             <button className="checkoutBtn btn btn-warning">Proceed to checkout</button>
           </Link>
         </div>
-        <DeleteConfirm cartItem={this.state.itemToRemove} onDeleteCartItem={this.props.onDeleteCartItem} />
+        {this.renderDeleteConfirmModal()}
       </div>
     );
   }
