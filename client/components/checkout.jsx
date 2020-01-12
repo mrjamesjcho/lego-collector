@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './styles/checkout.css';
@@ -9,23 +11,28 @@ export default class Checkout extends React.Component {
     this.months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
     this.state = {
       name: '',
-      phone: null,
+      phone: '',
       email: '',
       address1: '',
       address2: '',
       city: '',
       state: '',
       zip: '',
-      cc: null,
-      month: null,
-      year: null,
-      cvv: null,
+      cc: '',
+      month: '',
+      year: '',
+      cvv: '',
       checkbox: false
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
   handleInputChange(e) {
-
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value
+    });
   }
   renderStateOptions() {
     const elements = [];
@@ -127,6 +134,7 @@ export default class Checkout extends React.Component {
                     <label htmlFor="inputPhone">Phone</label>
                     <input
                       id="inputPhone"
+                      name="phone"
                       type="number"
                       className="form-control"
                       value={this.state.phone}
@@ -136,6 +144,7 @@ export default class Checkout extends React.Component {
                     <label htmlFor="inputEmail">Email</label>
                     <input
                       id="inputEmail"
+                      name="email"
                       type="email"
                       className="form-control"
                       value={this.state.email}
@@ -146,6 +155,7 @@ export default class Checkout extends React.Component {
                   <label htmlFor="inputAddress">Address</label>
                   <input
                     id="inputAddress"
+                    name="address1"
                     type="text"
                     className="form-control"
                     value={this.state.address1}
@@ -155,6 +165,7 @@ export default class Checkout extends React.Component {
                   <label htmlFor="inputAddress2">Address 2</label>
                   <input
                     id="inputAddress2"
+                    name="address2"
                     type="text"
                     className="form-control"
                     value={this.state.address2}
@@ -166,6 +177,7 @@ export default class Checkout extends React.Component {
                     <input
                       id="inputCity"
                       type="text"
+                      name="city"
                       className="form-control"
                       value={this.state.city}
                       onChange={this.handleInputChange} />
@@ -174,6 +186,7 @@ export default class Checkout extends React.Component {
                     <label htmlFor="inputState">State</label>
                     <select
                       id="inputState"
+                      name="state"
                       className="form-control"
                       value={this.state.state}
                       onChange={this.handleInputChange} >
@@ -184,6 +197,7 @@ export default class Checkout extends React.Component {
                     <label htmlFor="inputZip">Zip</label>
                     <input
                       id="inputZip"
+                      name="zip"
                       type="number"
                       className="form-control"
                       value={this.state.zip}
@@ -199,6 +213,7 @@ export default class Checkout extends React.Component {
                     <label htmlFor="inputCreditCard">Credit Card Number</label>
                     <input
                       id="inputCreditCard"
+                      name="cc"
                       type="number"
                       className="form-control"
                       value={this.state.cc}
@@ -208,6 +223,7 @@ export default class Checkout extends React.Component {
                     <label htmlFor="inputCreditCardMonth">Month</label>
                     <select
                       id="inputCreditCardMonth"
+                      name="month"
                       className="form-control"
                       value={this.state.month}
                       onChange={this.handleInputChange} >
@@ -218,6 +234,7 @@ export default class Checkout extends React.Component {
                     <label htmlFor="inputCreditCardYear">Year</label>
                     <select
                       id="inputCreditCardYear"
+                      name="year"
                       type="number"
                       className="form-control"
                       value={this.state.year}
@@ -229,6 +246,7 @@ export default class Checkout extends React.Component {
                     <label htmlFor="inputCreditCardCvv">CVV</label>
                     <input
                       id="inputCreditCardCvv"
+                      name="cvv"
                       type="number"
                       className="form-control"
                       value={this.state.cvv}
@@ -242,6 +260,7 @@ export default class Checkout extends React.Component {
                   <div className="form-check">
                     <input
                       id="gridCheck"
+                      name="checkbox"
                       type="checkbox"
                       className="form-check-input"
                       checked={this.state.checkbox}
@@ -255,7 +274,12 @@ export default class Checkout extends React.Component {
                     </div>
                   </div>
                 </div>
-                <button type="submit" className="btn btn-warning">Place your order</button>
+                <button
+                  type="submit"
+                  className="btn btn-warning"
+                  onClick={() => console.log(this.state)} >
+                  Place your order
+                </button>
               </div>
 
             </form>
