@@ -25,7 +25,11 @@ export default function DeleteConfirm(props) {
               Cancel
           </button>
           <button
-            className="btn btn-warning w-50 ml-1">
+            className="btn btn-warning w-50 ml-1"
+            onClick={() => {
+              props.onDeleteCartItem(props.item);
+              props.onCancelDeleteCartItem(null);
+            }} >
               Delete
           </button>
         </div>
