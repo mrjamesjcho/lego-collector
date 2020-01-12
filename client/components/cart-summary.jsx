@@ -2,14 +2,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import CartSummaryItem from './cart-summary-item';
 import './styles/cart.css';
+import DeleteConfirm from './delete-confirm';
 
 export default class CartSummary extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      itemToRemove: null
+    };
     this.handleBackToCatalog = this.handleBackToCatalog.bind(this);
+    this.handleDeleteCartItem = this.handleDeleteCartItem.bind(this);
   }
   handleBackToCatalog() {
     this.props.onBackToCatalog('catalog', {});
+  }
+  handleDeleteCartItem(cartItem) {
+    this.setState({
+      itemToRemove: cartItem
+    });
   }
   renderCartItems() {
     var elements = null;
@@ -22,11 +32,21 @@ export default class CartSummary extends React.Component {
             key={item.id}
             item={item}
             onUpdateCartItem={this.props.onUpdateCartItem}
-            onDeleteCartItem={this.props.onDeleteCartItem} />
+            onDeleteCartItem={this.handleDeleteCartItem} />
         );
       });
     }
     return elements;
+  }
+  renderDeleteConfirmModal() {
+    if (this.state.itemToRemove) {
+      return (
+        <DeleteConfirm
+          item={this.state.itemToRemove}
+          onCancelDeleteCartItem={this.handleDeleteCartItem}
+          onDeleteCartItem={this.props.onDeleteCartItem} />
+      );
+    }
   }
   render() {
     return (
@@ -48,6 +68,7 @@ export default class CartSummary extends React.Component {
             <button className="checkoutBtn btn btn-warning">Proceed to checkout</button>
           </Link>
         </div>
+        {this.renderDeleteConfirmModal()}
       </div>
     );
   }
