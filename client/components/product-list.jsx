@@ -1,7 +1,9 @@
 import React from 'react';
 import Carousel from './carousel';
 import ProductListItem from './product-list-item';
+import AddCartConfirm from './add-cart-confirm';
 import './styles/product-list.css';
+import './styles/add-cart-confirm.css';
 
 export default function ProductList(props) {
   const elements = props.products.map(product => {
@@ -20,6 +22,7 @@ export default function ProductList(props) {
           {elements}
         </div>
       </div>
+      <AddCartConfirm />
     </React.Fragment>
   );
 }
