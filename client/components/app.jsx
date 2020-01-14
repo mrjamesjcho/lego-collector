@@ -6,6 +6,7 @@ import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import Checkout from './checkout';
+import AddCartConfirm from './add-cart-confirm';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 export default class App extends React.Component {
@@ -14,10 +15,12 @@ export default class App extends React.Component {
     this.state = {
       products: [],
       featured: [],
+      productAdded: null,
       cart: [],
       cartTotal: null
     };
     this.addCartItem = this.addCartItem.bind(this);
+    this.clearProductAdded = this.clearProductAdded.bind(this);
     this.updateCartItem = this.updateCartItem.bind(this);
     this.deleteCartItem = this.deleteCartItem.bind(this);
   }
@@ -86,10 +89,17 @@ export default class App extends React.Component {
         }
         const newCartTotal = this.getCartTotal(newCart);
         this.setState({
+          productAdded: product,
           cart: newCart,
           cartTotal: newCartTotal
         });
       });
+  }
+
+  clearProductAdded() {
+    this.setState({
+      productAdded: null
+    });
   }
 
   updateCartItem(cartItem, incDec) {
@@ -169,6 +179,16 @@ export default class App extends React.Component {
     return numOfItems;
   }
 
+  renderProductAddedModal() {
+    if (this.state.productAdded) {
+      return (
+        <AddCartConfirm
+          product={this.state.productAdded}
+          clearProductAdded={this.clearProductAdded} />
+      );
+    }
+  }
+
   render() {
     return (
       <Router className='appContainer'>
@@ -190,6 +210,7 @@ export default class App extends React.Component {
             path="/checkout"
             render={props => <Checkout {...props} cartItems={this.state.cart} cartTotal={this.state.cartTotal} /> } />
         </Switch>
+        {this.renderProductAddedModal()}
       </Router>
     );
   }
