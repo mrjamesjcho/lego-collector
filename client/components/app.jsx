@@ -20,6 +20,7 @@ export default class App extends React.Component {
       cartTotal: null
     };
     this.addCartItem = this.addCartItem.bind(this);
+    this.clearProductAdded = this.clearProductAdded.bind(this);
     this.updateCartItem = this.updateCartItem.bind(this);
     this.deleteCartItem = this.deleteCartItem.bind(this);
   }

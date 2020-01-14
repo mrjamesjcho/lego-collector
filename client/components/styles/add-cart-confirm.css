@@ -1,8 +1,8 @@
 .addCartConfirmBackground {
   background-color: rgba(128, 128, 128, 0.4);
 }
-.addCartConfirmContainer {
-  height: 400px;
+.addCartConfirmImgContainer {
+  height: 240px;
 }
 .addCartConfirmImg {
   max-height: 100%;

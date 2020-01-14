@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function AddCartConfirm(props) {
   return (
     <div className="addCartConfirmBackground d-flex justify-content-center align-items-center fixed-top h-100 w-100">
-      <div className="addCartConfirmContainer col-4 bg-white p-3 border rounded">
+      <div className="addCartConfirmContainer d-flex flex-column col-4 bg-white p-3 border rounded">
         <div className="text-center mb-2">
           Item added to cart
         </div>
@@ -16,14 +16,16 @@ export default function AddCartConfirm(props) {
             alt={props.product.name} />
         </div>
         <div className="addCartConfirmButtons d-flex justify-content-center">
-          <button
-            className="btn btn-secondary w-50 mr-1"
-            onClick={() => {}}>
+          <Link
+            to='/products'
+            className="btn btn-secondary d-flex justify-content-center align-items-center w-50 mr-1"
+            onClick={props.clearProductAdded}>
             Continue shopping
-          </button>
+          </Link>
           <Link
             to='/cart'
-            className="btn btn-warning w-50 ml-1" >
+            className="btn btn-warning d-flex justify-content-center align-items-center w-50 ml-1"
+            onClick={props.clearProductAdded} >
             View cart
           </Link>
         </div>
