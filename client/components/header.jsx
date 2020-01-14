@@ -6,7 +6,15 @@ export default function Header(props) {
   return (
     <div className='headerContainer w-100 mb-3'>
       <div className='container d-flex py-3 px-5 align-items-center justify-content-between'>
-        <Link to={'/products'}>
+        <Link
+          to={'/products'}
+          className="headerLogoTitleContainer d-flex align-items-center" >
+          <div className="headerLogo mr-3">
+            <img
+              src="/images/lego-brick.png"
+              alt="lego-logo"
+              className="headerLogoImg" />
+          </div>
           <h1 className='headerTitle'>Lego Collector</h1>
         </Link>
         <Link to='/cart' >
