@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function AddCartConfirm(props) {
   return (
     <div className="addCartConfirmBackground d-flex justify-content-center align-items-center fixed-top h-100 w-100">
-      <div className="addCartConfirmContainer d-flex flex-column col-4 bg-white p-3 border rounded">
+      <div className="addCartConfirmContainer d-flex flex-column col-lg-4 col-md-6 col-sm-8 bg-white p-3 border rounded mx-sm-0 mx-3">
         <div className="text-center mb-2">
           Item added to cart
         </div>
