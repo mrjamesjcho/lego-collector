@@ -14,6 +14,7 @@ export default class App extends React.Component {
     this.state = {
       products: [],
       featured: [],
+      productAdded: null,
       cart: [],
       cartTotal: null
     };
@@ -86,10 +87,17 @@ export default class App extends React.Component {
         }
         const newCartTotal = this.getCartTotal(newCart);
         this.setState({
+          productAdded: product,
           cart: newCart,
           cartTotal: newCartTotal
         });
       });
+  }
+
+  clearProductAdded() {
+    this.setState({
+      productAdded: null
+    });
   }
 
   updateCartItem(cartItem, incDec) {
@@ -169,6 +177,12 @@ export default class App extends React.Component {
     return numOfItems;
   }
 
+  renderProductAddedModal() {
+    if (this.state.productAdded) {
+      return <AddCartConfirm />;
+    }
+  }
+
   render() {
     return (
       <Router className='appContainer'>
@@ -190,6 +204,7 @@ export default class App extends React.Component {
             path="/checkout"
             render={props => <Checkout {...props} cartItems={this.state.cart} cartTotal={this.state.cartTotal} /> } />
         </Switch>
+        {this.renderProductAddedModal()}
       </Router>
     );
   }
