@@ -6,7 +6,7 @@ export default function DeleteConfirm(props) {
     <div className="deleteConfirmBackground d-flex justify-content-center align-items-center fixed-top h-100 w-100">
       <div className="deleteConfirmContainer col-lg-4 col-md-6 col-sm-8 bg-white p-3 border rounded mx-sm-0 mx-3">
         <div
-          className="deleteConfirmClose position-absolute mr-3"
+          className="deleteConfirmClose position-absolute mt-1 mr-3"
           onClick={() => props.onCancelDeleteCartItem(null)} >
           &times;
         </div>
