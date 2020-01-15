@@ -5,23 +5,23 @@ import './styles/header.css';
 export default function Header(props) {
   return (
     <div className='headerContainer w-100 mb-3'>
-      <div className='container d-flex py-3 px-5 align-items-center justify-content-between'>
+      <div className='container d-flex align-items-center justify-content-between py-3 px-5'>
         <Link
           to={'/products'}
           className="headerLogoTitleContainer d-flex align-items-center" >
-          <div className="headerLogo mr-3">
+          <div className="headerLogo d-flex align-items-center mr-3">
             <img
               src="/images/lego-brick.png"
               alt="lego-logo"
               className="headerLogoImg" />
           </div>
-          <h1 className='headerTitle'>Lego Collector</h1>
+          <h3 className='headerTitle m-0'>Lego Collector</h3>
         </Link>
         <Link to='/cart' >
-          <h5 className='shoppingCartContainer d-flex align-items-center' >
-            <img className="shoppingCartImage mr-2" src='/images/shopping.png' />
+          <div className='shoppingCartContainer d-flex align-items-center' >
+            <img className="shoppingCartImage mr-2" src='/images/icon-my-bag.svg' />
             {`  ${props.numberOfItemsInCart}`}
-          </h5>
+          </div>
         </Link>
       </div>
     </div>
