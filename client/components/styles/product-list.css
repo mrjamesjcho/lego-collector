@@ -4,3 +4,6 @@
 .productImgContainer {
   height: 65%;
 }
+.productNameContainer:hover {
+  color: #007bff;
+}

@@ -46,7 +46,7 @@ export default class ThumbnailCarousel extends React.Component {
       <div className="thumbnailControlsContainer d-flex flex-column align-self-start h-100">
         {thumbnailNav
           ? <h4
-            className="thumbnailPrev text-info d-flex justify-content-center w-50 my-0 mx-auto"
+            className="thumbnailPrev text-primary d-flex justify-content-center w-50 my-0 mx-auto"
             data-tnav={1}
             onClick={this.handleThumbnailNavClick} >
               &and;
@@ -61,7 +61,7 @@ export default class ThumbnailCarousel extends React.Component {
         </div>
         {thumbnailNav
           ? <h4
-            className="thumbnailNext text-info d-flex justify-content-center w-50 my-0 mx-auto"
+            className="thumbnailNext text-primary d-flex justify-content-center w-50 my-0 mx-auto"
             data-tnav={-1}
             onClick={this.handleThumbnailNavClick} >
               &or;
