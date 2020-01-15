@@ -10,11 +10,11 @@ export default function ProductListItem(props) {
       </Link>
       <div className="productNamePriceContainer d-flex flex-column flex-fill p-2">
         <Link to={`/product/${props.product.id}`} className="productNameContainer">
-          <h5 className="productName mb-2">{props.product.name}</h5>
+          <h6 className="productName mb-2">{props.product.name}</h6>
         </Link>
-        <div className="productPriceContainer d-flex mb-1">
-          <h4 className="priceDollars mb-0">{'$' + (Math.floor(props.product.price / 100))}</h4>
-          <h6 className="priceCents mb-0">{props.product.price.toString().slice(-2)}</h6>
+        <div className="productPriceContainer d-flex">
+          <div className="priceDollars mb-0">{`$${Math.floor(props.product.price / 100)}.`}</div>
+          <div className="priceCents mb-0">{props.product.price.toString().slice(-2)}</div>
         </div>
       </div>
       <button className="addToCartBtn btn btn-warning mt-auto mx-2 mb-2" onClick={() => props.onAddCartItem(props.product)}>Add to Cart</button>

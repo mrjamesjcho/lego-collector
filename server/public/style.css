@@ -24,7 +24,7 @@ a, a:hover {
 .shoppingCartContainer{
   cursor: pointer;
 }
-.shoppingCartContainer, .cartTotal{
+.cartTotal{
   font-size: 2rem;
 }
 .productDetailsImgInfoContainer {

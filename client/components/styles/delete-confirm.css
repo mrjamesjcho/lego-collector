@@ -1,6 +1,15 @@
 .deleteConfirmBackground {
   background-color: rgba(128, 128, 128, 0.4);
 }
+.deleteConfirmClose {
+  top: 0;
+  right: 0;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.deleteConfirmClose:hover {
+  color: gray;
+}
 .deleteConfirmImgContainer {
   height: 200px;
 }
