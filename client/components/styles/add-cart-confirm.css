@@ -8,3 +8,12 @@
   max-height: 100%;
   max-width: 100%;
 }
+.addCartConfirmClose {
+  top: 0;
+  right: 0;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.addCartConfirmClose:hover {
+  color: gray;
+}

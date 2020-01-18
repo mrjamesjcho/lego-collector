@@ -1,5 +1,3 @@
-/*eslint-disable */
-
 import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
@@ -29,7 +27,6 @@ export default class App extends React.Component {
     fetch('/api/products.php')
       .then(res => res.json())
       .then(data => {
-        console.log('products: ', data);
         const featured = data.filter(product => product.featured);
         this.setState({ products: data, featured: featured });
       });
@@ -40,7 +37,6 @@ export default class App extends React.Component {
     fetch('/api/cart.php')
       .then(request => request.json())
       .then(data => {
-        console.log('cart: ', data);
         data.map(cartItem => {
           cartTotal += cartItem.count * cartItem.price;
         });
@@ -129,11 +125,10 @@ export default class App extends React.Component {
           cart: newCart,
           cartTotal: newCartTotal
         });
-      })
+      });
   }
 
   deleteCartItem(cartItem) {
-    console.log('cartItem: ', cartItem);
     const data = {
       method: 'DELETE',
       body: JSON.stringify({ 'id': cartItem.id }),
@@ -143,7 +138,6 @@ export default class App extends React.Component {
       .then(res => {})
       .then(data => {
         const newCart = this.state.cart.filter(item => item.id !== cartItem.id);
-        console.log('newCart: ', newCart);
         const newCartTotal = this.getCartTotal(newCart);
         this.setState({
           cart: newCart,
@@ -162,12 +156,11 @@ export default class App extends React.Component {
     fetch('/api/orders.php', data)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.setState({
           cart: [],
           cartTotal: 0
-        })
-      })
+        });
+      });
   }
 
   numOfItemsInCart() {
@@ -208,7 +201,7 @@ export default class App extends React.Component {
             render={props => <CartSummary {...props} cartItems={this.state.cart} cartTotal={this.state.cartTotal} onUpdateCartItem={this.updateCartItem} onDeleteCartItem={this.deleteCartItem} /> } />
           <Route
             path="/checkout"
-            render={props => <Checkout {...props} cartItems={this.state.cart} cartTotal={this.state.cartTotal} /> } />
+            render={props => <Checkout {...props} cartItems={this.state.cart} cartTotal={this.state.cartTotal} onPlaceOrder={this.placeOrder} /> } />
         </Switch>
         {this.renderProductAddedModal()}
       </Router>

@@ -1,6 +1,17 @@
 .headerContainer {
   background: #ffc107;
 }
+.shoppingCartContainer {
+  font-size: 1.5rem;
+}
 .shoppingCartImage {
-  height: 30px;
+  height: 35px;
+}
+.headerLogo {
+  height: 40px;
+  width: 40px;
+}
+.headerLogoImg {
+  max-height: 40px;
+  max-width: 40px;
 }
