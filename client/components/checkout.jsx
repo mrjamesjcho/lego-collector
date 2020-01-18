@@ -33,7 +33,8 @@ export default class Checkout extends React.Component {
       ccValid: true,
       monthValid: true,
       yearValid: true,
-      cvvValid: true
+      cvvValid: true,
+      checkboxValid: true
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -42,7 +43,8 @@ export default class Checkout extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     this.setState({
-      [name]: value
+      [name]: value,
+      [`${name}Valid`]: this.validate(name, value)
     });
   }
   validate(field, value) {
@@ -54,19 +56,32 @@ export default class Checkout extends React.Component {
       case 'month':
       case 'year':
         isValid = value.length > 0;
+        break;
       case 'phone':
-        isValid = value.match(/^\d{10}$/);
+        isValid = value.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
+        break;
       case 'email':
         isValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        break;
       case 'address1':
         isValid = value.match(/^[a-zA-Z0-9\s,.'-]{3,}$/);
+        break;
       case 'zip':
         isValid = value.length === 5;
+        break;
       case 'cc':
         isValid = value.length === 16;
+        break;
       case 'cvv':
         isValid = value.length === 3 || value.length === 4;
+        break;
+      case 'checkbox':
+        isValid = value;
+        break;
+      default:
+        break;
     }
+    return isValid;
   }
   renderStateOptions() {
     const elements = [];
@@ -140,12 +155,12 @@ export default class Checkout extends React.Component {
   render() {
     return (
       <div className = "checkoutContainer container mb-5" >
-        <div className="continueShoppingContainer pb-2">
+        <div className="continueShoppingContainer pb-2 ml-3">
           <Link to='/products' className='continueShoppingLink'>
           &lt; <span className="continueShopping">continue shopping</span>
           </Link>
         </div>
-        <h1 className="cartHeader">My Cart</h1>
+        <h1 className="cartHeader ml-3">My Cart</h1>
         <div className="checkoutFormCartContainer d-flex">
           <div className="checkoutFormContainer col-sm-8 p-0">
             <form>
@@ -173,7 +188,7 @@ export default class Checkout extends React.Component {
                       id="inputPhone"
                       name="phone"
                       type="number"
-                      className="form-control"
+                      className={`form-control ${this.state.phoneValid ? '' : 'is-invalid'}`}
                       value={this.state.phone}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
