@@ -22,7 +22,18 @@ export default class Checkout extends React.Component {
       month: '',
       year: '',
       cvv: '',
-      checkbox: false
+      checkbox: false,
+      nameValid: true,
+      phoneValid: true,
+      emailValid: true,
+      address1Valid: true,
+      cityValid: true,
+      stateValid: true,
+      zipValid: true,
+      ccValid: true,
+      monthValid: true,
+      yearValid: true,
+      cvvValid: true
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
