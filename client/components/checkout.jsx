@@ -45,6 +45,29 @@ export default class Checkout extends React.Component {
       [name]: value
     });
   }
+  validate(field, value) {
+    let isValid = false;
+    switch (field) {
+      case 'name':
+      case 'city':
+      case 'state':
+      case 'month':
+      case 'year':
+        isValid = value.length > 0;
+      case 'phone':
+        isValid = value.match(/^\d{10}$/);
+      case 'email':
+        isValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+      case 'address1':
+        isValid = value.match(/^[a-zA-Z0-9\s,.'-]{3,}$/);
+      case 'zip':
+        isValid = value.length === 5;
+      case 'cc':
+        isValid = value.length === 16;
+      case 'cvv':
+        isValid = value.length === 3 || value.length === 4;
+    }
+  }
   renderStateOptions() {
     const elements = [];
     elements.push(
