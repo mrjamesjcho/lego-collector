@@ -187,7 +187,7 @@ export default class Checkout extends React.Component {
                     <input
                       id="inputPhone"
                       name="phone"
-                      type="number"
+                      type="text"
                       className={`form-control ${this.state.phoneValid ? '' : 'is-invalid'}`}
                       value={this.state.phone}
                       onChange={this.handleInputChange} />
