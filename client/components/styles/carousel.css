@@ -1,6 +1,9 @@
 .carouselItem {
   height: 300px;
 }
+.carouselImg {
+  transform: translateY(-20%);
+}
 .carouselCaption {
   background-color: rgba(128, 128, 128, 0.7);
 }

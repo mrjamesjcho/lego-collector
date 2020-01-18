@@ -18,7 +18,7 @@ export default function Carousel(props) {
         to={`/product/${product.id}`}
         key={index}
         className={`carouselItem carousel-item ${index === 0 ? 'active' : ''}`} >
-        <img src={product.images[0]} className="d-block w-100" alt={product.name} />
+        <img src={product.images[0]} className="carouselImg d-block w-100" alt={product.name} />
         <div className="carouselCaption carousel-caption d-none d-block">
           <h1>{product.name}</h1>
           <p>{product.shortDescription}</p>
