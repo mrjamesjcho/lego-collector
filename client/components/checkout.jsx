@@ -127,6 +127,9 @@ export default class Checkout extends React.Component {
                       className="form-control"
                       value={this.state.name}
                       onChange={this.handleInputChange} />
+                    <div className="invalid-feedback">
+                      full name required
+                    </div>
                   </div>
                 </div>
                 <div className="form-row">
@@ -139,6 +142,9 @@ export default class Checkout extends React.Component {
                       className="form-control"
                       value={this.state.phone}
                       onChange={this.handleInputChange} />
+                    <div className="invalid-feedback">
+                      valid phone number required
+                    </div>
                   </div>
                   <div className="form-group col-lg-8 col-md-7">
                     <label htmlFor="inputEmail">Email</label>
@@ -149,6 +155,9 @@ export default class Checkout extends React.Component {
                       className="form-control"
                       value={this.state.email}
                       onChange={this.handleInputChange} />
+                    <div className="invalid-feedback">
+                      valid email required
+                    </div>
                   </div>
                 </div>
                 <div className="form-group">
@@ -160,6 +169,9 @@ export default class Checkout extends React.Component {
                     className="form-control"
                     value={this.state.address1}
                     onChange={this.handleInputChange} />
+                  <div className="invalid-feedback">
+                    valid address required
+                  </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="inputAddress2">Address 2</label>
@@ -181,6 +193,9 @@ export default class Checkout extends React.Component {
                       className="form-control"
                       value={this.state.city}
                       onChange={this.handleInputChange} />
+                    <div className="invalid-feedback">
+                      valid city required
+                    </div>
                   </div>
                   <div className="form-group col-md-4">
                     <label htmlFor="inputState">State</label>
@@ -192,6 +207,9 @@ export default class Checkout extends React.Component {
                       onChange={this.handleInputChange} >
                       {this.renderStateOptions()}
                     </select>
+                    <div className="invalid-feedback">
+                      please select state
+                    </div>
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="inputZip">Zip</label>
@@ -202,6 +220,9 @@ export default class Checkout extends React.Component {
                       className="form-control"
                       value={this.state.zip}
                       onChange={this.handleInputChange} />
+                    <div className="invalid-feedback">
+                      valid zip code required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -218,6 +239,9 @@ export default class Checkout extends React.Component {
                       className="form-control"
                       value={this.state.cc}
                       onChange={this.handleInputChange} />
+                    <div className="invalid-feedback">
+                      valid credit card required
+                    </div>
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="inputCreditCardMonth">Month</label>
@@ -229,6 +253,9 @@ export default class Checkout extends React.Component {
                       onChange={this.handleInputChange} >
                       {this.renderMonthOptions()}
                     </select>
+                    <div className="invalid-feedback">
+                      please select month
+                    </div>
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="inputCreditCardYear">Year</label>
@@ -241,6 +268,9 @@ export default class Checkout extends React.Component {
                       onChange={this.handleInputChange} >
                       {this.renderYearOptions()}
                     </select>
+                    <div className="invalid-feedback">
+                      please select year
+                    </div>
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="inputCreditCardCvv">CVV</label>
@@ -251,6 +281,9 @@ export default class Checkout extends React.Component {
                       className="form-control"
                       value={this.state.cvv}
                       onChange={this.handleInputChange} />
+                    <div className="invalid-feedback">
+                      valid cvv required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -277,7 +310,7 @@ export default class Checkout extends React.Component {
                 <button
                   type="submit"
                   className="btn btn-warning"
-                  onClick={() => console.log(this.state)} >
+                  onClick={() => this.props.onPlaceOrder(this.state)} >
                   Place your order
                 </button>
               </div>
