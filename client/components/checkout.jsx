@@ -33,17 +33,56 @@ export default class Checkout extends React.Component {
       ccValid: true,
       monthValid: true,
       yearValid: true,
-      cvvValid: true
+      cvvValid: true,
+      checkboxValid: true
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handlePlaceOrder = this.handlePlaceOrder.bind(this);
   }
   handleInputChange(e) {
     const target = e.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     this.setState({
-      [name]: value
+      [name]: value,
+      [`${name}Valid`]: this.validate(name, value)
     });
+  }
+  validate(field, value) {
+    let isValid = false;
+    switch (field) {
+      case 'name':
+      case 'city':
+      case 'state':
+      case 'month':
+      case 'year':
+        isValid = value.length > 0;
+        break;
+      case 'phone':
+        isValid = value.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
+        break;
+      case 'email':
+        isValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        break;
+      case 'address1':
+        isValid = value.match(/^[a-zA-Z0-9\s,.'-]{3,}$/);
+        break;
+      case 'zip':
+        isValid = value.length === 5;
+        break;
+      case 'cc':
+        isValid = value.length === 16;
+        break;
+      case 'cvv':
+        isValid = value.length === 3 || value.length === 4;
+        break;
+      case 'checkbox':
+        isValid = value;
+        break;
+      default:
+        break;
+    }
+    return isValid;
   }
   renderStateOptions() {
     const elements = [];
@@ -114,15 +153,20 @@ export default class Checkout extends React.Component {
     );
     return elements;
   }
+  handlePlaceOrder(e) {
+    e.preventDefault();
+    this.props.onPlaceOrder(this.state);
+    this.props.history.push("/order");
+  }
   render() {
     return (
       <div className = "checkoutContainer container mb-5" >
-        <div className="continueShoppingContainer pb-2">
-          <Link to='/products' className='continueShoppingLink'>
-          &lt; <span className="continueShopping">continue shopping</span>
+        <div className="continueShoppingContainer pb-2 ml-3">
+          <Link to="/products" className='continueShoppingLink'>
+            &lt; <span className="continueShopping">continue shopping</span>
           </Link>
         </div>
-        <h1 className="cartHeader">My Cart</h1>
+        <h1 className="cartHeader ml-3">My Cart</h1>
         <div className="checkoutFormCartContainer d-flex">
           <div className="checkoutFormContainer col-sm-8 p-0">
             <form>
@@ -149,8 +193,8 @@ export default class Checkout extends React.Component {
                     <input
                       id="inputPhone"
                       name="phone"
-                      type="number"
-                      className="form-control"
+                      type="text"
+                      className={`form-control ${this.state.phoneValid ? '' : 'is-invalid'}`}
                       value={this.state.phone}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
@@ -319,13 +363,11 @@ export default class Checkout extends React.Component {
                   </div>
                 </div>
                 <button
-                  type="submit"
                   className="btn btn-warning"
-                  onClick={() => this.props.onPlaceOrder(this.state)} >
+                  onClick={this.handlePlaceOrder} >
                   Place your order
                 </button>
               </div>
-
             </form>
           </div>
           <div className="checkoutCartContainer col-4">

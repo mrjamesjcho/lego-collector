@@ -51,12 +51,12 @@ export default class CartSummary extends React.Component {
   render() {
     return (
       <div className="cartContainer container mb-5">
-        <div className="continueShoppingContainer pb-2">
+        <div className="continueShoppingContainer pb-2 ml-3">
           <Link to='/products' className='continueShoppingLink'>
             &lt; <span className="continueShopping">continue shopping</span>
           </Link>
         </div>
-        <h1 className="cartHeader">My Cart</h1>
+        <h1 className="cartHeader ml-3">My Cart</h1>
         <div className="cartItems d-flex-column border-top">
           {this.renderCartItems()}
         </div>

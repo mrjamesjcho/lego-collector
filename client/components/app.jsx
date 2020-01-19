@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
@@ -5,6 +7,7 @@ import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import Checkout from './checkout';
 import AddCartConfirm from './add-cart-confirm';
+import OrderConfirm from './order-confirm';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 export default class App extends React.Component {
@@ -21,6 +24,7 @@ export default class App extends React.Component {
     this.clearProductAdded = this.clearProductAdded.bind(this);
     this.updateCartItem = this.updateCartItem.bind(this);
     this.deleteCartItem = this.deleteCartItem.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
   }
 
   getProducts() {
@@ -147,20 +151,20 @@ export default class App extends React.Component {
   }
 
   placeOrder(orderInfo) {
-    orderInfo.items = this.state.cart;
+    console.log('orderInfo: ', orderInfo);
+    const orderData = {
+      name: orderInfo.name,
+      shippingAddress: orderInfo.address1,
+      creditCard: orderInfo.cc
+    };
     const data = {
       method: 'POST',
-      body: JSON.stringify(orderInfo),
+      body: JSON.stringify(orderData),
       headers: { 'Content-Type': 'application/json' }
     };
     fetch('/api/orders.php', data)
       .then(res => res.json())
-      .then(data => {
-        this.setState({
-          cart: [],
-          cartTotal: 0
-        });
-      });
+      .then(data => {});
   }
 
   numOfItemsInCart() {
@@ -202,6 +206,9 @@ export default class App extends React.Component {
           <Route
             path="/checkout"
             render={props => <Checkout {...props} cartItems={this.state.cart} cartTotal={this.state.cartTotal} onPlaceOrder={this.placeOrder} /> } />
+          <Route
+            path="/order"
+            render={props => <OrderConfirm {...props} orderItems={this.state.cart} orderTotal={this.state.cartTotal} /> } />
         </Switch>
         {this.renderProductAddedModal()}
       </Router>
