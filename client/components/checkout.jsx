@@ -153,8 +153,21 @@ export default class Checkout extends React.Component {
     );
     return elements;
   }
+  checkValidation() {
+    let formIsValid = true;
+    const form = this.state;
+    for (const input in form) {
+      if (input !== 'address2' && (form[input] === false || form[input] === '')){
+        formIsValid = false;
+      }
+    }
+    return formIsValid;
+  }
   handlePlaceOrder(e) {
     e.preventDefault();
+    if (!this.checkValidation()){
+      return;
+    }
     this.props.onPlaceOrder(this.state);
     this.props.history.push("/order");
   }
@@ -363,6 +376,7 @@ export default class Checkout extends React.Component {
                   </div>
                 </div>
                 <button
+                  type="submit"
                   className="btn btn-warning"
                   onClick={this.handlePlaceOrder} >
                   Place your order
