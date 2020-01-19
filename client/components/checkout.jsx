@@ -179,7 +179,7 @@ export default class Checkout extends React.Component {
                       id="checkoutName"
                       name="name"
                       type="text"
-                      className="form-control"
+                      className={`form-control ${this.state.nameValid ? '' : 'is-invalid'}`}
                       value={this.state.name}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
@@ -207,7 +207,7 @@ export default class Checkout extends React.Component {
                       id="inputEmail"
                       name="email"
                       type="email"
-                      className="form-control"
+                      className={`form-control ${this.state.emailValid ? '' : 'is-invalid'}`}
                       value={this.state.email}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
@@ -221,7 +221,7 @@ export default class Checkout extends React.Component {
                     id="inputAddress"
                     name="address1"
                     type="text"
-                    className="form-control"
+                    className={`form-control ${this.state.address1Valid ? '' : 'is-invalid'}`}
                     value={this.state.address1}
                     onChange={this.handleInputChange} />
                   <div className="invalid-feedback">
@@ -245,7 +245,7 @@ export default class Checkout extends React.Component {
                       id="inputCity"
                       type="text"
                       name="city"
-                      className="form-control"
+                      className={`form-control ${this.state.cityValid ? '' : 'is-invalid'}`}
                       value={this.state.city}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
@@ -257,7 +257,7 @@ export default class Checkout extends React.Component {
                     <select
                       id="inputState"
                       name="state"
-                      className="form-control"
+                      className={`form-control ${this.state.stateValid ? '' : 'is-invalid'}`}
                       value={this.state.state}
                       onChange={this.handleInputChange} >
                       {this.renderStateOptions()}
@@ -272,7 +272,7 @@ export default class Checkout extends React.Component {
                       id="inputZip"
                       name="zip"
                       type="number"
-                      className="form-control"
+                      className={`form-control ${this.state.zipValid ? '' : 'is-invalid'}`}
                       value={this.state.zip}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
@@ -291,7 +291,7 @@ export default class Checkout extends React.Component {
                       id="inputCreditCard"
                       name="cc"
                       type="number"
-                      className="form-control"
+                      className={`form-control ${this.state.ccValid ? '' : 'is-invalid'}`}
                       value={this.state.cc}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
@@ -303,7 +303,7 @@ export default class Checkout extends React.Component {
                     <select
                       id="inputCreditCardMonth"
                       name="month"
-                      className="form-control"
+                      className={`form-control ${this.state.monthValid ? '' : 'is-invalid'}`}
                       value={this.state.month}
                       onChange={this.handleInputChange} >
                       {this.renderMonthOptions()}
@@ -318,7 +318,7 @@ export default class Checkout extends React.Component {
                       id="inputCreditCardYear"
                       name="year"
                       type="number"
-                      className="form-control"
+                      className={`form-control ${this.state.yearValid ? '' : 'is-invalid'}`}
                       value={this.state.year}
                       onChange={this.handleInputChange} >
                       {this.renderYearOptions()}
@@ -333,7 +333,7 @@ export default class Checkout extends React.Component {
                       id="inputCreditCardCvv"
                       name="cvv"
                       type="number"
-                      className="form-control"
+                      className={`form-control ${this.state.cvvValid ? '' : 'is-invalid'}`}
                       value={this.state.cvv}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
@@ -350,7 +350,7 @@ export default class Checkout extends React.Component {
                       id="gridCheck"
                       name="checkbox"
                       type="checkbox"
-                      className="form-check-input"
+                      className={`form-check-input ${this.state.checkboxValid ? '' : 'is-invalid'}`}
                       checked={this.state.checkbox}
                       value={this.state.checkbox}
                       onChange={this.handleInputChange} />
