@@ -33,17 +33,56 @@ export default class Checkout extends React.Component {
       ccValid: true,
       monthValid: true,
       yearValid: true,
-      cvvValid: true
+      cvvValid: true,
+      checkboxValid: true
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handlePlaceOrder = this.handlePlaceOrder.bind(this);
   }
   handleInputChange(e) {
     const target = e.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     this.setState({
-      [name]: value
+      [name]: value,
+      [`${name}Valid`]: this.validate(name, value)
     });
+  }
+  validate(field, value) {
+    let isValid = false;
+    switch (field) {
+      case 'name':
+      case 'city':
+      case 'state':
+      case 'month':
+      case 'year':
+        isValid = value.length > 0;
+        break;
+      case 'phone':
+        isValid = value.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
+        break;
+      case 'email':
+        isValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        break;
+      case 'address1':
+        isValid = value.match(/^[a-zA-Z0-9\s,.'-]{3,}$/);
+        break;
+      case 'zip':
+        isValid = value.length === 5;
+        break;
+      case 'cc':
+        isValid = value.length === 16;
+        break;
+      case 'cvv':
+        isValid = value.length === 3 || value.length === 4;
+        break;
+      case 'checkbox':
+        isValid = value;
+        break;
+      default:
+        break;
+    }
+    return isValid;
   }
   renderStateOptions() {
     const elements = [];
@@ -114,15 +153,33 @@ export default class Checkout extends React.Component {
     );
     return elements;
   }
+  checkValidation() {
+    let formIsValid = true;
+    const form = this.state;
+    for (const input in form) {
+      if (input !== 'address2' && (form[input] === false || form[input] === '')){
+        formIsValid = false;
+      }
+    }
+    return formIsValid;
+  }
+  handlePlaceOrder(e) {
+    e.preventDefault();
+    if (!this.checkValidation()){
+      return;
+    }
+    this.props.onPlaceOrder(this.state);
+    this.props.history.push("/order");
+  }
   render() {
     return (
       <div className = "checkoutContainer container mb-5" >
-        <div className="continueShoppingContainer pb-2">
-          <Link to='/products' className='continueShoppingLink'>
-          &lt; <span className="continueShopping">continue shopping</span>
+        <div className="continueShoppingContainer pb-2 ml-3">
+          <Link to="/products" className='continueShoppingLink'>
+            &lt; <span className="continueShopping">continue shopping</span>
           </Link>
         </div>
-        <h1 className="cartHeader">My Cart</h1>
+        <h1 className="cartHeader ml-3">My Cart</h1>
         <div className="checkoutFormCartContainer d-flex">
           <div className="checkoutFormContainer col-sm-8 p-0">
             <form>
@@ -135,7 +192,7 @@ export default class Checkout extends React.Component {
                       id="checkoutName"
                       name="name"
                       type="text"
-                      className="form-control"
+                      className={`form-control ${this.state.nameValid ? '' : 'is-invalid'}`}
                       value={this.state.name}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
@@ -149,8 +206,8 @@ export default class Checkout extends React.Component {
                     <input
                       id="inputPhone"
                       name="phone"
-                      type="number"
-                      className="form-control"
+                      type="text"
+                      className={`form-control ${this.state.phoneValid ? '' : 'is-invalid'}`}
                       value={this.state.phone}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
@@ -163,7 +220,7 @@ export default class Checkout extends React.Component {
                       id="inputEmail"
                       name="email"
                       type="email"
-                      className="form-control"
+                      className={`form-control ${this.state.emailValid ? '' : 'is-invalid'}`}
                       value={this.state.email}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
@@ -177,7 +234,7 @@ export default class Checkout extends React.Component {
                     id="inputAddress"
                     name="address1"
                     type="text"
-                    className="form-control"
+                    className={`form-control ${this.state.address1Valid ? '' : 'is-invalid'}`}
                     value={this.state.address1}
                     onChange={this.handleInputChange} />
                   <div className="invalid-feedback">
@@ -201,7 +258,7 @@ export default class Checkout extends React.Component {
                       id="inputCity"
                       type="text"
                       name="city"
-                      className="form-control"
+                      className={`form-control ${this.state.cityValid ? '' : 'is-invalid'}`}
                       value={this.state.city}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
@@ -213,7 +270,7 @@ export default class Checkout extends React.Component {
                     <select
                       id="inputState"
                       name="state"
-                      className="form-control"
+                      className={`form-control ${this.state.stateValid ? '' : 'is-invalid'}`}
                       value={this.state.state}
                       onChange={this.handleInputChange} >
                       {this.renderStateOptions()}
@@ -228,7 +285,7 @@ export default class Checkout extends React.Component {
                       id="inputZip"
                       name="zip"
                       type="number"
-                      className="form-control"
+                      className={`form-control ${this.state.zipValid ? '' : 'is-invalid'}`}
                       value={this.state.zip}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
@@ -247,7 +304,7 @@ export default class Checkout extends React.Component {
                       id="inputCreditCard"
                       name="cc"
                       type="number"
-                      className="form-control"
+                      className={`form-control ${this.state.ccValid ? '' : 'is-invalid'}`}
                       value={this.state.cc}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
@@ -259,7 +316,7 @@ export default class Checkout extends React.Component {
                     <select
                       id="inputCreditCardMonth"
                       name="month"
-                      className="form-control"
+                      className={`form-control ${this.state.monthValid ? '' : 'is-invalid'}`}
                       value={this.state.month}
                       onChange={this.handleInputChange} >
                       {this.renderMonthOptions()}
@@ -274,7 +331,7 @@ export default class Checkout extends React.Component {
                       id="inputCreditCardYear"
                       name="year"
                       type="number"
-                      className="form-control"
+                      className={`form-control ${this.state.yearValid ? '' : 'is-invalid'}`}
                       value={this.state.year}
                       onChange={this.handleInputChange} >
                       {this.renderYearOptions()}
@@ -289,7 +346,7 @@ export default class Checkout extends React.Component {
                       id="inputCreditCardCvv"
                       name="cvv"
                       type="number"
-                      className="form-control"
+                      className={`form-control ${this.state.cvvValid ? '' : 'is-invalid'}`}
                       value={this.state.cvv}
                       onChange={this.handleInputChange} />
                     <div className="invalid-feedback">
@@ -306,7 +363,7 @@ export default class Checkout extends React.Component {
                       id="gridCheck"
                       name="checkbox"
                       type="checkbox"
-                      className="form-check-input"
+                      className={`form-check-input ${this.state.checkboxValid ? '' : 'is-invalid'}`}
                       checked={this.state.checkbox}
                       value={this.state.checkbox}
                       onChange={this.handleInputChange} />
@@ -321,11 +378,10 @@ export default class Checkout extends React.Component {
                 <button
                   type="submit"
                   className="btn btn-warning"
-                  onClick={() => this.props.onPlaceOrder(this.state)} >
+                  onClick={this.handlePlaceOrder} >
                   Place your order
                 </button>
               </div>
-
             </form>
           </div>
           <div className="checkoutCartContainer col-4">
