@@ -4,13 +4,11 @@ import CartSummaryItem from './cart-summary-item';
 export default function OrderConfirm(props) {
   function renderOrderItems() {
     var elements = null;
-    elements = props.OrderItems.map(item => {
+    elements = props.orderItems.map(item => {
       return (
         <CartSummaryItem
           key={item.id}
-          item={item}
-          onUpdateCartItem={this.props.onUpdateCartItem}
-          onDeleteCartItem={this.handleDeleteCartItem} />
+          item={item} />
       );
     });
     return elements;

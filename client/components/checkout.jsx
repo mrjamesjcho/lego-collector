@@ -37,6 +37,7 @@ export default class Checkout extends React.Component {
       checkboxValid: true
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handlePlaceOrder = this.handlePlaceOrder.bind(this);
   }
   handleInputChange(e) {
     const target = e.target;
@@ -155,13 +156,14 @@ export default class Checkout extends React.Component {
   handlePlaceOrder(e) {
     e.preventDefault();
     this.props.onPlaceOrder(this.state);
+    this.props.history.push("/order");
   }
   render() {
     return (
       <div className = "checkoutContainer container mb-5" >
         <div className="continueShoppingContainer pb-2 ml-3">
-          <Link to='/products' className='continueShoppingLink'>
-          &lt; <span className="continueShopping">continue shopping</span>
+          <Link to="/products" className='continueShoppingLink'>
+            &lt; <span className="continueShopping">continue shopping</span>
           </Link>
         </div>
         <h1 className="cartHeader ml-3">My Cart</h1>
@@ -366,7 +368,6 @@ export default class Checkout extends React.Component {
                   Place your order
                 </button>
               </div>
-
             </form>
           </div>
           <div className="checkoutCartContainer col-4">
