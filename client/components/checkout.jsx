@@ -152,6 +152,10 @@ export default class Checkout extends React.Component {
     );
     return elements;
   }
+  handlePlaceOrder(e) {
+    e.preventDefault();
+    this.props.onPlaceOrder(this.state);
+  }
   render() {
     return (
       <div className = "checkoutContainer container mb-5" >
@@ -357,9 +361,8 @@ export default class Checkout extends React.Component {
                   </div>
                 </div>
                 <button
-                  type="submit"
                   className="btn btn-warning"
-                  onClick={() => this.props.onPlaceOrder(this.state)} >
+                  onClick={this.handlePlaceOrder} >
                   Place your order
                 </button>
               </div>

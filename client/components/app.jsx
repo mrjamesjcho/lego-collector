@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
@@ -21,6 +23,7 @@ export default class App extends React.Component {
     this.clearProductAdded = this.clearProductAdded.bind(this);
     this.updateCartItem = this.updateCartItem.bind(this);
     this.deleteCartItem = this.deleteCartItem.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
   }
 
   getProducts() {
@@ -147,6 +150,7 @@ export default class App extends React.Component {
   }
 
   placeOrder(orderInfo) {
+    console.log('orderInfo: ', orderInfo);
     const orderData = {
       name: orderInfo.name,
       shippingAddress: orderInfo.address1,
@@ -159,8 +163,7 @@ export default class App extends React.Component {
     };
     fetch('/api/orders.php', data)
       .then(res => res.json())
-      .then(data => {
-      });
+      .then(data => {});
   }
 
   numOfItemsInCart() {
