@@ -1,12 +1,12 @@
 import React from 'react';
-import CartSummaryItem from './cart-summary-item';
+import OrderSummaryItem from './order-summary-item';
 
-export default function OrderConfirm(props) {
+export default function OrderSummary(props) {
   function renderOrderItems() {
     var elements = null;
     elements = props.orderItems.map(item => {
       return (
-        <CartSummaryItem
+        <OrderSummaryItem
           key={item.id}
           item={item} />
       );
@@ -21,6 +21,7 @@ export default function OrderConfirm(props) {
       <div className="orderItems d-flex-column border-top">
         {renderOrderItems()}
       </div>
+      <h5 className="orderTotal">{`Total: $${props.orderTotal / 100}`}</h5>
     </div>
   );
 }

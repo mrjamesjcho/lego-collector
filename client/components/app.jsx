@@ -7,7 +7,7 @@ import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import Checkout from './checkout';
 import AddCartConfirm from './add-cart-confirm';
-import OrderConfirm from './order-confirm';
+import OrderSummary from './order-summary';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 export default class App extends React.Component {
@@ -208,7 +208,7 @@ export default class App extends React.Component {
             render={props => <Checkout {...props} cartItems={this.state.cart} cartTotal={this.state.cartTotal} onPlaceOrder={this.placeOrder} /> } />
           <Route
             path="/order"
-            render={props => <OrderConfirm {...props} orderItems={this.state.cart} orderTotal={this.state.cartTotal} /> } />
+            render={props => <OrderSummary {...props} orderItems={this.state.cart} orderTotal={this.state.cartTotal} /> } />
         </Switch>
         {this.renderProductAddedModal()}
       </Router>
