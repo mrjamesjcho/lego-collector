@@ -4,5 +4,4 @@
 _config.php
 node_modules/
 server/sessions/sess_*
-db_connection.php
 server/public/main.js*
