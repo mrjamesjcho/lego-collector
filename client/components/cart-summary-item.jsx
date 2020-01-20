@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function CartSummaryItem(props) {
   return (
     <div className="cartItemContainer d-flex flex-wrap justify-content-center border-bottom mb-2">
-      <Link to={`/product/${props.item.id}`} className="cartItemImgContainer d-flex col-md-5 h-100 p-2 overflow-hidden">
+      <Link to={`/product/${props.item.productId}`} className="cartItemImgContainer d-flex col-md-5 h-100 p-2 overflow-hidden">
         <img
           src={props.item.image}
           className="cartItemImg rounded m-auto" />

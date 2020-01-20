@@ -51,7 +51,7 @@ if ($request['method'] === 'POST') {
                       `products`.`shortDescription`
                       FROM cartItems AS c
                       JOIN products ON c.`productId` = `products`.`id`
-                      WHERE c.`cartItemId` = 2";
+                      WHERE c.`cartItemId` = $cartItemId";
 
     $result = mysqli_query($link, $responseQuery);
     if (!$result) {
@@ -75,20 +75,20 @@ if ($request['method'] === 'PATCH') {
     throw new ApiError('cart item id required', 400);
   }
 
-  $cartItemId = $request['body']['cartItemId'];
+  $cartItemId = (int) $request['body']['cartItemId'];
   if (!is_numeric($cartItemId) || $cartItemId <= 0) {
     throw new ApiError('invalid cart item id', 400);
   }
 
   $incDec = (int) $request['body']['incDec'];
-  if ($incDec !== 1 || $incDec !== -1) {
-    throw new ApiError('invalid inc dec value', 400);
-  }
+  // if ($incDec !== 1 || $incDec !== -1) {
+  //   throw new ApiError('invalid inc dec value', 400);
+  // }
 
   $cartId = $_SESSION['cartId'];
   $link = get_db_link();
 
-  $updateQuery = "UPDATE `cartItems` SET `count` = `count` + $incDec  WHERE `cartItems`.`productID` = $cartItemId AND `cartItems`.`cartID` = $cartId";
+  $updateQuery = "UPDATE `cartItems` SET `count` = `count` + $incDec  WHERE `cartItems`.`cartItemId` = $cartItemId";
   $updateResult = mysqli_query($link, $updateQuery);
   if (!$updateResult) {
     throw new ApiError(mysqli_error($link));
@@ -137,8 +137,8 @@ if ($request['method'] === 'DELETE') {
 
 function sendCart($link, $cartId, &$response) {
   $cartQuery = "SELECT c.`cartItemId` AS id, c.`productId`, p.`name`, c.`price`, c.`count`,
-                         (SELECT i.`url` FROM product_images AS i WHERE c.`productId` = i.product_id LIMIT 1) AS image,
-                         p.`shortDescription`
+                       (SELECT i.`url` FROM product_images AS i WHERE c.`productId` = i.product_id LIMIT 1) AS image,
+                       p.`shortDescription`
                   FROM cartItems AS c
                   JOIN products AS p ON c.`productId` = p.id
                   WHERE c.cartId = $cartId";
