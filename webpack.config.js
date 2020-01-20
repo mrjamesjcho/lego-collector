@@ -41,7 +41,7 @@ module.exports = {
     stats: 'minimal',
     proxy: {
       '/api': {
-        target: 'http://localhost',
+        target: 'http://localhost:9000',
         headers: {
           Host: 'lego-collector.localhost'
         }
