@@ -13,6 +13,21 @@ if ($request['method'] === 'GET') {
                   JOIN products AS p ON c.`productId` = p.id
                   WHERE c.cartId = $cartId";
   }
+  $result = mysqli_query($link, $query);
+
+  if (!$result) {
+    throw new ApiError(mysqli_error($link));
+  }
+  $cartItems = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $row['id'] = (int) $row['id'];
+    $row['count'] = (int) $row['count'];
+    $row['price'] = (int) $row['price'];
+    $cartItems[] = $row;
+  }
+  $response['body'] = $cartItems;
+  send($response);
+
 } else if ($request['method'] === 'POST') {
 
   if(isset($request['body']['productId'])) {
