@@ -8,6 +8,8 @@ switch ($request['path']) {
     exit;
   case '/api/health-check':
     require_once "..${request['path']}.php";
+  case '/api/products':
+    require_once "..${request['path']}.php";
   default:
     throw new ApiError("Cannot ${request['method']} ${request['path']}", 404);
 }

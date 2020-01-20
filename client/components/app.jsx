@@ -28,7 +28,7 @@ export default class App extends React.Component {
   }
 
   getProducts() {
-    fetch('/api/products.php')
+    fetch('/api/products')
       .then(res => res.json())
       .then(data => {
         const featured = data.filter(product => product.featured);

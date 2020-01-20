@@ -1,15 +1,13 @@
 <?php
 
-require_once('functions.php');
-set_exception_handler('error_handler');
-require_once('db_connection.php');
+if ($request['method'] === 'GET') {
+  $link = get_db_link();
 
-startup();
 
 $whereClause = '';
 if (!empty($_GET['id'])) {
   if (!is_numeric($_GET['id'])) {
-    throw new Exception('id needs to be a number');
+    throw new ApiError('id needs to be a number');
   }
   $whereClause = 'WHERE p.`id` = ' . $_GET['id'];
 }
@@ -21,13 +19,13 @@ $query = "SELECT p.`id`, p.`name`, p.`price`, p.`shortDescription`, p.`longDescr
             . $whereClause .
             " GROUP BY p.`id`";
 
-$result = mysqli_query($conn, $query);
+$result = mysqli_query($link, $query);
 
 if (!$result) {
-  throw new Exception(mysqli_error($conn));
+  throw new ApiError(mysqli_error($link));
 }
 if (mysqli_num_rows($result) === 0 && !empty($_GET['id'])) {
-  throw new Exception('Invalid ID: ' . $_GET['id']);
+  throw new ApiError('Invalid ID: ' . $_GET['id']);
 }
 
 $output = [];
@@ -39,7 +37,9 @@ while ($row = mysqli_fetch_assoc($result)) {
   $row['featured'] = (int)$row['featured'];
   $output[] = $row;
 }
-$json_output = json_encode($output);
-print($json_output);
+$response['body'] = $output;
+send($response);
+
+}
 
 ?>
