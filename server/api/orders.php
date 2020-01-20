@@ -1,15 +1,6 @@
 <?php
 
-require_once('functions.php');
-require_once('db_connection.php');
-
-set_exception_handler('error_handler');
-
-header('Content-Type: application/json');
-
-$method = $_SERVER['REQUEST_METHOD'];
-
-if ($method != 'POST') {
+if ($request['method'] === 'POST') {
   http_response_code(404);
   print(json_encode([
     'error' => 'Not Found',
@@ -18,7 +9,7 @@ if ($method != 'POST') {
 } else if (empty($_SESSION['cartId'])) {
   http_response_code(400);
   print(json_encode([
-    'error' => 'ApiError',
+    'error' => 'Not Found',
     'message' => 'active shopping cart not found'
   ]));
 } else {
@@ -27,19 +18,19 @@ if ($method != 'POST') {
   if (empty($order['name'])) {
     http_response_code(400);
     print(json_encode([
-      'error' => 'ApiError',
+      'error' => 'Not Found',
       'message' => 'name not provided in order'
     ]));
   } else if (empty($order['creditCard'])) {
     http_response_code(400);
     print(json_encode([
-      'error' => 'ApiError',
+      'error' => 'Not Found',
       'message' => 'credit card not provided in order'
     ]));
   } else if (empty($order['shippingAddress'])){
     http_response_code(400);
     print(json_encode([
-      'error' => 'ApiError',
+      'error' => 'Not Found',
       'message' => 'shipping address not provided in order'
     ]));
   } else {
