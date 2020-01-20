@@ -66,11 +66,11 @@ if ($request['method'] === 'GET') {
     $cartItemId = mysqli_insert_id($link);
 
     $responseQuery = "SELECT c.`cartItemId` AS `id`, c.`count`, c.`productId`, `products`.`name`, `products`.`price`,
-                        (SELECT i.url FROM product_images AS i WHERE c.`productId` = i.product_id LIMIT 1) AS image,
-                        `products`.`shortDescription`
+                      (SELECT i.url FROM product_images AS i WHERE c.`productId` = i.product_id LIMIT 1) AS image,
+                      `products`.`shortDescription`
                       FROM cartItems AS c
                       JOIN products ON c.`productId` = `products`.`id`
-                      WHERE c.`cartId` = $cartId AND c.`cartItemId` = $cartItemId";
+                      WHERE c.`cartItemId` = $cartItemId";
     $result = mysqli_query($link, $responseQuery);
     if (!$result) {
       throw new ApiError(mysqli_error($link));
@@ -82,6 +82,7 @@ if ($request['method'] === 'GET') {
 
     $response['body'] = $cartItemData;
     send($response);
+
   }
 }
 
