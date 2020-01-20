@@ -4,33 +4,13 @@ if ($request['method'] === 'GET') {
   if(!isset($_SESSION['cartId'])) {
     $response['body'] = [];
     send($response);
-  } else {
-    $link = get_db_link();
-    $cartId = $_SESSION['cartId'];
-    $cartQuery = "SELECT c.`cartItemId` AS id, c.`productId`, p.`name`, c.`price`, c.`count`,
-                         (SELECT i.`url` FROM product_images AS i WHERE c.`productId` = i.product_id LIMIT 1) AS image,
-                         p.`shortDescription`
-                  FROM cartItems AS c
-                  JOIN products AS p ON c.`productId` = p.id
-                  WHERE c.cartId = $cartId";
   }
-  $result = mysqli_query($link, $cartQuery);
+  $link = get_db_link();
+  $cartId = $_SESSION['cartId'];
+  sendCart($link, $cartId, $response);
+}
 
-  if (!$result) {
-    throw new ApiError(mysqli_error($link));
-  }
-  $cartItems = [];
-  while ($row = mysqli_fetch_assoc($result)) {
-    $row['id'] = (int) $row['id'];
-    $row['count'] = (int) $row['count'];
-    $row['price'] = (int) $row['price'];
-    $cartItems[] = $row;
-  }
-  $response['body'] = $cartItems;
-  send($response);
-
-} else if ($request['method'] === 'POST') {
-
+if ($request['method'] === 'POST') {
   if(isset($request['body']['productId'])) {
     $productId = $request['body']['productId'];
     if (!is_numeric($productId) || $productId <= 0) {
@@ -71,7 +51,8 @@ if ($request['method'] === 'GET') {
                       `products`.`shortDescription`
                       FROM cartItems AS c
                       JOIN products ON c.`productId` = `products`.`id`
-                      WHERE c.`cartItemId` = $cartItemId";
+                      WHERE c.`cartItemId` = 2";
+
     $result = mysqli_query($link, $responseQuery);
     if (!$result) {
       throw new ApiError(mysqli_error($link));
@@ -81,20 +62,21 @@ if ($request['method'] === 'GET') {
     $cartItemData['productId'] = (int) $cartItemData['productId'];
     $cartItemData['count'] = (int) $cartItemData['count'];
     $cartItemData['price'] = (int) $cartItemData['price'];
-
     $response['body'] = $cartItemData;
     send($response);
   }
 
   throw new ApiError('valid productId is required', 400);
 
-} else if ($request['method'] === 'PATCH') {
-  if (!isset($request['body']['id'])) {
+}
+
+if ($request['method'] === 'PATCH') {
+  if (!isset($request['body']['cartItemId'])) {
     throw new ApiError('cart item id required', 400);
   }
 
-  $id = $request['body']['id'];
-  if (!is_numeric($id) || $id <= 0) {
+  $cartItemId = $request['body']['cartItemId'];
+  if (!is_numeric($cartItemId) || $cartItemId <= 0) {
     throw new ApiError('invalid cart item id', 400);
   }
 
@@ -106,7 +88,7 @@ if ($request['method'] === 'GET') {
   $cartId = $_SESSION['cartId'];
   $link = get_db_link();
 
-  $updateQuery = "UPDATE `cartItems` SET `count` = `count` + $incDec  WHERE `cartItems`.`productID` = $id AND `cartItems`.`cartID` = $cartId";
+  $updateQuery = "UPDATE `cartItems` SET `count` = `count` + $incDec  WHERE `cartItems`.`productID` = $cartItemId AND `cartItems`.`cartID` = $cartId";
   $updateResult = mysqli_query($link, $updateQuery);
   if (!$updateResult) {
     throw new ApiError(mysqli_error($link));
@@ -120,7 +102,8 @@ if ($request['method'] === 'GET') {
                       `products`.`shortDescription`
                       FROM cartItems AS c
                       JOIN products ON c.`productId` = `products`.`id`
-                      WHERE c.`cartItemId` = $id";
+                      WHERE c.`cartItemId` = $cartItemId";
+
   $result = mysqli_query($link, $responseQuery);
   if (!$result) {
     throw new ApiError(mysqli_error($link));
@@ -130,12 +113,49 @@ if ($request['method'] === 'GET') {
   $cartItemData['productId'] = (int) $cartItemData['productId'];
   $cartItemData['count'] = (int) $cartItemData['count'];
   $cartItemData['price'] = (int) $cartItemData['price'];
-
   $response['body'] = $cartItemData;
   send($response);
 
-} else if ($request['method'] === 'DELETE') {
+}
 
+if ($request['method'] === 'DELETE') {
+  if (!isset($request['body']['cartItemId'])) {
+    throw new ApiError('cart item id required', 400);
+  }
+  $cartItemId = $request['body']['cartItemId'];
+  if (!is_numeric($cartItemId) || $cartItemId <= 0) {
+    throw new ApiError('invalid cart item id', 400);
+  }
+  $cartId = $_SESSION['cartId'];
+  $link = get_db_link();
+
+  $deleteQuery = "DELETE FROM `cartItems` WHERE `cartItems`.`cartItemId` = $cartItemId AND `cartItems`.`cartId` = $cartId";
+  $result = mysqli_query($link, $deleteQuery);
+
+  sendCart($link, $cartId, $response);
+}
+
+function sendCart($link, $cartId, &$response) {
+  $cartQuery = "SELECT c.`cartItemId` AS id, c.`productId`, p.`name`, c.`price`, c.`count`,
+                         (SELECT i.`url` FROM product_images AS i WHERE c.`productId` = i.product_id LIMIT 1) AS image,
+                         p.`shortDescription`
+                  FROM cartItems AS c
+                  JOIN products AS p ON c.`productId` = p.id
+                  WHERE c.cartId = $cartId";
+  $result = mysqli_query($link, $cartQuery);
+
+  if (!$result) {
+    throw new ApiError(mysqli_error($link));
+  }
+  $cartItems = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $row['id'] = (int) $row['id'];
+    $row['count'] = (int) $row['count'];
+    $row['price'] = (int) $row['price'];
+    $cartItems[] = $row;
+  }
+  $response['body'] = $cartItems;
+  send($response);
 }
 
 ?>

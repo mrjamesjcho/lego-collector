@@ -73,6 +73,7 @@ export default class App extends React.Component {
     fetch('/api/cart', data)
       .then(res => {})
       .then(data => {
+        console.log('add cart response: ', data);
         var sameItemIndex = null;
         const newCart = this.state.cart.map((item, index) => {
           if (item.id === product.id) {
@@ -109,12 +110,12 @@ export default class App extends React.Component {
     const data = {
       method: 'PATCH',
       body: JSON.stringify({
-        id: cartItem.id,
-        incDec: incDec
+        'cartItemId': cartItem.id,
+        'incDec': incDec
       }),
       headers: { 'Content-Type': 'application/json' }
     };
-    fetch('/api/cart.php', data)
+    fetch('/api/cart', data)
       .then(res => {})
       .then(data => {
         let newCartTotal = this.state.cartTotal;
@@ -135,10 +136,10 @@ export default class App extends React.Component {
   deleteCartItem(cartItem) {
     const data = {
       method: 'DELETE',
-      body: JSON.stringify({ 'id': cartItem.id }),
+      body: JSON.stringify({ 'cartItemId': cartItem.id }),
       headers: { 'Content-Type': 'application/json' }
     };
-    fetch('/api/cart.php', data)
+    fetch('/api/cart', data)
       .then(res => {})
       .then(data => {
         const newCart = this.state.cart.filter(item => item.id !== cartItem.id);
@@ -162,7 +163,7 @@ export default class App extends React.Component {
       body: JSON.stringify(orderData),
       headers: { 'Content-Type': 'application/json' }
     };
-    fetch('/api/orders.php', data)
+    fetch('/api/orders', data)
       .then(res => res.json())
       .then(data => {});
   }
