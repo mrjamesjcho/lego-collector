@@ -7,14 +7,14 @@ if ($request['method'] === 'GET') {
   } else {
     $link = get_db_link();
     $cartId = $_SESSION['cartId'];
-    $cartQuery = "SELECT c.`cartItemId` AS id c.`productId`, p.`name`, c.`price`, c.`count`,
+    $cartQuery = "SELECT c.`cartItemId` AS id, c.`productId`, p.`name`, c.`price`, c.`count`,
                          (SELECT i.`url` FROM product_images AS i WHERE c.`productId` = i.product_id LIMIT 1) AS image,
                          p.`shortDescription`
                   FROM cartItems AS c
                   JOIN products AS p ON c.`productId` = p.id
                   WHERE c.cartId = $cartId";
   }
-  $result = mysqli_query($link, $query);
+  $result = mysqli_query($link, $cartQuery);
 
   if (!$result) {
     throw new ApiError(mysqli_error($link));
@@ -75,11 +75,12 @@ if ($request['method'] === 'GET') {
     if (!$result) {
       throw new ApiError(mysqli_error($link));
     }
-    $result['id'] = (int) $result['id'];
-    $result['count'] = (int) $result['count'];
-    $result['price'] = (int) $result['price'];
+    $cartItemData = mysqli_fetch_assoc($result);
+    $cartItemData['id'] = (int) $cartItemData['id'];
+    $cartItemData['count'] = (int) $cartItemData['count'];
+    $cartItemData['price'] = (int) $cartItemData['price'];
 
-    $response['body'] = $result;
+    $response['body'] = $cartItemData;
     send($response);
   }
 }
