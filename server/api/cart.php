@@ -4,6 +4,14 @@ if ($request['method'] === 'GET') {
   if(!isset($_SESSION['cartId'])) {
     $response['body'] = [];
     send($response);
+  } else {
+    $cartId = $_SESSION['cartId'];
+    $cartQuery = "SELECT c.`cartItemId` AS id c.`productId`, p.`name`, c.`price`, c.`count`,
+                         (SELECT i.`url` FROM product_images AS i WHERE c.`productId` = i.product_id LIMIT 1) AS image,
+                         p.`shortDescription`
+                  FROM cartItems AS c
+                  JOIN products AS p ON c.`productId` = p.id
+                  WHERE c.cartId = $cartId";
   }
 } else if ($request['method'] === 'POST') {
 
@@ -41,12 +49,12 @@ if ($request['method'] === 'GET') {
     $insertResult = mysqli_query($link, $insertQuery);
     $cartItemId = mysqli_insert_id($link);
 
-    $responseQuery = "SELECT `cartItems`.`cartItemId` AS `id`, `cartItems`.`count`, `cartItems`.`productId`, `products`.`name`, `products`.`price`,
-                        (SELECT i.url FROM product_images AS i WHERE c.productID = i.product_id LIMIT 1) AS image,
+    $responseQuery = "SELECT c.`cartItemId` AS `id`, c.`count`, c.`productId`, `products`.`name`, `products`.`price`,
+                        (SELECT i.url FROM product_images AS i WHERE c.`productId` = i.product_id LIMIT 1) AS image,
                         `products`.`shortDescription`
-                      FROM cartItems WHERE `cartItems`.`cartItemId` = $cartItemId
-                      JOIN products ON `cartItems`.`productId` = `products`.`id`
-                      WHERE `cartItems`.`cartId` = $cartId";
+                      FROM cartItems AS c
+                      JOIN products ON c.`productId` = `products`.`id`
+                      WHERE c.`cartId` = $cartId AND c.`cartItemId` = $cartItemId";
     $result = mysqli_query($link, $responseQuery);
     if (!$result) {
       throw new ApiError(mysqli_error($link));
