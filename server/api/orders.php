@@ -1,15 +1,6 @@
 <?php
 
-require_once('functions.php');
-require_once('db_connection.php');
-
-set_exception_handler('error_handler');
-
-header('Content-Type: application/json');
-
-$method = $_SERVER['REQUEST_METHOD'];
-
-if ($method != 'POST') {
+if ($request['method'] === 'POST') {
   http_response_code(404);
   print(json_encode([
     'error' => 'Not Found',
