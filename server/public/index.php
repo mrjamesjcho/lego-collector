@@ -12,6 +12,8 @@ switch ($request['path']) {
     require_once "..${request['path']}.php";
   case '/api/cart':
     require_once "../api/cart.php";
+  case '/api/orders':
+    require_once "../api/orders.php";
   default:
     throw new ApiError("Cannot ${request['method']} ${request['path']}", 404);
 }

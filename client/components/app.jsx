@@ -73,7 +73,6 @@ export default class App extends React.Component {
     fetch('/api/cart', data)
       .then(res => res.json())
       .then(data => {
-        console.log('add cart response: ', data);
         var sameItemIndex = null;
         const newCart = this.state.cart.map((item, index) => {
           if (item.id === product.id) {
@@ -116,7 +115,7 @@ export default class App extends React.Component {
       headers: { 'Content-Type': 'application/json' }
     };
     fetch('/api/cart', data)
-      .then(res => {})
+      .then(res => res.json())
       .then(data => {
         let newCartTotal = this.state.cartTotal;
         const newCart = this.state.cart.map(item => {
