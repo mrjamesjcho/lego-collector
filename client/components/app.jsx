@@ -38,7 +38,7 @@ export default class App extends React.Component {
 
   getCartItems() {
     let cartTotal = 0;
-    fetch('/api/cart.php')
+    fetch('/api/cart')
       .then(request => request.json())
       .then(data => {
         data.map(cartItem => {
