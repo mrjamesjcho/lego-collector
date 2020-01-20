@@ -81,9 +81,9 @@ if ($request['method'] === 'PATCH') {
   }
 
   $incDec = (int) $request['body']['incDec'];
-  // if ($incDec !== 1 || $incDec !== -1) {
-  //   throw new ApiError('invalid inc dec value', 400);
-  // }
+  if ($incDec !== 1 && $incDec !== -1) {
+     throw new ApiError('invalid inc dec value', 400);
+  }
 
   $cartId = $_SESSION['cartId'];
   $link = get_db_link();
