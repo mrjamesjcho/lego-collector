@@ -5,6 +5,7 @@ if ($request['method'] === 'GET') {
     $response['body'] = [];
     send($response);
   } else {
+    $link = get_db_link();
     $cartId = $_SESSION['cartId'];
     $cartQuery = "SELECT c.`cartItemId` AS id c.`productId`, p.`name`, c.`price`, c.`count`,
                          (SELECT i.`url` FROM product_images AS i WHERE c.`productId` = i.product_id LIMIT 1) AS image,
@@ -29,7 +30,7 @@ if ($request['method'] === 'GET') {
   send($response);
 
 } else if ($request['method'] === 'POST') {
-
+  $link = get_db_link();
   if(isset($request['body']['productId'])) {
 
     $productId = $request['body']['productId'];

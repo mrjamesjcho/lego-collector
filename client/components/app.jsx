@@ -67,10 +67,10 @@ export default class App extends React.Component {
   addCartItem(product) {
     const data = {
       method: 'POST',
-      body: JSON.stringify({ 'id': product.id }),
+      body: JSON.stringify({ 'productId': product.id }),
       headers: { 'Content-Type': 'application/json' }
     };
-    fetch('/api/cart.php', data)
+    fetch('/api/cart', data)
       .then(res => {})
       .then(data => {
         var sameItemIndex = null;
