@@ -1,8 +1,61 @@
 <?php
 
 if ($request['method'] === 'GET') {
-  if(empty($_SESSION['cartId'])) {
+  if(!isset($_SESSION['cartId'])) {
     $response['body'] = [];
+    send($response);
+  }
+} else if ($request['method'] === 'POST') {
+
+  if(isset($request['body']['productId'])) {
+
+    $productId = $request['body']['productId'];
+    if (!is_numeric($productId) || $productId <= 0) {
+      throw new ApiError('valid productId is required', 400);
+    }
+
+    $priceQuery = "SELECT `price` FROM `products` WHERE `id` = $productId";
+    $result = mysqli_query($link, $priceQuery);
+    if (!$result) {
+      throw new ApiError(mysqli_error($link));
+    }
+    if (mysqli_num_rows($result) === 0) {
+      throw new ApiError('invalid productId: '.$productId, 400);
+    }
+    $productData = mysqli_fetch_assoc($result);
+    $productPrice = $productData['price'];
+
+    if (!isset($_SESSION['cartId'])) {
+      $newCartQuery = "INSERT INTO `carts` SET `createdAt` = CURRENT_TIMESTAMP";
+      $newCartResult = mysqli_query($link, $newCartQuery);
+      if(!$newCartResult) {
+        throw new ApiError(mysqli_error($link));
+      }
+      $cartId = mysqli_insert_id($link);
+      $_SESSION['cartId'] = $cartId;
+    } else {
+      $cartId = $_SESSION['cartId'];
+    }
+
+    $insertQuery = "INSERT INTO `cartItems` SET `price` = $productPrice, `count` = 1, `productId` = $productId, `cartId` = $cartId, `added` = NOW() ON DUPLICATE KEY UPDATE `count`=`count` + 1";
+    $insertResult = mysqli_query($link, $insertQuery);
+    $cartItemId = mysqli_insert_id($link);
+
+    $responseQuery = "SELECT `cartItems`.`cartItemId` AS `id`, `cartItems`.`count`, `cartItems`.`productId`, `products`.`name`, `products`.`price`,
+                        (SELECT i.url FROM product_images AS i WHERE c.productID = i.product_id LIMIT 1) AS image,
+                        `products`.`shortDescription`
+                      FROM cartItems WHERE `cartItems`.`cartItemId` = $cartItemId
+                      JOIN products ON `cartItems`.`productId` = `products`.`id`
+                      WHERE `cartItems`.`cartId` = $cartId";
+    $result = mysqli_query($link, $responseQuery);
+    if (!$result) {
+      throw new ApiError(mysqli_error($link));
+    }
+    $result['id'] = (int) $result['id'];
+    $result['count'] = (int) $result['count'];
+    $result['price'] = (int) $result['price'];
+
+    $response['body'] = $result;
     send($response);
   }
 }
