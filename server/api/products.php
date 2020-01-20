@@ -4,11 +4,12 @@ if ($request['method'] === 'GET') {
   $link = get_db_link();
 
   $whereClause = '';
-  if (!empty($_GET['id'])) {
-    if (!is_numeric($_GET['id'])) {
-      throw new ApiError('id needs to be a number');
+  if (!empty($request['query']['id'])) {
+    $productId = $request['query']['id'];
+    if (!is_numeric($productId) || $productId <= 0) {
+      throw new ApiError('id must be a non-zero integer', 400);
     }
-    $whereClause = 'WHERE p.`id` = ' . $_GET['id'];
+    $whereClause = 'WHERE p.`id` = ' . $productId;
   }
 
   $query = "SELECT p.`id`, p.`name`, p.`price`, p.`shortDescription`, p.`longDescription`, p.`featured`,
@@ -23,8 +24,8 @@ if ($request['method'] === 'GET') {
   if (!$result) {
     throw new ApiError(mysqli_error($link));
   }
-  if (mysqli_num_rows($result) === 0 && !empty($_GET['id'])) {
-    throw new ApiError('Invalid ID: ' . $_GET['id']);
+  if (mysqli_num_rows($result) === 0) {
+    throw new ApiError('Invalid ID: ' . $productId, 404);
   }
 
   $output = [];
