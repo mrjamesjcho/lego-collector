@@ -18,34 +18,11 @@ if ($request['method'] === 'POST') {
     throw new ApiError('valid credit card required', 400);
   }
 
+  $link = get_db_link();
+  $stmt = mysqli_prepare($link, "INSERT INTO `orders` (`cartId`, `name`, `shippingAddress`, `creditCard`, `createdAt`) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)");
+  mysqli_stmt_bind_param($stmt, "issi", $cartId, $order['name'], $order['shippingAddress'], $order['creditCard']);
+  mysqli_stmt_execute($stmt);
 
-}  else {
-    $cartId = $_SESSION['cartId'];
-    $name = $order['name'];
-    $shippingAddress = $order['shippingAddress'];
-    $creditCard = $order['creditCard'];
-
-    $transactionResult = mysqli_query($conn, 'START TRANSACTION');
-
-    if (!$transactionResult) {
-      throw new Exception(mysqli_error($conn));
-    }
-
-    $query = "INSERT INTO `orders` SET `cartId` = $cartId, `name` = $name, `shippingAddress` = $shippingAddress, `createdAt` = NOW()";
-
-    $result = mysqli_query($conn, $query);
-
-    if (!$result) {
-      throw new Exception(mysqli_error($conn));
-    }
-    if (mysqli_affected_rows($conn) < 1) {
-      mysqli_query($conn, 'ROLLBACK');
-      throw new Exception('there was an error adding to cart');
-    }
-    mysqli_query($conn, 'COMMIT');
-    http_response_code(201);
-    print($order);
-  }
 }
 
 ?>
