@@ -1,33 +1,25 @@
 <?php
 
 if ($request['method'] === 'POST') {
+
   if (!isset($_SESSION['cartId'])) {
     throw new ApiError('active shopping cart required', 400);
+  }
+  $cartId = $_SESSION['cartId'];
+
+  $order = $request['body'];
+  if (!isset($order['name'])) {
+    throw new ApiError('valid name required', 400);
+  }
+  if (!isset($order['shippingAddress'])) {
+    throw new ApiError('valid shipping address required', 400);
+  }
+  if (!isset($order['creditCard'])) {
+    throw new ApiError('valid credit card required', 400);
   }
 
 
 }  else {
-  $order = getBodyData();
-  $order = json_decode($order, true);
-  if (empty($order['name'])) {
-    http_response_code(400);
-    print(json_encode([
-      'error' => 'Not Found',
-      'message' => 'name not provided in order'
-    ]));
-  } else if (empty($order['creditCard'])) {
-    http_response_code(400);
-    print(json_encode([
-      'error' => 'Not Found',
-      'message' => 'credit card not provided in order'
-    ]));
-  } else if (empty($order['shippingAddress'])){
-    http_response_code(400);
-    print(json_encode([
-      'error' => 'Not Found',
-      'message' => 'shipping address not provided in order'
-    ]));
-  } else {
     $cartId = $_SESSION['cartId'];
     $name = $order['name'];
     $shippingAddress = $order['shippingAddress'];
