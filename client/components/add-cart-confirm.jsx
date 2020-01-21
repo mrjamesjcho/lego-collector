@@ -17,7 +17,7 @@ export default function AddCartConfirm(props) {
         <div className="addCartConfirmImgContainer d-flex p-3">
           <img
             className="addCartConfirmImg m-auto"
-            src={props.product.images[0]}
+            src={`/images/${props.product.images[0]}`}
             alt={props.product.name} />
         </div>
         <div className="addCartConfirmButtons d-flex justify-content-center">

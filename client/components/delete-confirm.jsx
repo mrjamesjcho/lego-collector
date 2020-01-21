@@ -14,7 +14,7 @@ export default function DeleteConfirm(props) {
         <div className="deleteConfirmImgContainer d-flex p-2">
           <img
             className="deleteConfirmImg m-auto"
-            src={props.item.images}
+            src={`/images/${props.item.image}`}
             alt={props.item.name} />
         </div>
         <div className="text-center mb-2">

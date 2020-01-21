@@ -10,12 +10,9 @@ export default class CartSummary extends React.Component {
     this.state = {
       itemToRemove: null
     };
-    this.handleBackToCatalog = this.handleBackToCatalog.bind(this);
     this.handleDeleteCartItem = this.handleDeleteCartItem.bind(this);
   }
-  handleBackToCatalog() {
-    this.props.onBackToCatalog('catalog', {});
-  }
+
   handleDeleteCartItem(cartItem) {
     this.setState({
       itemToRemove: cartItem
@@ -24,7 +21,7 @@ export default class CartSummary extends React.Component {
   renderCartItems() {
     var elements = null;
     if (this.props.cartItems.length === 0) {
-      elements = 'Your cart is empty';
+      elements = <h5 className="ml-3 mt-2">Your cart is empty</h5>;
     } else {
       elements = this.props.cartItems.map(item => {
         return (
@@ -53,7 +50,7 @@ export default class CartSummary extends React.Component {
       <div className="cartContainer container mb-5">
         <div className="continueShoppingContainer pb-2 ml-3">
           <Link to='/products' className='continueShoppingLink'>
-            &lt; <span className="continueShopping">continue shopping</span>
+            &lt; <div className="continueShopping">continue shopping</div>
           </Link>
         </div>
         <h1 className="cartHeader ml-3">My Cart</h1>
@@ -61,7 +58,7 @@ export default class CartSummary extends React.Component {
           {this.renderCartItems()}
         </div>
         <div className="cartTotalCheckoutContainer d-flex">
-          <h1 className="cartTotal my-auto">Item Total: {'$' + (this.props.cartTotal / 100)}</h1>
+          <h4 className="cartTotal my-auto ml-3">Item Total: {'$' + (this.props.cartTotal / 100)}</h4>
           <Link
             to='/checkout'
             className='ml-auto' >
