@@ -39,7 +39,7 @@ export default class ProductDetails extends React.Component {
                 imgSelected={this.state.imgSelected}
                 onThumbnailClick={this.handleThumbnailClick} />
               <div className="productDetailsImgContainer d-flex justify-content-center align-items-center flex-fill h-100">
-                <img src={this.state.imgSelected} className="productDetailsImg rounded m-auto p-2" />
+                <img src={`/images/${this.state.imgSelected}`} className="productDetailsImg rounded m-auto p-2" />
               </div>
             </div>
             <div className="productDetailsInfoContainer col-5 d-flex-column">

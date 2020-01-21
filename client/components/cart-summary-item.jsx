@@ -6,7 +6,7 @@ export default function CartSummaryItem(props) {
     <div className="cartItemContainer d-flex flex-wrap justify-content-center border-bottom mb-2">
       <Link to={`/product/${props.item.productId}`} className="cartItemImgContainer d-flex col-md-5 p-2 overflow-hidden">
         <img
-          src={props.item.image}
+          src={`/images/${props.item.image}`}
           className="cartItemImg rounded m-auto" />
       </Link>
       <div className="d-flex flex-column p-2 col-md-7 mt-2">
