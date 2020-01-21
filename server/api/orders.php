@@ -22,7 +22,12 @@ if ($request['method'] === 'POST') {
   $stmt = mysqli_prepare($link, "INSERT INTO `orders` (`cartId`, `name`, `shippingAddress`, `creditCard`, `createdAt`) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)");
   mysqli_stmt_bind_param($stmt, "issi", $cartId, $order['name'], $order['shippingAddress'], $order['creditCard']);
   mysqli_stmt_execute($stmt);
+  $insertId = mysqli_insert_id($link);
+  unset($_SESSION['cartId']);
 
+  $order['id'] = $insertId;
+  $response['body'] = $order;
+  send($response);
 }
 
 ?>
