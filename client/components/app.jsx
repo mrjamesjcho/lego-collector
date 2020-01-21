@@ -18,7 +18,9 @@ export default class App extends React.Component {
       featured: [],
       productAdded: null,
       cart: [],
-      cartTotal: null
+      cartTotal: null,
+      order: [],
+      orderTotal: null
     };
     this.addCartItem = this.addCartItem.bind(this);
     this.clearProductAdded = this.clearProductAdded.bind(this);
@@ -167,7 +169,9 @@ export default class App extends React.Component {
       .then(data => {
         this.setState({
           cart: [],
-          cartTotal: newCartTotal
+          cartTotal: null,
+          order: [...this.state.cart],
+          orderTotal: this.state.cartTotal
         });
       });
   }
@@ -213,7 +217,7 @@ export default class App extends React.Component {
             render={props => <Checkout {...props} cartItems={this.state.cart} cartTotal={this.state.cartTotal} onPlaceOrder={this.placeOrder} /> } />
           <Route
             path="/order"
-            render={props => <OrderSummary {...props} orderItems={this.state.cart} orderTotal={this.state.cartTotal} /> } />
+            render={props => <OrderSummary {...props} orderItems={this.state.order} orderTotal={this.state.orderTotal} /> } />
         </Switch>
         {this.renderProductAddedModal()}
       </Router>
