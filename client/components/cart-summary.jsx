@@ -50,7 +50,7 @@ export default class CartSummary extends React.Component {
       <div className="cartContainer container mb-5">
         <div className="continueShoppingContainer pb-2 ml-3">
           <Link to='/products' className='continueShoppingLink'>
-            &lt; <span className="continueShopping">continue shopping</span>
+            &lt; <div className="continueShopping">continue shopping</div>
           </Link>
         </div>
         <h1 className="cartHeader ml-3">My Cart</h1>
