@@ -13,7 +13,7 @@ export default class ProductDetails extends React.Component {
     this.handleThumbnailClick = this.handleThumbnailClick.bind(this);
   }
   getProducts(id) {
-    fetch('/api/products.php?id=' + id)
+    fetch('/api/products?id=' + id)
       .then(response => response.json())
       .then(data => {
         this.setState({ product: data[0], imgSelected: data[0].images[0] });
