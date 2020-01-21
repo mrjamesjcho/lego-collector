@@ -27,7 +27,7 @@ export default function Carousel(props) {
     );
   });
   return (
-    <div className="carouselContainer px-3 my-3">
+    <div className="carouselContainer px-3 my-3 d-sm-block d-none">
       <div id="carouselCaptions" className="carousel slide" data-ride="carousel">
         <ol className="carousel-indicators">
           {indicatorElements}
