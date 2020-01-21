@@ -1,65 +1,33 @@
 <?php
 
 if ($request['method'] === 'POST') {
-  http_response_code(404);
-  print(json_encode([
-    'error' => 'Not Found',
-    'message' => 'Cannot $method /api/orders.php'
-  ]));
-} else if (empty($_SESSION['cartId'])) {
-  http_response_code(400);
-  print(json_encode([
-    'error' => 'Not Found',
-    'message' => 'active shopping cart not found'
-  ]));
-} else {
-  $order = getBodyData();
-  $order = json_decode($order, true);
-  if (empty($order['name'])) {
-    http_response_code(400);
-    print(json_encode([
-      'error' => 'Not Found',
-      'message' => 'name not provided in order'
-    ]));
-  } else if (empty($order['creditCard'])) {
-    http_response_code(400);
-    print(json_encode([
-      'error' => 'Not Found',
-      'message' => 'credit card not provided in order'
-    ]));
-  } else if (empty($order['shippingAddress'])){
-    http_response_code(400);
-    print(json_encode([
-      'error' => 'Not Found',
-      'message' => 'shipping address not provided in order'
-    ]));
-  } else {
-    $cartId = $_SESSION['cartId'];
-    $name = $order['name'];
-    $shippingAddress = $order['shippingAddress'];
-    $creditCard = $order['creditCard'];
 
-    $transactionResult = mysqli_query($conn, 'START TRANSACTION');
-
-    if (!$transactionResult) {
-      throw new Exception(mysqli_error($conn));
-    }
-
-    $query = "INSERT INTO `orders` SET `cartId` = $cartId, `name` = $name, `shippingAddress` = $shippingAddress, `createdAt` = NOW()";
-
-    $result = mysqli_query($conn, $query);
-
-    if (!$result) {
-      throw new Exception(mysqli_error($conn));
-    }
-    if (mysqli_affected_rows($conn) < 1) {
-      mysqli_query($conn, 'ROLLBACK');
-      throw new Exception('there was an error adding to cart');
-    }
-    mysqli_query($conn, 'COMMIT');
-    http_response_code(201);
-    print($order);
+  if (!isset($_SESSION['cartId'])) {
+    throw new ApiError('active shopping cart required', 400);
   }
+  $cartId = $_SESSION['cartId'];
+
+  $order = $request['body'];
+  if (!isset($order['name'])) {
+    throw new ApiError('valid name required', 400);
+  }
+  if (!isset($order['shippingAddress'])) {
+    throw new ApiError('valid shipping address required', 400);
+  }
+  if (!isset($order['creditCard'])) {
+    throw new ApiError('valid credit card required', 400);
+  }
+
+  $link = get_db_link();
+  $stmt = mysqli_prepare($link, "INSERT INTO `orders` (`cartId`, `name`, `shippingAddress`, `creditCard`, `createdAt`) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)");
+  mysqli_stmt_bind_param($stmt, "issi", $cartId, $order['name'], $order['shippingAddress'], $order['creditCard']);
+  mysqli_stmt_execute($stmt);
+  $insertId = mysqli_insert_id($link);
+  unset($_SESSION['cartId']);
+
+  $order['id'] = $insertId;
+  $response['body'] = $order;
+  send($response);
 }
 
 ?>

@@ -7,9 +7,9 @@ switch ($request['path']) {
     readfile('index.html');
     exit;
   case '/api/health-check':
-    require_once "..${request['path']}.php";
+    require_once "../api/health-check.php";
   case '/api/products':
-    require_once "..${request['path']}.php";
+    require_once "../api/products.php";
   case '/api/cart':
     require_once "../api/cart.php";
   case '/api/orders':
