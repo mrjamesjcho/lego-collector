@@ -55,7 +55,7 @@ Try the application live at [https://lego-collector.mrjamesjcho.com](https://leg
 1. Import the example database to MySQL.
 
     ```shell
-
+    npm run db:import
     ```
 
 1. Start the project. Once started you can view the application by opening http://localhost:3000 in your browser.
