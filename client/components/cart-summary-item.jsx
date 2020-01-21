@@ -11,7 +11,7 @@ export default function CartSummaryItem(props) {
       </Link>
       <div className="d-flex flex-column p-2 col-md-7 mt-2">
         <Link to={`/product/${props.item.id}`} >
-          <h4 className="cartItemName">{props.item.name}</h4>
+          <h5 className="cartItemName">{props.item.name}</h5>
         </Link>
         <div className="cartItemPriceQtyContainer d-flex justify-content-between mt-3 pr-3">
           <div className="qtyContainer d-flex justify-content-center align-items-center mr-4">

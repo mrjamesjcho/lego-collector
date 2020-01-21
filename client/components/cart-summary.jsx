@@ -58,7 +58,7 @@ export default class CartSummary extends React.Component {
           {this.renderCartItems()}
         </div>
         <div className="cartTotalCheckoutContainer d-flex">
-          <h1 className="cartTotal my-auto ml-3">Item Total: {'$' + (this.props.cartTotal / 100)}</h1>
+          <h5 className="cartTotal my-auto ml-3">Item Total: {'$' + (this.props.cartTotal / 100)}</h5>
           <Link
             to='/checkout'
             className='ml-auto' >
