@@ -1,18 +1,12 @@
 <?php
 
 if ($request['method'] === 'POST') {
-  http_response_code(404);
-  print(json_encode([
-    'error' => 'Not Found',
-    'message' => 'Cannot $method /api/orders.php'
-  ]));
-} else if (empty($_SESSION['cartId'])) {
-  http_response_code(400);
-  print(json_encode([
-    'error' => 'Not Found',
-    'message' => 'active shopping cart not found'
-  ]));
-} else {
+  if (!isset($_SESSION['cartId'])) {
+    throw new ApiError('active shopping cart required', 400);
+  }
+
+
+}  else {
   $order = getBodyData();
   $order = json_decode($order, true);
   if (empty($order['name'])) {
