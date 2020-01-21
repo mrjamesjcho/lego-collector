@@ -19,7 +19,13 @@ export default function CartSummaryItem(props) {
             <div className="qtyChange d-flex justify-content-center align-items-center border rounded overflow-hidden">
               <h6
                 className="qtyDec btn btn-light d-flex justify-content-center align-items-center h-100 border-right rounded-0 p-0 m-0"
-                onClick={() => props.onUpdateCartItem(props.item, -1)} >
+                onClick={() => {
+                  if (props.item.count === 1) {
+                    props.onDeleteCartItem(props.item);
+                  } else {
+                    props.onUpdateCartItem(props.item, -1);
+                  }
+                }} >
                 &#8722;
               </h6>
               <h6 className="qty text-center h-100 m-0">{props.item.count}</h6>
