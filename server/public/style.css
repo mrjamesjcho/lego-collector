@@ -7,6 +7,7 @@ a, a:hover {
 }
 .continueShopping:hover, .productNameContainer:hover, .cartItemName:hover {
   text-decoration: underline;
+  color: #007bff;
 }
 .item-thumbnail{
   width: 80px;
@@ -24,9 +25,6 @@ a, a:hover {
 .shoppingCartContainer{
   cursor: pointer;
 }
-.cartTotal{
-  font-size: 2rem;
-}
 .productDetailsImgInfoContainer {
   height: 380px;
 }
@@ -37,7 +35,7 @@ a, a:hover {
 .productImg:hover, .cartItemImg:hover {
   opacity: .7;
 }
-.cartItemContainer, .orderItemContainer {
+.cartItemImgContainer, .orderItemContainer {
   height: 150px;
 }
 .qty {
