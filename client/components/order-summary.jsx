@@ -21,7 +21,7 @@ export default function OrderSummary(props) {
       <div className="orderItems d-flex-column border-top">
         {renderOrderItems()}
       </div>
-      <h5 className="orderTotal">{`Total: $${props.orderTotal / 100}`}</h5>
+      <h5 className="orderTotal ml-3">{`Total: $${props.orderTotal / 100}`}</h5>
     </div>
   );
 }
