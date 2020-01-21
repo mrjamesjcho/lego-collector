@@ -128,7 +128,7 @@ export default class Checkout extends React.Component {
       elements.push(
         <div key={item.id} className="checkoutCartItem d-flex p-3 border-top">
           <div className="checkoutCartItemImgContainer d-flex justify-content-center">
-            <img className="checkoutCartItemImg" src={item.images} alt={item.name} />
+            <img className="checkoutCartItemImg" src={item.image} alt={item.name} />
           </div>
           <div className="ml-3">
             <div className="checkoutCartItemName">

@@ -145,7 +145,7 @@ export default class App extends React.Component {
         const newCartTotal = this.getCartTotal(newCart);
         this.setState({
           cart: newCart,
-          cartTotal: newCartTotal
+          cartTotal: 0
         });
       });
   }
@@ -164,7 +164,12 @@ export default class App extends React.Component {
     };
     fetch('/api/orders', data)
       .then(res => res.json())
-      .then(data => {});
+      .then(data => {
+        this.setState({
+          cart: [],
+          cartTotal: newCartTotal
+        });
+      });
   }
 
   numOfItemsInCart() {
