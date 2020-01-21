@@ -21,9 +21,6 @@ if ($request['method'] === 'POST') {
 
     $priceQuery = "SELECT `price` FROM `products` WHERE `id` = $productId";
     $result = mysqli_query($link, $priceQuery);
-    if (!$result) {
-      throw new ApiError(mysqli_error($link));
-    }
     if (mysqli_num_rows($result) === 0) {
       throw new ApiError('invalid productId: '.$productId, 400);
     }
@@ -33,9 +30,6 @@ if ($request['method'] === 'POST') {
     if (!isset($_SESSION['cartId'])) {
       $newCartQuery = "INSERT INTO `carts` SET `createdAt` = CURRENT_TIMESTAMP";
       $newCartResult = mysqli_query($link, $newCartQuery);
-      if(!$newCartResult) {
-        throw new ApiError(mysqli_error($link));
-      }
       $cartId = mysqli_insert_id($link);
       $_SESSION['cartId'] = $cartId;
     } else {
@@ -54,9 +48,6 @@ if ($request['method'] === 'POST') {
                       WHERE c.`cartItemId` = $cartItemId";
 
     $result = mysqli_query($link, $responseQuery);
-    if (!$result) {
-      throw new ApiError(mysqli_error($link));
-    }
     $cartItemData = mysqli_fetch_assoc($result);
     $cartItemData['id'] = (int) $cartItemData['id'];
     $cartItemData['productId'] = (int) $cartItemData['productId'];
@@ -90,9 +81,6 @@ if ($request['method'] === 'PATCH') {
 
   $updateQuery = "UPDATE `cartItems` SET `count` = `count` + $incDec  WHERE `cartItems`.`cartItemId` = $cartItemId";
   $updateResult = mysqli_query($link, $updateQuery);
-  if (!$updateResult) {
-    throw new ApiError(mysqli_error($link));
-  }
   if (mysqli_affected_rows($link) < 1) {
     throw new ApiError('error updating cart', 400);
   }
@@ -105,9 +93,6 @@ if ($request['method'] === 'PATCH') {
                       WHERE c.`cartItemId` = $cartItemId";
 
   $result = mysqli_query($link, $responseQuery);
-  if (!$result) {
-    throw new ApiError(mysqli_error($link));
-  }
   $cartItemData = mysqli_fetch_assoc($result);
   $cartItemData['id'] = (int) $cartItemData['id'];
   $cartItemData['productId'] = (int) $cartItemData['productId'];
@@ -143,10 +128,6 @@ function sendCart($link, $cartId, &$response) {
                   JOIN products AS p ON c.`productId` = p.id
                   WHERE c.cartId = $cartId";
   $result = mysqli_query($link, $cartQuery);
-
-  if (!$result) {
-    throw new ApiError(mysqli_error($link));
-  }
   $cartItems = [];
   while ($row = mysqli_fetch_assoc($result)) {
     $row['id'] = (int) $row['id'];

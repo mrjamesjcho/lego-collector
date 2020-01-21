@@ -20,10 +20,6 @@ if ($request['method'] === 'GET') {
               " GROUP BY p.`id`";
 
   $result = mysqli_query($link, $query);
-
-  if (!$result) {
-    throw new ApiError(mysqli_error($link));
-  }
   if (mysqli_num_rows($result) === 0) {
     throw new ApiError('Invalid ID: ' . $productId, 404);
   }
