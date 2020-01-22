@@ -57,7 +57,6 @@ if ($request['method'] === 'POST') {
 
     $result = mysqli_query($link, $responseQuery);
     $cartItemData = mysqli_fetch_assoc($result);
-    $cartItemData['cartItemId'] = $cartItemId;
     $cartItemData['id'] = (int) $cartItemData['id'];
     $cartItemData['productId'] = (int) $cartItemData['productId'];
     $cartItemData['count'] = (int) $cartItemData['count'];

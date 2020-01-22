@@ -33,6 +33,7 @@ export default class App extends React.Component {
     fetch('/api/products')
       .then(res => res.json())
       .then(data => {
+        console.log('products: ', data);
         const featured = data.filter(product => product.featured);
         this.setState({ products: data, featured: featured });
       });
@@ -43,6 +44,7 @@ export default class App extends React.Component {
     fetch('/api/cart')
       .then(request => request.json())
       .then(data => {
+        console.log('cart: ', data);
         data.map(cartItem => {
           cartTotal += cartItem.count * cartItem.price;
         });
