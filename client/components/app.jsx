@@ -6,11 +6,11 @@ import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import Checkout from './checkout';
-import AddCartConfirm from './add-cart-confirm';
 import OrderSummary from './order-summary';
+import ConfirmModal from './modal/confirm-modal';
+import AddCartConfirm from './modal/add-cart-confirm';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import confirmModal from './confirm-modal';
-import ConfirmModal from './confirm-modal';
+
 
 export default class App extends React.Component {
   constructor(props) {
