@@ -6,7 +6,7 @@ export default function ProductListItem(props) {
   return (
     <div className="productContainer col-lg-3 col-md-4 col-sm-6 col-12 d-flex flex-column p-1 border-right border-bottom" >
       <Link to={`/product/${props.product.id}`} className="productImgContainer d-flex overflow-hidden p-2">
-        <img src={props.product.images[0]} className="productImg m-auto" />
+        <img src={`/images/${props.product.images[0]}`} className="productImg m-auto" />
       </Link>
       <div className="productNamePriceContainer d-flex flex-column flex-fill p-2">
         <Link to={`/product/${props.product.id}`} className="productNameContainer">
