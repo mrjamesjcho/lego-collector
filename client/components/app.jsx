@@ -33,6 +33,7 @@ export default class App extends React.Component {
     fetch('/api/products')
       .then(res => res.json())
       .then(data => {
+        console.log('products: ', data);
         const featured = data.filter(product => product.featured);
         this.setState({ products: data, featured: featured });
       });
@@ -43,6 +44,7 @@ export default class App extends React.Component {
     fetch('/api/cart')
       .then(request => request.json())
       .then(data => {
+        console.log('cart: ', data);
         data.map(cartItem => {
           cartTotal += cartItem.count * cartItem.price;
         });
@@ -75,19 +77,17 @@ export default class App extends React.Component {
     fetch('/api/cart', data)
       .then(res => res.json())
       .then(data => {
+        console.log('add response: ', data);
         var sameItemIndex = null;
         const newCart = this.state.cart.map((item, index) => {
-          if (item.id === product.id) {
+          if (item.productId === product.id) {
             item.count++;
             sameItemIndex = index;
           }
           return item;
         });
         if (sameItemIndex === null) {
-          const newCartProduct = { ...product };
-          newCartProduct.count = 1;
-          newCartProduct.image = product.images[0];
-          newCart.push(newCartProduct);
+          newCart.push(data);
         }
         const newCartTotal = this.getCartTotal(newCart);
         this.setState({
@@ -119,6 +119,7 @@ export default class App extends React.Component {
     fetch('/api/cart', data)
       .then(res => res.json())
       .then(data => {
+        console.log('update response: ', data);
         let newCartTotal = this.state.cartTotal;
         const newCart = this.state.cart.map(item => {
           if (item.id === cartItem.id) {
@@ -141,19 +142,19 @@ export default class App extends React.Component {
       headers: { 'Content-Type': 'application/json' }
     };
     fetch('/api/cart', data)
-      .then(res => {})
+      .then(res => res.json())
       .then(data => {
+        console.log('delete response: ', data);
         const newCart = this.state.cart.filter(item => item.id !== cartItem.id);
         const newCartTotal = this.getCartTotal(newCart);
         this.setState({
           cart: newCart,
-          cartTotal: 0
+          cartTotal: newCartTotal
         });
       });
   }
 
   placeOrder(orderInfo) {
-    console.log('orderInfo: ', orderInfo);
     const orderData = {
       name: orderInfo.name,
       shippingAddress: orderInfo.address1,
@@ -167,6 +168,7 @@ export default class App extends React.Component {
     fetch('/api/orders', data)
       .then(res => res.json())
       .then(data => {
+        console.log('order response: ', data);
         this.setState({
           cart: [],
           cartTotal: null,
