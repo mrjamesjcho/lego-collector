@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles/thumbnail-carousel.css';
+import '../styles/thumbnail-carousel.css';
 
 export default class ThumbnailCarousel extends React.Component {
   constructor(props) {
