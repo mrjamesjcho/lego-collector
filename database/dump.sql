@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 21, 2020 at 11:01 PM
+-- Generation Time: Jan 22, 2020 at 05:57 PM
 -- Server version: 5.7.27-0ubuntu0.18.04.1
 -- PHP Version: 7.2.19-0ubuntu0.18.04.2
 
@@ -34,7 +34,16 @@ CREATE TABLE `cartItems` (
   `added` datetime NOT NULL,
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `cartId` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cartItems`
+--
+
+INSERT INTO `cartItems` (`cartItemId`, `productId`, `count`, `price`, `added`, `updated`, `cartId`) VALUES
+(10, 8, 1, 14999, '2020-01-22 01:39:37', '2020-01-22 01:39:37', 1),
+(11, 2, 2, 99900, '2020-01-22 05:01:49', '2020-01-22 07:24:58', 1),
+(20, 3, 2, 69999, '2020-01-22 07:26:46', '2020-01-22 07:39:54', 1);
 
 -- --------------------------------------------------------
 
@@ -45,7 +54,14 @@ CREATE TABLE `cartItems` (
 CREATE TABLE `carts` (
   `cartId` int(11) UNSIGNED NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`cartId`, `createdAt`) VALUES
+(1, '2020-01-22 01:11:27');
 
 -- --------------------------------------------------------
 
@@ -56,11 +72,11 @@ CREATE TABLE `carts` (
 CREATE TABLE `orders` (
   `orderId` int(11) NOT NULL,
   `cartId` int(11) NOT NULL,
-  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `creditCard` varchar(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `shippingAddress` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `creditCard` varchar(24) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shippingAddress` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -75,7 +91,7 @@ CREATE TABLE `products` (
   `shortDescription` text CHARACTER SET utf8 NOT NULL,
   `longDescription` text CHARACTER SET utf8 NOT NULL,
   `featured` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `products`
@@ -105,7 +121,7 @@ CREATE TABLE `product_images` (
   `id` mediumint(9) NOT NULL,
   `url` varchar(100) CHARACTER SET utf8 NOT NULL,
   `product_id` mediumint(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `product_images`
@@ -288,12 +304,12 @@ ALTER TABLE `product_images`
 -- AUTO_INCREMENT for table `cartItems`
 --
 ALTER TABLE `cartItems`
-  MODIFY `cartItemId` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `cartItemId` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `cartId` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `cartId` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `orders`
 --

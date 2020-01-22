@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CartSummaryItem from './cart-summary-item';
+import ConfirmModal from './modal/confirm-modal';
+import DeleteConfirm from './modal/delete-confirm';
 import './styles/cart.css';
-import DeleteConfirm from './delete-confirm';
 
 export default class CartSummary extends React.Component {
   constructor(props) {
@@ -38,10 +39,12 @@ export default class CartSummary extends React.Component {
   renderDeleteConfirmModal() {
     if (this.state.itemToRemove) {
       return (
-        <DeleteConfirm
-          item={this.state.itemToRemove}
-          onCancelDeleteCartItem={this.handleDeleteCartItem}
-          onDeleteCartItem={this.props.onDeleteCartItem} />
+        <ConfirmModal>
+          <DeleteConfirm
+            item={this.state.itemToRemove}
+            onCancelDeleteCartItem={this.handleDeleteCartItem}
+            onDeleteCartItem={this.props.onDeleteCartItem} />
+        </ConfirmModal>
       );
     }
   }
@@ -50,7 +53,7 @@ export default class CartSummary extends React.Component {
       <div className="cartContainer container mb-5">
         <div className="continueShoppingContainer pb-2 ml-3">
           <Link to='/products' className='continueShoppingLink'>
-            &lt; <div className="continueShopping">continue shopping</div>
+            &lt; <span className="continueShopping">continue shopping</span>
           </Link>
         </div>
         <h1 className="cartHeader ml-3">My Cart</h1>
