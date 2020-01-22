@@ -36,19 +36,28 @@ if ($request['method'] === 'POST') {
       $cartId = $_SESSION['cartId'];
     }
 
+    $transactionResult = mysqli_query($link, 'START TRANSACTION');
+
     $insertQuery = "INSERT INTO `cartItems` SET `price` = $productPrice, `count` = 1, `productId` = $productId, `cartId` = $cartId, `added` = NOW() ON DUPLICATE KEY UPDATE `count`=`count` + 1";
     $insertResult = mysqli_query($link, $insertQuery);
-    $cartItemId = mysqli_insert_id($link);
 
-    $responseQuery = "SELECT c.`cartItemId` AS `id`, c.`productId`, `products`.`name`, `products`.`price`, c.`count`,
+    if (mysqli_affected_rows($link) < 1) {
+      mysqli_query($link, 'ROLLBACK');
+      throw new ApiError('error adding to cart', 400);
+    }
+    $cartItemId = mysqli_insert_id($link);
+    mysqli_query($link, 'COMMIT');
+
+    $responseQuery = "SELECT c.`cartItemId` AS `id`, c.`productId`, p.`name`, p.`price`, c.`count`,
                       (SELECT i.url FROM product_images AS i WHERE c.`productId` = i.product_id LIMIT 1) AS image,
-                      `products`.`shortDescription`
+                      p.`shortDescription`
                       FROM cartItems AS c
-                      JOIN products ON c.`productId` = `products`.`id`
+                      JOIN products AS p ON c.`productId` = p.`id`
                       WHERE c.`cartItemId` = $cartItemId";
 
     $result = mysqli_query($link, $responseQuery);
     $cartItemData = mysqli_fetch_assoc($result);
+    $cartItemData['cartItemId'] = $cartItemId;
     $cartItemData['id'] = (int) $cartItemData['id'];
     $cartItemData['productId'] = (int) $cartItemData['productId'];
     $cartItemData['count'] = (int) $cartItemData['count'];
@@ -56,12 +65,10 @@ if ($request['method'] === 'POST') {
     $response['body'] = $cartItemData;
     send($response);
   }
-
-  throw new ApiError('valid productId is required', 400);
-
 }
 
 if ($request['method'] === 'PATCH') {
+
   if (!isset($request['body']['cartItemId'])) {
     throw new ApiError('cart item id required', 400);
   }
@@ -79,11 +86,14 @@ if ($request['method'] === 'PATCH') {
   $cartId = $_SESSION['cartId'];
   $link = get_db_link();
 
+  $transactionResult = mysqli_query($link, 'START TRANSACTION');
   $updateQuery = "UPDATE `cartItems` SET `count` = `count` + $incDec  WHERE `cartItems`.`cartItemId` = $cartItemId";
   $updateResult = mysqli_query($link, $updateQuery);
   if (mysqli_affected_rows($link) < 1) {
+    mysqli_query($link, 'ROLLBACK');
     throw new ApiError('error updating cart', 400);
   }
+  mysqli_query($link, 'COMMIT');
 
   $responseQuery = "SELECT c.`cartItemId` AS `id`, c.`productId`, `products`.`name`, `products`.`price`, c.`count`,
                       (SELECT i.url FROM product_images AS i WHERE c.`productId` = i.product_id LIMIT 1) AS image,
@@ -91,7 +101,6 @@ if ($request['method'] === 'PATCH') {
                       FROM cartItems AS c
                       JOIN products ON c.`productId` = `products`.`id`
                       WHERE c.`cartItemId` = $cartItemId";
-
   $result = mysqli_query($link, $responseQuery);
   $cartItemData = mysqli_fetch_assoc($result);
   $cartItemData['id'] = (int) $cartItemData['id'];
@@ -100,7 +109,6 @@ if ($request['method'] === 'PATCH') {
   $cartItemData['price'] = (int) $cartItemData['price'];
   $response['body'] = $cartItemData;
   send($response);
-
 }
 
 if ($request['method'] === 'DELETE') {

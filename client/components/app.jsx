@@ -75,9 +75,10 @@ export default class App extends React.Component {
     fetch('/api/cart', data)
       .then(res => res.json())
       .then(data => {
+        console.log('add response: ', data);
         var sameItemIndex = null;
         const newCart = this.state.cart.map((item, index) => {
-          if (item.id === product.id) {
+          if (item.productId === product.id) {
             item.count++;
             sameItemIndex = index;
           }
@@ -119,6 +120,7 @@ export default class App extends React.Component {
     fetch('/api/cart', data)
       .then(res => res.json())
       .then(data => {
+        console.log('update response: ', data);
         let newCartTotal = this.state.cartTotal;
         const newCart = this.state.cart.map(item => {
           if (item.id === cartItem.id) {
@@ -143,6 +145,7 @@ export default class App extends React.Component {
     fetch('/api/cart', data)
       .then(res => {})
       .then(data => {
+        console.log('delete response: ', data);
         const newCart = this.state.cart.filter(item => item.id !== cartItem.id);
         const newCartTotal = this.getCartTotal(newCart);
         this.setState({
@@ -153,7 +156,6 @@ export default class App extends React.Component {
   }
 
   placeOrder(orderInfo) {
-    console.log('orderInfo: ', orderInfo);
     const orderData = {
       name: orderInfo.name,
       shippingAddress: orderInfo.address1,
@@ -167,6 +169,7 @@ export default class App extends React.Component {
     fetch('/api/orders', data)
       .then(res => res.json())
       .then(data => {
+        console.log('order response: ', data);
         this.setState({
           cart: [],
           cartTotal: null,
