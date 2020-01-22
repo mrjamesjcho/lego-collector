@@ -87,10 +87,7 @@ export default class App extends React.Component {
           return item;
         });
         if (sameItemIndex === null) {
-          const newCartProduct = { ...product };
-          newCartProduct.count = 1;
-          newCartProduct.image = product.images[0];
-          newCart.push(newCartProduct);
+          newCart.push(data);
         }
         const newCartTotal = this.getCartTotal(newCart);
         this.setState({
