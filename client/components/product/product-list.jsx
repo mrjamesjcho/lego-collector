@@ -1,8 +1,8 @@
 import React from 'react';
-import Carousel from './carousel';
-import ProductListItem from './product-list-item';
-import './styles/product-list.css';
-import './styles/add-cart-confirm.css';
+import Carousel from '../carousel/carousel';
+import ProductListItem from '../product/product-list-item';
+import '../styles/product-list.css';
+import '../styles/add-cart-confirm.css';
 
 export default function ProductList(props) {
   const elements = props.products.map(product => {

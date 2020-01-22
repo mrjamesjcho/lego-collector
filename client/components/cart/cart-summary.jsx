@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CartSummaryItem from './cart-summary-item';
-import ConfirmModal from './modal/confirm-modal';
-import DeleteConfirm from './modal/delete-confirm';
-import './styles/cart.css';
+import ConfirmModal from '../modal/confirm-modal';
+import DeleteConfirm from '../modal/delete-confirm';
+import '../styles/cart.css';
 
 export default class CartSummary extends React.Component {
   constructor(props) {
@@ -36,6 +36,18 @@ export default class CartSummary extends React.Component {
     }
     return elements;
   }
+  renderCheckoutButton() {
+    if (this.props.cartItems.length) {
+      return (
+        <Link
+          to='/checkout'
+          className='ml-auto' >
+          <button className="checkoutBtn btn btn-warning">Proceed to checkout</button>
+        </Link>
+      );
+    }
+    return null;
+  }
   renderDeleteConfirmModal() {
     if (this.state.itemToRemove) {
       return (
@@ -62,11 +74,7 @@ export default class CartSummary extends React.Component {
         </div>
         <div className="cartTotalCheckoutContainer d-flex">
           <h4 className="cartTotal my-auto ml-3">Item Total: {'$' + (this.props.cartTotal / 100)}</h4>
-          <Link
-            to='/checkout'
-            className='ml-auto' >
-            <button className="checkoutBtn btn btn-warning">Proceed to checkout</button>
-          </Link>
+          {this.renderCheckoutButton()}
         </div>
         {this.renderDeleteConfirmModal()}
       </div>

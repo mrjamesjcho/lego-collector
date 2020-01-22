@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ThumbnailCarousel from './thumbnail-carousel';
+import ThumbnailCarousel from '../carousel/thumbnail-carousel';
 
 export default class ProductDetails extends React.Component {
   constructor(props) {

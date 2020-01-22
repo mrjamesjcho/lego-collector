@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './styles/carousel.css';
+import '../styles/carousel.css';
 
 export default function Carousel(props) {
   const indicatorElements = [];
