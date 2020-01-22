@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CartSummaryItem from './cart-summary-item';
-import ConfirmModal from './modal/confirm-modal';
-import DeleteConfirm from './modal/delete-confirm';
-import './styles/cart.css';
+import ConfirmModal from '../modal/confirm-modal';
+import DeleteConfirm from '../modal/delete-confirm';
+import '../styles/cart.css';
 
 export default class CartSummary extends React.Component {
   constructor(props) {

@@ -1,15 +1,15 @@
 /* eslint-disable */
 
 import React from 'react';
-import Header from './header';
-import ProductList from './product-list';
-import ProductDetails from './product-details';
-import CartSummary from './cart-summary';
-import Checkout from './checkout';
-import OrderSummary from './order-summary';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import Header from './header/header';
+import ProductList from './product/product-list';
+import ProductDetails from './product/product-details';
+import CartSummary from './cart/cart-summary';
+import Checkout from './checkout/checkout';
+import OrderSummary from './checkout/order-summary';
 import ConfirmModal from './modal/confirm-modal';
 import AddCartConfirm from './modal/add-cart-confirm';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 
 export default class App extends React.Component {

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './styles/checkout.css';
+import '../styles/checkout.css';
 
 export default class Checkout extends React.Component {
   constructor(props) {
