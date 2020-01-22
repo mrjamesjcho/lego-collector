@@ -149,7 +149,7 @@ export default class App extends React.Component {
         const newCartTotal = this.getCartTotal(newCart);
         this.setState({
           cart: newCart,
-          cartTotal: 0
+          cartTotal: newCartTotal
         });
       });
   }
