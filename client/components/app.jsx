@@ -9,6 +9,8 @@ import Checkout from './checkout';
 import AddCartConfirm from './add-cart-confirm';
 import OrderSummary from './order-summary';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import confirmModal from './confirm-modal';
+import ConfirmModal from './confirm-modal';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -190,9 +192,11 @@ export default class App extends React.Component {
   renderProductAddedModal() {
     if (this.state.productAdded) {
       return (
-        <AddCartConfirm
-          product={this.state.productAdded}
-          clearProductAdded={this.clearProductAdded} />
+        <ConfirmModal>
+          <AddCartConfirm
+            product={this.state.productAdded}
+            clearProductAdded={this.clearProductAdded} />
+        </ConfirmModal>
       );
     }
   }

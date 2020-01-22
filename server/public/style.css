@@ -52,3 +52,6 @@ a, a:hover {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.modalBackground {
+  background-color: rgba(128, 128, 128, 0.4);
+}
