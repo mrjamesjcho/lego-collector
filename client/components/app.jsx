@@ -143,7 +143,7 @@ export default class App extends React.Component {
       headers: { 'Content-Type': 'application/json' }
     };
     fetch('/api/cart', data)
-      .then(res => {})
+      .then(res => res.json())
       .then(data => {
         console.log('delete response: ', data);
         const newCart = this.state.cart.filter(item => item.id !== cartItem.id);
