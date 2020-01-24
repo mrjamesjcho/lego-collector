@@ -29,9 +29,11 @@ export default class ProductDetails extends React.Component {
     if (this.state.product) {
       return (
         <div className="productDetailsContainer container">
-          <Link to="/products" className="continueShoppingLink ml-3" >
-            &lt; <span className="continueShopping">continue shopping</span>
-          </Link>
+          <div className="continueShoppingContainer pb-2 ml-3">
+            <Link to='/products' className='continueShoppingLink'>
+              &lt; <span className="continueShopping">continue shopping</span>
+            </Link>
+          </div>
           <div className="productDetailsImgInfoContainer row px-3">
             <div className="productDetailsImgContainer col-lg-7 d-flex align-items-center mb-2">
               <ThumbnailCarousel
