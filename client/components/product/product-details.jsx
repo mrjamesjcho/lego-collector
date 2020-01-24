@@ -28,12 +28,14 @@ export default class ProductDetails extends React.Component {
   render() {
     if (this.state.product) {
       return (
-        <div className='productDetailsContainer container'>
-          <Link to='/products' className='continueShoppingLink' >
-            &lt; <span className="continueShopping">continue shopping</span>
-          </Link>
-          <div className="productDetailsImgInfoContainer d-flex">
-            <div className="productDetailsImageContainer col-7 d-flex align-items-center h-100 ">
+        <div className="productDetailsContainer container">
+          <div className="continueShoppingContainer pb-2 ml-3">
+            <Link to='/products' className='continueShoppingLink'>
+              &lt; <span className="continueShopping">continue shopping</span>
+            </Link>
+          </div>
+          <div className="productDetailsImgInfoContainer row px-3">
+            <div className="productDetailsImgContainer col-lg-7 d-flex align-items-center mb-2">
               <ThumbnailCarousel
                 thumbnails={this.state.product.images}
                 imgSelected={this.state.imgSelected}
@@ -42,12 +44,12 @@ export default class ProductDetails extends React.Component {
                 <img src={`/images/${this.state.imgSelected}`} className="productDetailsImg rounded m-auto p-2" />
               </div>
             </div>
-            <div className="productDetailsInfoContainer col-5 d-flex-column">
+            <div className="productDetailsInfoContainer col-lg-5 d-flex-column">
               <h1 className="productName">{this.state.product.name}</h1>
               <h3 className="price">{'$' + (this.state.product.price / 100)}</h3>
               <div className="productShortDescription mt-2">{this.state.product.shortDescription}</div>
               <div className="buttonContainer d-flex">
-                <a href='#' className='addToCartBtn btn btn-warning mt-3' onClick={() => this.props.onAddCartItem(this.state.product)}>Add to Cart</a>
+                <a href="#" className="addToCartBtn btn btn-warning mt-3" onClick={() => this.props.onAddCartItem(this.state.product)}>Add to Cart</a>
               </div>
             </div>
           </div>
