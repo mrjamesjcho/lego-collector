@@ -25,9 +25,9 @@ a, a:hover {
 .shoppingCartContainer{
   cursor: pointer;
 }
-.productDetailsImgInfoContainer {
+/* .productDetailsImgInfoContainer {
   height: 380px;
-}
+} */
 .productImg, .thumbnail > img,.productDetailsImg, .cartItemImg, .orderItemImg {
   max-width: 100%;
   max-height: 100%;
