@@ -33,7 +33,7 @@ export default class ProductDetails extends React.Component {
             &lt; <span className="continueShopping">continue shopping</span>
           </Link>
           <div className="productDetailsImgInfoContainer row">
-            <div className="productDetailsImageContainer col-lg-7 d-flex align-items-center h-100 ">
+            <div className="productDetailsImageContainer col-lg-7 d-flex align-items-center h-100 mb-2">
               <ThumbnailCarousel
                 thumbnails={this.state.product.images}
                 imgSelected={this.state.imgSelected}
