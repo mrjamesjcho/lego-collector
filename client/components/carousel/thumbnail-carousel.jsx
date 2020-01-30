@@ -4,12 +4,12 @@ import '../styles/thumbnail-carousel.css';
 export default class ThumbnailCarousel extends React.Component {
   constructor(props) {
     super(props);
-    this.scrollOffset = 74;
-    this.fourThumbnailHeight = 296;
+    this.scrollOffset = 59;
+    this.maxThumbnailHeight = 295;
     this.state = {
       thumbnails: props.thumbnails,
       thumbnailsOffset: 0,
-      maxOffset: this.fourThumbnailHeight - props.thumbnails.length * this.scrollOffset
+      maxOffset: this.maxThumbnailHeight - props.thumbnails.length * this.scrollOffset
     };
     this.handleThumbnailNavClick = this.handleThumbnailNavClick.bind(this);
   }
