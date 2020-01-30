@@ -35,7 +35,7 @@ export default class ProductDetails extends React.Component {
             </Link>
           </div>
           <div className="productDetailsImgInfoContainer row px-3">
-            <div className="productDetailsImgContainer col-lg-7 d-flex align-items-center mb-2">
+            <div className="productDetailsImgContainer col-lg-9 d-flex align-items-center mb-2">
               <ThumbnailCarousel
                 thumbnails={this.state.product.images}
                 imgSelected={this.state.imgSelected}
@@ -44,9 +44,9 @@ export default class ProductDetails extends React.Component {
                 <img src={`/images/${this.state.imgSelected}`} className="productDetailsImg rounded m-auto p-2" />
               </div>
             </div>
-            <div className="productDetailsInfoContainer col-lg-5 d-flex-column">
-              <h1 className="productName">{this.state.product.name}</h1>
-              <h3 className="price">{'$' + (this.state.product.price / 100)}</h3>
+            <div className="productDetailsInfoContainer col-lg-3 d-flex-column">
+              <h3 className="productName">{this.state.product.name}</h3>
+              <h5 className="price">{'$' + (this.state.product.price / 100)}</h5>
               <div className="productShortDescription mt-2">{this.state.product.shortDescription}</div>
               <div className="buttonContainer d-flex">
                 <a href="#" className="addToCartBtn btn btn-warning mt-3" onClick={() => this.props.onAddCartItem(this.state.product)}>Add to Cart</a>
