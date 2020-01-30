@@ -18,10 +18,14 @@
   opacity: .6;
 }
 .thumbnailNav {
-  min-height: 295px;
-  max-height: 295px;
+  min-height: 354px;
+  max-height: 354px;
 }
 .thumbnail > img {
   max-width: 60px;
   max-height: 45px;
+}
+.thumbnailPrev, .thumbnailNext {
+  min-height: 23px;
+  max-height: 23px;
 }
