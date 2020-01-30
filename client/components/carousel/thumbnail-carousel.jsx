@@ -5,7 +5,7 @@ export default class ThumbnailCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.scrollOffset = 59;
-    this.maxThumbnailHeight = 354;
+    this.maxThumbnailHeight = 295;
     this.state = {
       thumbnails: props.thumbnails,
       thumbnailsOffset: 0,

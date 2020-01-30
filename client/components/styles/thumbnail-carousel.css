@@ -18,8 +18,8 @@
   opacity: .6;
 }
 .thumbnailNav {
-  min-height: 354px;
-  max-height: 354px;
+  min-height: 295px;
+  max-height: 295px;
 }
 .thumbnail > img {
   max-width: 60px;
