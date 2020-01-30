@@ -15,7 +15,7 @@ export default function CartSummaryItem(props) {
         </Link>
         <div className="cartItemPriceQtyContainer d-flex justify-content-between mt-3 pr-3">
           <div className="qtyContainer d-flex justify-content-center align-items-center">
-            <h6 className="qtyTitle mr-2 my-0">Qty:</h6>
+            <h6 className="qtyTitle d-md-block d-none mr-2 my-0">Qty:</h6>
             <div className="qtyChange d-flex justify-content-center align-items-center border rounded overflow-hidden">
               <h6
                 className="qtyDec btn btn-light d-flex justify-content-center align-items-center h-100 border-right rounded-0 p-0 m-0"
