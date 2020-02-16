@@ -1,29 +1,60 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { Badge, makeStyles, Typography } from '@material-ui/core';
 import '../styles/header.css';
 
 export default function Header(props) {
+  const history = useHistory();
+
+  const classes = useStyles();
+
   return (
-    <div className='headerContainer w-100 mb-3'>
-      <div className='container d-flex align-items-center justify-content-between py-3 px-5'>
-        <Link
-          to={'/products'}
-          className="headerLogoTitleContainer d-flex align-items-center" >
-          <div className="headerLogo d-flex align-items-center mr-3">
-            <img
-              src="/images/lego-brick.png"
-              alt="lego-logo"
-              className="headerLogoImg" />
-          </div>
-          <h3 className='headerTitle m-0'>Lego Collector</h3>
-        </Link>
-        <Link to='/cart' >
-          <div className='shoppingCartContainer d-flex align-items-center' >
-            <img className="shoppingCartImage mr-2" src='/images/icon-my-bag.svg' />
-            {`  ${props.numberOfItemsInCart}`}
-          </div>
-        </Link>
+    <div className={classes.headerContainer}>
+      <div
+        onClick={() => history.push('/products')}
+        className={classes.headerLogoContainer} >
+        <div className={classes.headerLogo}>
+          <img
+            src="/images/lego-brick.png"
+            alt="lego-logo"
+            className={classes.headerLogoImg} />
+        </div>
+        <Typography className='headerTitle m-0' variant="h4">Lego Collector</Typography>
+      </div>
+      <div onClick={() => history.push('/cart')} >
+        <Badge badgeContent={props.numberOfItemsInCart} color="error">
+          <img className="shoppingCartImage mr-2" src='/images/icon-my-bag.svg' />
+        </Badge>
       </div>
     </div>
   );
 }
+
+const useStyles = makeStyles(({ spacing }) => ({
+  headerContainer: {
+    alignItems: 'center',
+    backgroundColor: '#ffc107',
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: spacing(2, 7),
+    width: '100%',
+    marginBottom: spacing(3)
+  },
+  headerLogoContainer: {
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center'
+  },
+  headerLogo: {
+    display: 'flex',
+    alignItems: 'center',
+    marginRight: spacing()
+  },
+  headerLogoImg: {
+    maxHeight: 40,
+    maxWidth: 40
+  },
+  shoppingCartImg: {
+    height: 35
+  }
+}));
