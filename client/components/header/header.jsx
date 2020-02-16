@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Badge, makeStyles, Typography } from '@material-ui/core';
-import '../styles/header.css';
 
 export default function Header(props) {
   const history = useHistory();
@@ -23,7 +22,7 @@ export default function Header(props) {
       </div>
       <div onClick={() => history.push('/cart')} >
         <Badge badgeContent={props.numberOfItemsInCart} color="error">
-          <img className="shoppingCartImage mr-2" src='/images/icon-my-bag.svg' />
+          <img className={classes.shoppingCartImg} src='/images/icon-my-bag.svg' />
         </Badge>
       </div>
     </div>
