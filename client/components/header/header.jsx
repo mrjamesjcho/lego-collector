@@ -20,11 +20,9 @@ export default function Header(props) {
         </div>
         <Typography className='headerTitle m-0' variant="h4">Lego Collector</Typography>
       </div>
-      <div onClick={() => history.push('/cart')} >
-        <Badge badgeContent={props.numberOfItemsInCart} color="error">
-          <img className={classes.shoppingCartImg} src='/images/icon-my-bag.svg' />
-        </Badge>
-      </div>
+      <Badge badgeContent={props.numberOfItemsInCart} className={classes.shoppingCartContainer} color="error" onClick={() => history.push('/cart')}>
+        <img className={classes.shoppingCartImg} src='/images/icon-my-bag.svg' />
+      </Badge>
     </div>
   );
 }
@@ -52,6 +50,9 @@ const useStyles = makeStyles(({ spacing }) => ({
   headerLogoImg: {
     maxHeight: 40,
     maxWidth: 40
+  },
+  shoppingCartContainer: {
+    cursor: 'pointer'
   },
   shoppingCartImg: {
     height: 35
