@@ -19,14 +19,14 @@ export default function ProductList(props) {
     );
   });
   return (
-    <React.Fragment>
+    <>
       <Carousel featured={props.featured} />
       <Container className={classes.productListContainer}>
         <Box borderColor="grey.500" borderLeft={1} borderTop={1} className={classes.productListBorder}>
           {elements}
         </Box>
       </Container>
-    </React.Fragment>
+    </>
   );
 }
 

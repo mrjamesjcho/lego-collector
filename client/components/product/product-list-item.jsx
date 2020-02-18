@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { makeStyles, Box } from '@material-ui/core';
 
 export default function ProductListItem(props) {
+  const classes = useStyles();
 
   return (
-    <div className="productContainer col-lg-3 col-md-4 col-sm-6 col-12 d-flex flex-column p-1 border-right border-bottom" >
+    <Box borderBottom={1} borderColor="grey.500" borderRight={1} className={classes.productContainer} >
       <Link to={`/product/${props.product.id}`} className="productImgContainer d-flex overflow-hidden p-2">
         <img src={`/images/${props.product.images[0]}`} className="productImg m-auto" />
       </Link>
@@ -18,6 +20,24 @@ export default function ProductListItem(props) {
         </div>
       </div>
       <button className="addToCartBtn btn btn-warning mt-auto mx-2 mb-2" onClick={() => props.onAddCartItem(props.product)}>Add to Cart</button>
-    </div>
+    </Box>
   );
 }
+
+const useStyles = makeStyles(({ spacing, breakpoints }) => ({
+  productContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: 400,
+    padding: spacing(),
+    [breakpoints.between('xs', 'md')]: {
+      width: '50%'
+    },
+    [breakpoints.between('md', 'lg')]: {
+      width: '33.33%'
+    },
+    [breakpoints.between('lg', 'xl')]: {
+      width: '25%'
+    }
+  }
+}));
